@@ -5,12 +5,12 @@ export const Media: CollectionConfig = {
   access: {
     read: () => true,
   },
-  fields: [
-    {
-      name: 'alt',
-      type: 'text',
-      required: true,
-    },
-  ],
-  upload: true,
+  admin: {
+    hidden: true,
+  },
+  upload: {
+    staticDir: 'media', // Folder where files will be stored
+    mimeTypes: ['image/*', 'video/*'], // Allow images & videos
+  },
+  fields: [],
 }
