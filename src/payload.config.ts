@@ -11,7 +11,9 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { ProjectOverview } from './collections/ProjectOverview'
 import FeaturedProperties from './collections/FeaturedProperties'
-
+import icon from '../public/favicon.ico'
+import { PropertyType } from './collections/PropertyType'
+import { Location } from './collections/Location'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -21,8 +23,19 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    meta: {
+      titleSuffix: ' - Paul Balita Realty Services',
+      icons: [
+        {
+          rel: 'icon',
+          type: 'image/png',
+          url: icon.src,
+        },
+      ],
+    },
   },
-  collections: [Users, Media, ProjectOverview, FeaturedProperties],
+
+  collections: [Users, Media, ProjectOverview, FeaturedProperties, PropertyType, Location],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
