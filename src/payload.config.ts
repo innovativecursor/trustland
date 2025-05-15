@@ -9,11 +9,20 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+<<<<<<< HEAD
 import { ProjectOverview } from './collections/ProjectOverview'
 import FeaturedProperties from './collections/FeaturedProperties'
 import icon from '../public/favicon.ico'
 import { PropertyType } from './collections/PropertyType'
 import { Location } from './collections/Location'
+=======
+import { Property } from './collections/Property'
+import { PropertyType } from './collections/PropertyType'
+import ContactUs from './collections/ContactUs'
+import { Location } from './collections/Location'
+import { Contact } from './globals/Contact'
+
+>>>>>>> refs/remotes/origin/master
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -34,8 +43,13 @@ export default buildConfig({
       ],
     },
   },
+<<<<<<< HEAD
 
   collections: [Users, Media, ProjectOverview, FeaturedProperties, PropertyType, Location],
+=======
+  collections: [Property, PropertyType, ContactUs, Location, Users, Media],
+  globals: [Contact],
+>>>>>>> refs/remotes/origin/master
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
