@@ -34,13 +34,8 @@ export default buildConfig({
       ],
     },
   },
-<<<<<<< HEAD
 
   collections: [Users, Media, ProjectOverview, FeaturedProperties, PropertyType, Location],
-=======
-  collections: [Property, PropertyType, ContactUs, Location, Users, Media],
-  globals: [Contact],
->>>>>>> refs/remotes/origin/master
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
