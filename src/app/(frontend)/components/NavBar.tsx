@@ -10,6 +10,7 @@ import { SiViber } from 'react-icons/si'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import logo from '../public/assets/logo_trustland.png'
+import AnimatedSidebar from './ui/AnimatedSideBar'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -93,7 +94,7 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {isOpen && (
           <>
             <motion.div
@@ -135,7 +136,7 @@ const Navbar = () => {
                 ))}
               </ul>
 
-              {/* Social Icons - Mobile */}
+        
               <div className="flex gap-6 mt-4">
                 {socialLinks.map((link, idx) => (
                   <a
@@ -152,7 +153,8 @@ const Navbar = () => {
             </motion.div>
           </>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
+      <AnimatedSidebar isOpen={isOpen} setIsOpen={setIsOpen} />
     </nav>
   )
 }
