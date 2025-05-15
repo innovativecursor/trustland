@@ -9,20 +9,11 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
-<<<<<<< HEAD
 import { ProjectOverview } from './collections/ProjectOverview'
 import FeaturedProperties from './collections/FeaturedProperties'
 import icon from '../public/favicon.ico'
 import { PropertyType } from './collections/PropertyType'
 import { Location } from './collections/Location'
-=======
-import { Property } from './collections/Property'
-import { PropertyType } from './collections/PropertyType'
-import ContactUs from './collections/ContactUs'
-import { Location } from './collections/Location'
-import { Contact } from './globals/Contact'
-
->>>>>>> refs/remotes/origin/master
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
