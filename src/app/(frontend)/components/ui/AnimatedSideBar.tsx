@@ -7,6 +7,7 @@ import { IoMdClose } from 'react-icons/io'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { SiViber } from 'react-icons/si'
+
 type SidebarProps = {
   isOpen: boolean
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>

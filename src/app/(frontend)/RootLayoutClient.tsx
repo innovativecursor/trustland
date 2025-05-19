@@ -2,9 +2,11 @@
 
 import React, { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
-import './styles.css'
 import { Poppins } from 'next/font/google'
 import Navbar from './components/NavBar'
+import Footer from './components/Footer'
+import './styles.css'
+import Loader from './components/ui/Loader'
 
 const poppins = Poppins({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -17,18 +19,27 @@ export default function RootLayoutClient({ children }: { children: React.ReactNo
   const pathname = usePathname()
 
   useEffect(() => {
-    setLoading(true) // Show loader
+    setLoading(true) // Show loader on route change
     const timer = setTimeout(() => setLoading(false), 600) // Fake delay for UX
 
     return () => clearTimeout(timer)
-  }, [pathname]) // Run on route change
+  }, [pathname])
 
   return (
     <html lang="en">
       <body className={poppins.className}>
-        {/* Show Loader when loading */}
         <Navbar />
-        <main>{children}</main>
+
+        {/* Show loader while loading */}
+        {loading ? (
+          <div className="flex items-center justify-center min-h-screen">
+            <Loader />
+          </div>
+        ) : (
+          <main>{children}</main>
+        )}
+
+        <Footer />
       </body>
     </html>
   )

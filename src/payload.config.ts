@@ -24,7 +24,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
     meta: {
-      titleSuffix: ' - Paul Balita Realty Services',
+      titleSuffix: ' - Trustland Solutions',
       icons: [
         {
           rel: 'icon',

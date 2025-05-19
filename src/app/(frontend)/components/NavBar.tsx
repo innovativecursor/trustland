@@ -94,66 +94,6 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      {/* <AnimatePresence>
-        {isOpen && (
-          <>
-            <motion.div
-              className="fixed inset-0 bg-black/50 backdrop-blur-md"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              onClick={() => setIsOpen(false)}
-            />
-
-            <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ duration: 0.4, ease: 'easeInOut' }}
-              className="fixed top-0 right-0 w-[260px] sm:w-[280px] md:w-[320px] h-full bg-[#121212] shadow-xl p-6 flex flex-col gap-6"
-            >
-              <div className="flex justify-end">
-                <button onClick={() => setIsOpen(false)}>
-                  <IoMdClose size={28} className="text-white" />
-                </button>
-              </div>
-
-              <ul className="flex flex-col text-white font-medium text-lg sm:text-xl gap-6 sm:gap-8">
-                {navItems.map((item) => (
-                  <motion.li
-                    key={item.name}
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.2 }}
-                    className={`cursor-pointer hover:text-gray-400 ${
-                      pathname === item.href ? 'font-semibold' : ''
-                    }`}
-                  >
-                    <Link href={item.href} onClick={() => setIsOpen(false)}>
-                      {item.name}
-                    </Link>
-                  </motion.li>
-                ))}
-              </ul>
-
-        
-              <div className="flex gap-6 mt-4">
-                {socialLinks.map((link, idx) => (
-                  <a
-                    key={idx}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-9 h-9 flex items-center justify-center rounded-full border border-[#339438] text-white bg-[#339438] hover:bg-white hover:text-[#339438] transition-colors duration-300"
-                  >
-                    {link.icon}
-                  </a>
-                ))}
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence> */}
       <AnimatedSidebar isOpen={isOpen} setIsOpen={setIsOpen} />
     </nav>
   )

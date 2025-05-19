@@ -24,7 +24,7 @@ const Hero = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: 'easeOut' }}
       >
-        <h1 className="font-albertSans text-[28px] sm:text-[32px] md:text-4xl lg:text-[43px] font-bold mb-[30px] md:mb-[50px]">
+        <h1 className="font-albertSans text-[28px] sm:text-[32px] md:text-4xl lg:text-[43px] font-bold mb-[30px] md:mb-[5px]">
           Building Trust, One Property at a Time.
         </h1>
 
