@@ -86,7 +86,7 @@ const properties = [
 const FeaturedProperties: React.FC = () => {
   return (
     <section className="w-full max-w-7xl mx-auto flex flex-col items-center justify-between px-6 md:px-8 py-16 my-12 relative">
-      <div className="flex justify-between items-center mb-6 w-full">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 w-full">
         <div>
           <h2 className="text-[58px] font-semibold">Featured Properties</h2>
           <p className="text-[#5C5C5C] leading-8 mt-1 text-[17px] font-light max-w-5xl">

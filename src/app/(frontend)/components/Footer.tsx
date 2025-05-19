@@ -25,14 +25,14 @@ export default function Footer() {
             />
           </div>
           <div className="flex items-center gap-3">
-            <div className="border border-green-600 rounded-full p-2 cursor-pointer">
-              <FaFacebookF className="text-green-700" />
+            <div className="border border-[#339438] rounded-full p-2 cursor-pointer">
+              <FaFacebookF size={20} className="text-[#339438]" />
             </div>
-            <div className="border border-green-600 rounded-full p-2 cursor-pointer">
-              <FaWhatsapp className="text-green-700" />
+            <div className="border border-[#339438] rounded-full p-2 cursor-pointer">
+              <FaWhatsapp size={20} className="text-[#339438]" />
             </div>
-            <div className="border border-green-600 rounded-full p-2 cursor-pointer">
-              <FaViber className="text-green-700" />
+            <div className="border border-[#339438] rounded-full p-2 cursor-pointer">
+              <FaViber size={20} className="text-[#339438]" />
             </div>
           </div>
         </div>
@@ -40,7 +40,7 @@ export default function Footer() {
         {/* Middle Row: Description + Contact + Quick Links + Services */}
         <div className="border-t border-gray-200 mt-6 pt-10">
           <div className="">
-            <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-24">
+            <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-24">
               {/* Description & Contact */}
               <div className="flex-1 flex flex-col gap-6 max-w-md">
                 <p className="text-[#1A1A1ACC] font-light text-[15px] leading-7">
@@ -92,7 +92,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom Footer */}
-      <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between text-xs text-gray-500 border-t border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between text-xs text-gray-500 border-t border-gray-200 gap-2 text-center md:text-left">
         <span>© 2025 TrustLand Solutions. All rights reserved.</span>
         <p className="flex items-center">
           Designed & Developed
