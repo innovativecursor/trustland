@@ -14,6 +14,7 @@ import FeaturedProperties from './collections/FeaturedProperties'
 import icon from '../public/favicon.ico'
 import { PropertyType } from './collections/PropertyType'
 import { Location } from './collections/Location'
+import BuyerInquiry from './collections/BuyerInquiry'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -35,7 +36,15 @@ export default buildConfig({
     },
   },
 
-  collections: [Users, Media, ProjectOverview, FeaturedProperties, PropertyType, Location],
+  collections: [
+    Users,
+    Media,
+    ProjectOverview,
+    FeaturedProperties,
+    PropertyType,
+    Location,
+    BuyerInquiry,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
