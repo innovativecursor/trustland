@@ -7,7 +7,8 @@ import ContactUsButton from './ContactUsButton'
 
 const ParallaxSection = () => {
   return (
-    <section id="contact" className="relative h-[50vh] w-full pt-16 md:pt-24 lg:pt-32 ">
+    <section id="contact" className="relative h-[50vh] w-full pt-16 md:pt-24 lg:pt-32">
+      {/* Background Image */}
       <div
         className="absolute inset-0 bg-fixed bg-cover bg-center"
         style={{
@@ -15,20 +16,22 @@ const ParallaxSection = () => {
         }}
       ></div>
 
+      {/* Gradient Overlay (your updated gradient) */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            'linear-gradient(90deg, rgba(113, 174, 76, 0.35) 0%, rgba(10, 8, 8, 0.35) 51.61%, rgba(113, 174, 76, 0.35) 100%)',
+            'linear-gradient(90deg, rgba(6, 35, 7, 0) 0%, rgba(0, 32, 2, 0.58) 38.7%, rgba(0, 32, 2, 0.58) 65.89%, rgba(22, 137, 28, 0) 100%)',
         }}
       ></div>
 
+      {/* Content */}
       <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-center px-6">
-        <p className=" text-lg sm:text-2xl md:text-4xl font-semibold mt-4 mb-4 leading-tight">
-          Your Trusted Real Estate Expert in baguio
+        <p className="text-lg sm:text-2xl md:text-4xl font-semibold mt-4 mb-6 leading-tight">
+          Your Trusted Real Estate Expert in Baguio
         </p>
 
-        <h2 className="text-white tracking-wide text-xs sm:text-sm md:text-base flex flex-col">
+        <h2 className="text-white text-xs sm:text-sm md:text-[15px] mb-6 flex flex-col font-extralight tracking-wide">
           Offering personalized real estate services to help you buy your dream property.
         </h2>
 

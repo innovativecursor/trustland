@@ -13,7 +13,7 @@ const ContactUsButton: React.FC<ContactUsButtonProps> = ({
 }) => {
   return (
     <a href={href} className={`relative inline-block text-lg group ${className}`} {...props}>
-      <span className="relative z-10 block w-full px-6 py-2 overflow-hidden text-[15px] font-medium leading-tight tracking-wider text-white transition-colors duration-300 ease-out border-2 border-[#339438] rounded-xl group-hover:text-black">
+      <span className="relative z-10 block w-full px-6 py-3 overflow-hidden text-[12px] font-light leading-tight tracking-wider text-white transition-colors duration-300 ease-out border-2 border-[#339438] rounded-xl group-hover:text-black">
         <span className="absolute inset-0 w-full h-full rounded-lg bg-[#339438]"></span>
 
         {/* Preserve your original animation */}
