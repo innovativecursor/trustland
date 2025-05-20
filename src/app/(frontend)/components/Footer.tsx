@@ -12,17 +12,11 @@ import Image from 'next/image'
 export default function Footer() {
   return (
     <footer className="bg-[#f7fbf5] text-gray-700 text-sm">
-      <div className="max-w-7xl mx-auto px-4 py-10 border-t border-b border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 py-10 border-b border-gray-200">
         {/* Top Row: Logo & Social Icons */}
         <div className="flex justify-between items-center mb-10">
           <div className="flex items-center gap-2">
-            <Image
-              src={logo.src}
-              width={200}
-              height={200}
-              alt="TrustLand Solutions Logo"
-              className=""
-            />
+            <Image src={logo.src} width={200} height={200} alt="TrustLand Solutions Logo" />
           </div>
           <div className="flex items-center gap-3">
             <div className="border border-[#339438] rounded-full p-2 cursor-pointer">
