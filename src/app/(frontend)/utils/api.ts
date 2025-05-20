@@ -1,4 +1,14 @@
 // types.ts (you can separate this if needed)
+export interface BuyerInquiry {
+  name: string
+  email: string
+  budget: number
+  minSize: number
+  howToAddress: 'mr' | 'ms' | 'mrs' | 'dr' | 'mx' | 'other'
+  personnelRole: 'buyer' | 'agent' | 'investor' | 'other'
+  createdAt: string
+}
+
 export interface Location {
   location_city: string
 }
@@ -48,4 +58,14 @@ export const fetchPropertyTypeNames = async (): Promise<string[]> => {
   const res = await fetch('/api/property-type') // or your actual endpoint
   const data = await res.json()
   return data.docs.map((doc: { name: string }) => doc.name)
+}
+
+export const fetchBuyerInquiries = async (): Promise<BuyerInquiry[]> => {
+  return await fetchFromAPI('buyer-inquiry')
+}
+
+// ✅ Fetch buyer names (example utility if needed)
+export const fetchBuyerNames = async (): Promise<string[]> => {
+  const buyers: BuyerInquiry[] = await fetchFromAPI('buyer-inquiry')
+  return buyers.map((b) => b.name)
 }
