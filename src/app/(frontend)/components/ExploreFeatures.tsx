@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import Image from 'next/image'
+// import Image from 'next/image'
 
 import correctImage from '../public/assets/ServicesAssets/correct_image.png'
 import workerImage from '../public/assets/ServicesAssets/worker_image.png'
@@ -53,7 +53,7 @@ const ExploreFeatures: React.FC = () => {
   return (
     <div className="bg-[#F5FFF6]">
       <motion.section
-        className="w-full max-w-7xl mx-auto flex flex-col items-center justify-between px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-18"
+        className="w-full max-w-7xl mx-auto flex flex-col items-center justify-between px-4 sm:px-6 sm:py-16"
         initial="hidden"
         animate={isVisible ? 'visible' : 'hidden'}
         onViewportEnter={() => setIsVisible(true)}

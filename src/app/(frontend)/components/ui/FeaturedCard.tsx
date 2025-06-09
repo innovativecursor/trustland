@@ -31,7 +31,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ image, title, description, in
       viewport={{ once: false, amount: 0.2 }}
     >
       {/* Top Right Image */}
-      <div className="absolute top-4 right-4 w-24 h-24 sm:w-28 sm:h-28 z-20">
+      <div className="absolute bg-white rounded-full top-4 right-4 w-24 h-24 sm:w-28 sm:h-28 z-20">
         <Image src={image} alt={title} className="w-full h-full object-contain" />
       </div>
 
