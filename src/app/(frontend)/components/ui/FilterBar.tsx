@@ -9,7 +9,7 @@ export default function FilterBar() {
   const [currentPage, setCurrentPage] = useState(1)
 
 return (
-    <div className="ml-35 mt-20 space-y-6">
+    <div className="mt-5 ml-4 space-y-6 md:ml-35 md:mt-20">
       {/* View, Sort, Page */}
       <div className="flex space-y-4">
         {/* View Toggle */}
@@ -29,11 +29,11 @@ return (
         </div>
 
         {/* Sort + Page */}
-        <div className="flex space-x-4 ml-10 ">
+        <div className="flex flex-col md:flex md:flex-row md:space-x-4 ml-10 ">
           <select
             value={sortOption}
             onChange={(e) => setSortOption(e.target.value)}
-            className="h-10 w-50 border rounded p-2 text-gray-400"
+            className="h-10 w-50 mb-3 border rounded p-2 text-gray-400"
           >
             <option>Sort by Popularity</option>
             <option>Price: Low to High</option>
@@ -44,7 +44,7 @@ return (
           <select
             value={currentPage}
             onChange={(e) => setCurrentPage(Number(e.target.value))}
-            className="h-10 w-35 border rounded p-2 text-gray-400"
+            className="h-10 w-35 mb-3 border rounded p-2 text-gray-400"
           >
             {Array.from({ length: 12 }, (_, i) => (
               <option key={i} value={i + 1}>

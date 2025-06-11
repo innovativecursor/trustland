@@ -24,11 +24,8 @@ const Navbar = () => {
   const navItems = [
     { name: 'Home', href: '/' },
     { name: 'Feature Properties', href: '/properties' },
-    { name: 'Services', href: isPropertiesPage ? '/' : '#services' },
-    {
-      name: 'Contact',
-      href: isPropertiesPage ? 'https://www.facebook.com/paulbalitarealtyservicespbrs' : '#contact',
-    },
+    { name: 'Services', href: '/services' },
+    { name: 'Contact', href: '/contact', },
   ]
 
   const socialLinks = [

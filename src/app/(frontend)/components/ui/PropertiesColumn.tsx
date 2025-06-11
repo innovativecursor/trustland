@@ -85,7 +85,7 @@ const properties = [
 
 const FeaturedProperties: React.FC = () => {
   return (
-    <section className="max-w-3xl h-3xl ml-30 px-4 md:px-8 py-16">
+    <section className="max-w-4xl h-4xl md:ml-30 px-8 md:px-8 py-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
         {properties.map((property) => {
           const containerRef = useRef<HTMLDivElement | null>(null)
@@ -147,7 +147,7 @@ const FeaturedProperties: React.FC = () => {
               </div>
 
               {/* Content */}
-              <div className="p-4">
+              <div className="absolute bottom-[20px] left-1/2 transform -translate-x-1/2 bg-white p-4 rounded-md shadow-md w-[90%] max-w-md z-10">
                 <h3 className="text-lg font-semibold mb-1">{property.title}</h3>
                 <p className="text-sm text-gray-500 flex items-center gap-1 mb-3">
                   <PiMapPin className="text-base" /> {property.location}

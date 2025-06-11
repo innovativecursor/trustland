@@ -7,17 +7,18 @@ import PropertiesColumn from '../components/ui/PropertiesColumn'
 import PerfectHouse from '../components/ui/PerfectHouse'
 import ContactUs from '../components/ui/ContactUs'
 
+
 const PropertiesSection = () => {
   return (
     <div className='pt-5'>
       <div className='h-[160px] bg-[#71ae4c1a] w-full py-3 pt-7'>
         {/* <h1 className='font-semibold text-3xl'>Properties</h1> */}
-        <Breadcrumbs propertyName={''} propertyDestination={''} />
+        <Breadcrumbs />
       </div>
         <FilterBar />
         <SearchBar />
         <PropertiesColumn />
-        <AdditionalInfo />
+        {/* <AdditionalInfo /> */}
         <PerfectHouse /> 
         <ContactUs />
     </div>
