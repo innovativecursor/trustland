@@ -1,14 +1,30 @@
 'use client'
 
-import Image from 'next/image'
 import React from 'react'
+import Image from 'next/image'
 
-import Bullet from "../../public/assets/InternalPropertyAssets/Star 6.png"
-import Tick from "../../public/assets/InternalPropertyAssets/Group 1000005104.png"
-import Card from "../../public/assets/InternalPropertyAssets/Card Payment.png"
-import PriceTag from "../../public/assets/InternalPropertyAssets/Price Tag.png"
+import Bullet from '../../public/assets/InternalPropertyAssets/Star 6.png'
+import Tick from '../../public/assets/InternalPropertyAssets/Group 1000005104.png'
+import Card from '../../public/assets/InternalPropertyAssets/Card Payment.png'
+import PriceTag from '../../public/assets/InternalPropertyAssets/Price Tag.png'
 
-const FeaturesAndPricing = () => {
+type FeaturePoint = {
+  id: string
+  point: string
+}
+
+type FeaturesType = {
+  nature_living: FeaturePoint[]
+  building_unit_features: FeaturePoint[]
+  recreational_facilities: FeaturePoint[]
+  convenience_accessibility: FeaturePoint[]
+}
+
+type Props = {
+  features: FeaturesType
+}
+
+const FeaturesAndPricing: React.FC<Props> = ({ features }) => {
   return (
     <div className="max-w-7xl mx-auto bg-[#71ae4c1a] p-8 rounded-2xl grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-800 my-25">
       {/* Left Column */}
@@ -22,12 +38,12 @@ const FeaturesAndPricing = () => {
             Nature-Inspired Living
           </div>
           <ul className="ml-6 space-y-1 mt-2 text-sm">
-            <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> Surrounded by lush pine trees & landscaped gardens
-            </li>
-            <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> Fresh mountain air & scenic views
-            </li>
+            {features.nature_living.map((item) => (
+              <li key={item.id} className="flex items-start gap-2">
+                <Image src={Tick} alt="Check" width={16} height={16} />
+                {item.point}
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -38,15 +54,12 @@ const FeaturesAndPricing = () => {
             Building & Unit Features
           </div>
           <ul className="ml-6 space-y-1 mt-2 text-sm">
-            <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> High-speed elevators
-            </li>
-            <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> Balconies with scenic views (select units)
-            </li>
-            <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> Spacious & modern interiors
-            </li>
+            {features.building_unit_features.map((item) => (
+              <li key={item.id} className="flex items-start gap-2">
+                <Image src={Tick} alt="Check" width={16} height={16} />
+                {item.point}
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -57,95 +70,89 @@ const FeaturesAndPricing = () => {
             Recreational Facilities
           </div>
           <ul className="ml-6 space-y-1 mt-2 text-sm">
-            <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> Swimming pool & clubhouse
-            </li>
-            <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> Gym & wellness center
-            </li>
-            <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> Children’s play area & jogging paths
-            </li>
+            {features.recreational_facilities.map((item) => (
+              <li key={item.id} className="flex items-start gap-2">
+                <Image src={Tick} alt="Check" width={16} height={16} />
+                {item.point}
+              </li>
+            ))}
           </ul>
         </div>
 
-        {/* Convinience & Accessibility */}
+        {/* Convenience & Accessibility */}
         <div>
           <div className="flex items-center gap-2 font-semibold text-sm">
             <Image src={Bullet} alt="Accessibility Icon" width={20} height={20} />
             Convenience & Accessibility
           </div>
           <ul className="ml-6 space-y-1 mt-2 text-sm">
-            <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> Underground parking & guest parking
-            </li>
-            <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> On-site property management & concierge services
-            </li>
+            {features.convenience_accessibility.map((item) => (
+              <li key={item.id} className="flex items-start gap-2">
+                <Image src={Tick} alt="Check" width={16} height={16} />
+                {item.point}
+              </li>
+            ))}
           </ul>
         </div>
       </div>
 
-      {/* Right Column */}
+      {/* Right Column - Placeholder (optional static or prop-based content) */}
       <div className="space-y-6">
-        {/* Location Highlights */}
         <div>
           <h2 className="text-xl font-semibold flex items-center gap-2 mb-5">
             Location Highlights
           </h2>
           <ul className="ml-6 space-y-1 mt-2 text-sm">
             <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> 10 minutes to SM Baguio & Burnham Park
+              <Image src={Tick} alt="Check" width={16} height={16} /> 10 minutes to SM Baguio &
+              Burnham Park
             </li>
             <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> 15 minutes to Camp John Hay & Baguio Country Club
+              <Image src={Tick} alt="Check" width={16} height={16} /> 15 minutes to Camp John Hay &
+              Baguio Country Club
             </li>
             <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> Close to top universities (Saint Louis University, University of the Cordilleras)
+              <Image src={Tick} alt="Check" width={16} height={16} /> Close to top universities
             </li>
           </ul>
         </div>
 
-        {/* Pricing & Payment Plans */}
         <div>
-          <h2 className="text-xl font-semibold flex items-center gap-2">
-           Pricing & Payment Plans
-          </h2>
-
-          {/* Price Range */}
-          <div>
-            <p className='flex items-center gap-2 font-semibold text-sm mt-5 '><Image src={PriceTag} alt='Price-Tag' className='w-7' />Price Range</p>
-          </div>
+          <h2 className="text-xl font-semibold flex items-center gap-2">Pricing & Payment Plans</h2>
+          <p className="flex items-center gap-2 font-semibold text-sm mt-5">
+            <Image src={PriceTag} alt="Price Tag" className="w-7" /> Price Range
+          </p>
           <ul className="ml-6 space-y-1 mt-2 text-sm">
             <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> <p className='font-medium'>Studio Units (30 sqm)</p> – Starts at PHP 3.5M
+              <Image src={Tick} alt="Check" width={16} height={16} /> Studio Units – PHP 3.5M
             </li>
             <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> <p className='font-medium'>1-Bedroom Units (50 sqm)</p> – Starts at PHP 5.8M
+              <Image src={Tick} alt="Check" width={16} height={16} /> 1-Bedroom Units – PHP 5.8M
             </li>
             <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> <p className='font-medium'>2-Bedroom Units (80 sqm)</p> – Starts at PHP 9.5M
+              <Image src={Tick} alt="Check" width={16} height={16} /> 2-Bedroom Units – PHP 9.5M
             </li>
             <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> <p className='font-medium'>Penthouse Suites (120 sqm)</p> – Starts at PHP 15M
+              <Image src={Tick} alt="Check" width={16} height={16} /> Penthouse – PHP 15M
             </li>
           </ul>
         </div>
 
-        {/*Flexible Payment Options */}
         <div>
           <h3 className="text-sm font-semibold flex items-center gap-2">
-            <Image src={Card} alt='Card' />Flexible Payment Options
+            <Image src={Card} alt="Card" /> Flexible Payment Options
           </h3>
           <ul className="ml-6 space-y-1 mt-2 text-sm">
             <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> <p className='font-medium'>Spot Cash Discount </p>– Up to 10% off
+              <Image src={Tick} alt="Check" width={16} height={16} /> Spot Cash Discount – Up to 10%
             </li>
             <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> <p className='font-medium'>Bank Financing Available</p> – Low monthly amortization
+              <Image src={Tick} alt="Check" width={16} height={16} /> Bank Financing – Low
+              amortization
             </li>
             <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> <p className='font-medium'>In-House Financing </p>– Flexible terms
+              <Image src={Tick} alt="Check" width={16} height={16} /> In-House Financing – Flexible
+              terms
             </li>
           </ul>
         </div>

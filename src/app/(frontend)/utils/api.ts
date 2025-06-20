@@ -42,6 +42,13 @@ export interface ProjectOverview {
     flexible_payment_options?: { point: string }[]
   }
   location_highlights?: { point: string }[]
+  card_data?: {
+    beds?: number
+    baths?: number
+    area?: number
+    image: any
+    badges?: { badge: string }[]
+  }
 }
 
 // API Utility Function
@@ -97,6 +104,19 @@ export const fetchBuyerNames = async (): Promise<string[]> => {
   return buyers.map((b) => b.name)
 }
 
-export const fetchAllProjectOverviews = async (): Promise<ProjectOverview[]> => {
-  return await fetchFromAPI('project-overview')
+export const fetchProjectOverviewBySlug = async (slug: string): Promise<ProjectOverview | null> => {
+  try {
+    const res = await fetch(`/api/project-overview?where[slug][equals]=${slug}`, {
+      cache: 'no-store',
+    })
+
+    if (!res.ok) throw new Error('Failed to fetch property overview')
+    const data = await res.json()
+    if (!data?.docs?.length) return null
+
+    return data.docs[0]
+  } catch (error) {
+    console.error('Error fetching project overview by slug:', error)
+    return null
+  }
 }

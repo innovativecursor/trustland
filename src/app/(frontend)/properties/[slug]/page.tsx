@@ -1,13 +1,9 @@
-// src/app/property/[id]/page.tsx
-
-// import { notFound } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import Breadcrumbs from '../../components/ui/BreadCrumbs'
 import PropertyListing from '../../components/ui/PropertyListing'
 import PropertyDetails from '../../components/ui/PropertyDetails'
-import  FeatureSection  from '../../components/ui/FeatureSection'
-
-
-
+import FeatureSection from '../../components/ui/FeatureSection'
+import { fetchProjectOverviewBySlug } from '../../utils/api'
 
 interface Props {
   params: {
@@ -15,28 +11,67 @@ interface Props {
   }
 }
 
-const properties = [
-  { id: '1', title: 'Titled Lot Residences', slug: 'titled-lot' },
-  { id: '2', title: 'Luxury House & Lot' },
-  { id: '3', title: 'The Outlook Ridge Residences' },
-  { id: '4', title: 'Titled Lot' },
-  { id: '5', title: 'Cozy Cabin in the Woods' },
-  { id: '6', title: 'Vacant Lot for Sale' }
-]
+export default async function PropertyPage({ params }: Props) {
+  const property = await fetchProjectOverviewBySlug(params.id)
 
-export default function PropertyPage({ params }: Props) {
-  const property = properties.find((p) => p.id === params.id)
+  if (!property) return notFound()
 
-  // if (!property) return notFound()
+  const galleryImages = property.gallery_images ?? []
+
+  const propertyDetailsRaw = property.property_details
+  const details = propertyDetailsRaw
+    ? {
+        propertyType: propertyDetailsRaw.property_type,
+        floorArea: propertyDetailsRaw.floor_area ?? '',
+        unitTypes: propertyDetailsRaw.unit_types ?? '',
+        price: propertyDetailsRaw.price,
+        status: propertyDetailsRaw.property_status ?? '',
+        location: propertyDetailsRaw.location,
+      }
+    : {
+        propertyType: '',
+        floorArea: '',
+        unitTypes: '',
+        price: '',
+        status: '',
+        location: '',
+      }
+
+  const pricing = property.pricing_payment_plans ?? {
+    price_range: [],
+    flexible_payment_options: [],
+  }
+
+  const locationPoints = property.location_highlights ?? []
+
+  const mapFeatureArray = (arr?: { point: string }[]) =>
+    (arr ?? []).map((item, index) => ({
+      id: index.toString(),
+      point: item.point,
+    }))
+
+  const features = {
+    nature_living: mapFeatureArray(property.features_amenities?.nature_living),
+    building_unit_features: mapFeatureArray(property.features_amenities?.building_unit_features),
+    recreational_facilities: mapFeatureArray(property.features_amenities?.recreational_facilities),
+    convenience_accessibility: mapFeatureArray(
+      property.features_amenities?.convenience_accessibility,
+    ),
+  }
 
   return (
-    <div className='pt-[80px]'>
-      <div className='pt-5'>
-        <Breadcrumbs />
-        <PropertyListing />
-        <PropertyDetails />
-        <FeatureSection />
+    <div className="pt-[80px]">
+      <div className="pt-5">
+        <Breadcrumbs title={property.title} />
+        <PropertyListing images={galleryImages} video={property.promo_video} />
+        <PropertyDetails
+          overview={property.overview}
+          details={details}
+          pricing={pricing}
+          locationPoints={locationPoints}
+        />
+        <FeatureSection features={features} />
       </div>
     </div>
-  );
+  )
 }

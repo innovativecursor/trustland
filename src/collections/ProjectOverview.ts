@@ -229,5 +229,68 @@ export const ProjectOverview: CollectionConfig = {
         },
       ],
     },
+    {
+      label: 'Display Card Data',
+      name: 'card_data',
+      type: 'group',
+      admin: {
+        description: 'Information used for the property card display',
+      },
+      fields: [
+        {
+          label: 'Beds',
+          name: 'beds',
+          type: 'number',
+          required: false,
+          admin: {
+            description: 'Number of bedrooms',
+          },
+        },
+        {
+          label: 'Baths',
+          name: 'baths',
+          type: 'number',
+          required: false,
+          admin: {
+            description: 'Number of bathrooms',
+          },
+        },
+        {
+          label: 'Area (in sqm)',
+          name: 'area',
+          type: 'number',
+          required: false,
+          admin: {
+            description: 'Floor area in square meters',
+          },
+        },
+        {
+          label: 'Primary Image',
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+          admin: {
+            description: 'Image to be shown in property card',
+          },
+        },
+        {
+          label: 'Badges',
+          name: 'badges',
+          type: 'array',
+          required: false,
+          admin: {
+            description: 'e.g. FOR SALE, FEATURED, etc.',
+          },
+          fields: [
+            {
+              name: 'badge',
+              type: 'text',
+              required: true,
+            },
+          ],
+        },
+      ],
+    },
   ],
 }
