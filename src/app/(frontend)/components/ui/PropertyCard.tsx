@@ -90,7 +90,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, view }) => {
 
           <div className="flex items-center justify-between flex-wrap gap-2">
             <div className="text-green-600 text-[15px] font-semibold">
-              {property.property_details?.price}
+              PHP {property.property_details?.price}M
             </div>
             <div className="flex items-center gap-3 text-xs text-gray-600">
               {card?.beds !== 0 && card?.beds !== undefined && (

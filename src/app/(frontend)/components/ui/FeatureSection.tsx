@@ -22,9 +22,14 @@ type FeaturesType = {
 
 type Props = {
   features: FeaturesType
+  locationPoints: FeaturePoint[]
+  pricing: {
+    price_range: FeaturePoint[]
+    flexible_payment_options: FeaturePoint[]
+  }
 }
 
-const FeaturesAndPricing: React.FC<Props> = ({ features }) => {
+const FeaturesAndPricing: React.FC<Props> = ({ features, locationPoints, pricing }) => {
   return (
     <div className="max-w-7xl mx-auto bg-[#71ae4c1a] p-8 rounded-2xl grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-800 my-25">
       {/* Left Column */}
@@ -98,62 +103,47 @@ const FeaturesAndPricing: React.FC<Props> = ({ features }) => {
 
       {/* Right Column - Placeholder (optional static or prop-based content) */}
       <div className="space-y-6">
+        {/* Location Highlights */}
         <div>
           <h2 className="text-xl font-semibold flex items-center gap-2 mb-5">
             Location Highlights
           </h2>
           <ul className="ml-6 space-y-1 mt-2 text-sm">
-            <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> 10 minutes to SM Baguio &
-              Burnham Park
-            </li>
-            <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> 15 minutes to Camp John Hay &
-              Baguio Country Club
-            </li>
-            <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> Close to top universities
-            </li>
+            {locationPoints.map((item) => (
+              <li key={item.id} className="flex items-start gap-2">
+                <Image src={Tick} alt="Check" width={16} height={16} /> {item.point}
+              </li>
+            ))}
           </ul>
         </div>
 
+        {/* Pricing Plans */}
         <div>
           <h2 className="text-xl font-semibold flex items-center gap-2">Pricing & Payment Plans</h2>
+
           <p className="flex items-center gap-2 font-semibold text-sm mt-5">
             <Image src={PriceTag} alt="Price Tag" className="w-7" /> Price Range
           </p>
           <ul className="ml-6 space-y-1 mt-2 text-sm">
-            <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> Studio Units – PHP 3.5M
-            </li>
-            <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> 1-Bedroom Units – PHP 5.8M
-            </li>
-            <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> 2-Bedroom Units – PHP 9.5M
-            </li>
-            <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> Penthouse – PHP 15M
-            </li>
+            {pricing.price_range.map((item) => (
+              <li key={item.id} className="flex items-start gap-2">
+                <Image src={Tick} alt="Check" width={16} height={16} /> {item.point}
+              </li>
+            ))}
           </ul>
         </div>
 
+        {/* Flexible Options */}
         <div>
           <h3 className="text-sm font-semibold flex items-center gap-2">
             <Image src={Card} alt="Card" /> Flexible Payment Options
           </h3>
           <ul className="ml-6 space-y-1 mt-2 text-sm">
-            <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> Spot Cash Discount – Up to 10%
-            </li>
-            <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> Bank Financing – Low
-              amortization
-            </li>
-            <li className="flex items-start gap-2">
-              <Image src={Tick} alt="Check" width={16} height={16} /> In-House Financing – Flexible
-              terms
-            </li>
+            {pricing.flexible_payment_options.map((item) => (
+              <li key={item.id} className="flex items-start gap-2">
+                <Image src={Tick} alt="Check" width={16} height={16} /> {item.point}
+              </li>
+            ))}
           </ul>
         </div>
       </div>

@@ -7,12 +7,16 @@ import { fetchProjectOverviewBySlug } from '../../utils/api'
 
 interface Props {
   params: {
-    id: string
+    slug: string
   }
 }
 
-export default async function PropertyPage({ params }: Props) {
-  const property = await fetchProjectOverviewBySlug(params.id)
+export default async function PropertyPage(props: Props) {
+  const { slug } = props.params
+
+  console.log("Received slug param:", slug)
+
+  const property = await fetchProjectOverviewBySlug(slug)
 
   if (!property) return notFound()
 
@@ -63,14 +67,24 @@ export default async function PropertyPage({ params }: Props) {
     <div className="pt-[80px]">
       <div className="pt-5">
         <Breadcrumbs title={property.title} />
-        <PropertyListing images={galleryImages} video={property.promo_video} />
+        <PropertyListing
+          images={galleryImages}
+          video={property.promo_video}
+          title={property.title}
+          location={property.property_details?.location || ''}
+          price={property.property_details?.price || ''}
+        />
         <PropertyDetails
           overview={property.overview}
           details={details}
           pricing={pricing}
           locationPoints={locationPoints}
         />
-        <FeatureSection features={features} />
+        <FeatureSection
+          features={features}
+          locationPoints={locationPoints}
+          pricing={pricing}
+        />
       </div>
     </div>
   )

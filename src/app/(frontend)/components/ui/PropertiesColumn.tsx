@@ -12,12 +12,16 @@ const PropertiesColumn: React.FC<PropertiesColumnProps> = ({ view }) => {
   const [properties, setProperties] = useState<ProjectOverview[]>([])
 
   useEffect(() => {
-    const fetchProperties = async () => {
-      const slugs = await fetchAllProjectSlugs()
-      const results = await Promise.all(slugs.map(fetchProjectOverviewBySlug))
-      const filtered = results.filter(Boolean) as ProjectOverview[]
-      setProperties(filtered)
-    }
+  const fetchProperties = async () => {
+    const slugs = await fetchAllProjectSlugs()
+    console.log("Slugs fetched from CMS:", slugs)
+
+    const results = await Promise.all(slugs.map(fetchProjectOverviewBySlug))
+    const filtered = results.filter(Boolean) as ProjectOverview[]
+    console.log("Properties fetched:", filtered.map(p => p.title))
+
+    setProperties(filtered)
+  }
 
     fetchProperties()
   }, [])
