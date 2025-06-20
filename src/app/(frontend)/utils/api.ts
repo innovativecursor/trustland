@@ -106,7 +106,7 @@ export const fetchBuyerNames = async (): Promise<string[]> => {
 
 export const fetchProjectOverviewBySlug = async (slug: string): Promise<ProjectOverview | null> => {
   try {
-    const res = await fetch(`/api/project-overview?where[slug][equals]=${slug}`, {
+    const res = await fetch(`/api/project-overview?${slug}`, {
       cache: 'no-store',
     })
 
@@ -118,5 +118,19 @@ export const fetchProjectOverviewBySlug = async (slug: string): Promise<ProjectO
   } catch (error) {
     console.error('Error fetching project overview by slug:', error)
     return null
+  }
+}
+
+// Fetch all project slugs
+export const fetchAllProjectSlugs = async (): Promise<string[]> => {
+  try {
+    const res = await fetch('/api/project-overview', { cache: 'no-store' })
+    if (!res.ok) throw new Error('Failed to fetch project slugs')
+
+    const data = await res.json()
+    return data?.docs?.map((doc: { slug: string }) => doc.slug) || []
+  } catch (error) {
+    console.error('Error fetching project slugs:', error)
+    return []
   }
 }
