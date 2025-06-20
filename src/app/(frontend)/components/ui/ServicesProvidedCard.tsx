@@ -1,6 +1,7 @@
 // components/ServiceSection.tsx
 
 import Image, { StaticImageData } from "next/image";
+import tick from "../../public/assets/ServicesAssets/Group 1000005079.png"
 
 type ServicePoint = {
   title: string;
@@ -50,7 +51,7 @@ export default function ServicesProvidedCard({
         <ul className="text-left space-y-4">
           {points.map((point, index) => (
             <li key={index} className="flex ">
-              <span className="mr-2">✅</span>
+              <Image src={tick} alt="tick" className="mr-2 w-5 h-5"></Image>
               <div>
                 <span className="font-semibold">{point.title}</span>{" "}
                 – {point.description}

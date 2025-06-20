@@ -1,19 +1,57 @@
-"use client"
+// "use client"
 
-import { FaThLarge, FaBars} from 'react-icons/fa'
+// import { FaThLarge, FaBars} from 'react-icons/fa'
+// import { useState } from 'react'
+
+// export default function FilterBar() {
+//   const [view, setView] = useState<'grid' | 'list'>('grid')
+//   const [sortOption, setSortOption] = useState('Popularity')
+//   const [currentPage, setCurrentPage] = useState(1)
+
+// return (
+//     <div className="mt-5 space-y-6 md:mt-20">
+//       {/* View, Sort, Page */}
+//       <div className="flex space-y-4">
+//         {/* View Toggle */}
+//         <div>
+//           <button
+//             onClick={() => setView('grid')}
+//             className={`p-2 ${view === 'grid' ? 'text-[#339438]' : 'text-gray-400'}`}
+//           >
+//             <FaThLarge size={25} />
+//           </button>
+//           <button
+//             onClick={() => setView('list')}
+//             className={`p-2 ${view === 'list' ? 'text-[#339438]' : 'text-gray-400'}`}
+//           >
+//             <FaBars size={25} />
+//           </button>
+//         </div>
+
+        
+//       </div>
+//     </div>
+// )}
+
+
+'use client'
+
+import { FaThLarge, FaBars } from 'react-icons/fa'
 import { useState } from 'react'
 
-export default function FilterBar() {
-  const [view, setView] = useState<'grid' | 'list'>('grid')
-  const [sortOption, setSortOption] = useState('Popularity')
-  const [currentPage, setCurrentPage] = useState(1)
+interface Props {
+  view: 'grid' | 'list'
+  setView: (v: 'grid' | 'list') => void
+}
 
-return (
-    <div className="mt-5 ml-4 space-y-6 md:ml-35 md:mt-20">
-      {/* View, Sort, Page */}
+export default function FilterBar({ view, setView }: Props) {
+   const [sortOption, setSortOption] = useState('Popularity')
+   const [currentPage, setCurrentPage] = useState(1)
+
+  return (
+    <div className="mt-5 space-y-6 md:mt-20">
       <div className="flex space-y-4">
-        {/* View Toggle */}
-        <div className="flex">
+        <div>
           <button
             onClick={() => setView('grid')}
             className={`p-2 ${view === 'grid' ? 'text-[#339438]' : 'text-gray-400'}`}
@@ -27,7 +65,6 @@ return (
             <FaBars size={25} />
           </button>
         </div>
-
         {/* Sort + Page */}
         <div className="flex flex-col md:flex md:flex-row md:space-x-4 ml-10 ">
           <select
@@ -55,4 +92,5 @@ return (
         </div>
       </div>
     </div>
-)}
+  )
+}

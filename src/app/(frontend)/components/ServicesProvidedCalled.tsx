@@ -88,7 +88,7 @@ export default function HomePage() {
           {
             title: "Subdivision & Lot Development Surveys",
             description:
-              "We divide land into residential or commercial lots while complying with zoning regulations.",
+              "We divide land into residential or commercial lots while fully complying with local zoning regulations.",
           },
           {
             title: "Construction Layout & Planning",
@@ -116,7 +116,7 @@ export default function HomePage() {
           {
             title: "Building Design & 3D Visualization",
             description:
-              "Experience your property in 3D before construction begins.",
+              "Visualize and explore every detail of your property in 3D environment before the actual construction starts.",
           },
           {
             title: "Permit Drawings & Compliance Documentation ",

@@ -165,7 +165,8 @@ export const Property: CollectionConfig = {
       label: 'Property Type',
       name: 'prop_type',
       type: 'relationship',
-      relationTo: 'propertyType',
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      relationTo: 'property-type' as any,
       required: true,
     },
     {

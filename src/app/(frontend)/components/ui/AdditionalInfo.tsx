@@ -1,10 +1,11 @@
 'use client'
 
 import React from 'react'
+import PrizeFilter from './PrizeFilter'
 
 export default function AdditionalInfo() {
   return (
-  <aside className="lg:w-100 p-6 space-y-6 bg-white">
+  <aside className="max-w-3xl p-6 md:p-0 md:mt-20 space-y-6 bg-white">
       {/* Header */}
       <div>
         <h2 className="text-xl font-semibold">Additional Information</h2>
@@ -14,7 +15,7 @@ export default function AdditionalInfo() {
       {/* Property Type */}
       <div className='border rounded-xl w-100 p-5'>
       <div>
-        <h3 className="font-semibold mb-2 p-4">Property Type</h3>
+        <h3 className="font-medium p-4">Property Type</h3>
         <div className="space-y-2 text-sm">
           <label className="flex items-center justify-between">
             <div className="flex items-center text-gray-400">
@@ -50,7 +51,7 @@ export default function AdditionalInfo() {
 
       {/* Price Range (Fixed Options) */}
       <div>
-        <h3 className="font-semibold mb-2 p-4">Price Range</h3>
+        <h3 className="font-medium p-4">Price Range</h3>
         <div className="space-y-2 text-sm">
           <label className="flex items-center justify-between">
             <div className="flex items-center text-gray-400">
@@ -79,17 +80,12 @@ export default function AdditionalInfo() {
 
       {/* Filter by Price (Slider Placeholder) */}
       <div>
-        <h3 className="font-semibold mb-2 p-4">Filter by Price</h3>
-        <p className="ml-4 text-sm text-gray-400 mb-2 font-semibold">Your Range: 3M – 20M</p>
-        <div className="h-2 ml-4 bg-gray-200 rounded-full relative">
-          <div className="h-2 bg-[#339438] rounded-full absolute left-[15%] right-[15%]" />
-        </div>
-        <hr className='text-gray-400 p-3 mt-10' />
+        <PrizeFilter/>
       </div>
 
       {/* Bedroom Options */}
       <div>
-        <h3 className="font-semibold mb-2 p-4">Bedroom</h3>
+        <h3 className="font-medium p-4">Bedroom</h3>
         <div className="space-y-2 text-sm">
           <label className="flex items-center justify-between">
             <div className="flex items-center text-gray-400">

@@ -8,13 +8,11 @@ import ContactForm from '../components/ui/ContactUs'
 const ServiceSection = () => {
   return (
     <div className='pt-5'>
-      <div className='h-[160px] bg-[#71ae4c1a] w-full py-3 pt-7'>
-        <Breadcrumbs />
-      </div>
-        <ImgGridService />
-        <ServicesHeading />
-        <ServicesProvidedCalled />
-        <ContactForm />
+      <Breadcrumbs />
+      <ImgGridService />
+      <ServicesHeading />
+      <ServicesProvidedCalled />
+      <ContactForm />
     </div>
   )
 }

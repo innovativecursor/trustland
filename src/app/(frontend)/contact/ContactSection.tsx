@@ -6,9 +6,7 @@ import FormMap from '../components/ui/Form&Map'
 const ContactSection = () => {
   return (
     <div className='pt-5'>
-      <div className='h-[160px] bg-[#71ae4c1a] w-full py-3 pt-7'>
-        <Breadcrumbs />
-      </div>
+      <Breadcrumbs />
       <ImageSection />
       <FormMap />
     </div>

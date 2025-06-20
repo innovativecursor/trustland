@@ -9,10 +9,10 @@ const ImageSection = () => {
   return (
     <>
         {/* Background Image */}
-        <Image src={BgImage} width={1525} alt='Background-Image' className='relative w-full h-auto md:h-[500px]' />
+        <div className='relative'>
+            <Image src={BgImage} width={1525} alt='Background-Image' className='w-full h-auto md:h-[500px]' />
         {/* Black Background on Background Image */}
-        <div className='flex flex-col lg:block'>
-        <div className='absolute h-72 min-w-292 left-1/2 bottom-[-205px] transform -translate-x-1/2 flex flex-col items-center justify-center bg-black p-6 rounded-2xl shadow-lg'>
+        <div className='hidden lg:flex flex-col items-center justify-center bg-black p-6 rounded-2xl shadow-lg h-72 min-w-292 absolute left-1/2 bottom-[-150px] transform -translate-x-1/2'>
             {/* Phone Column */}
             <div className="flex justify-center items-center gap-45 text-white">
                 <div className="flex-col items-center gap-4">   
@@ -42,7 +42,7 @@ const ImageSection = () => {
                     </div>
                 </div>
             </div>
-            </div>
+        </div>  
       </div>
     </>
   )

@@ -1,4 +1,5 @@
-import React from 'react'
+'use client'
+import React, { useState } from 'react'
 import Breadcrumbs from '../components/ui/BreadCrumbs'
 import FilterBar from '../components/ui/FilterBar'
 import SearchBar from '../components/ui/SearchBar'
@@ -6,21 +7,25 @@ import AdditionalInfo from '../components/ui/AdditionalInfo'
 import PropertiesColumn from '../components/ui/PropertiesColumn'
 import PerfectHouse from '../components/ui/PerfectHouse'
 import ContactUs from '../components/ui/ContactUs'
-
+// import Pagination from '../components/ui/Pagination'
 
 const PropertiesSection = () => {
+  const [view, setView] = useState<'grid' | 'list'>('grid')
+
   return (
     <div className='pt-5'>
-      <div className='h-[160px] bg-[#71ae4c1a] w-full py-3 pt-7'>
-        {/* <h1 className='font-semibold text-3xl'>Properties</h1> */}
-        <Breadcrumbs />
+      <Breadcrumbs />
+      <div className='flex justify-center'>
+        <div className='pr-10'>
+          <FilterBar view={view} setView={setView} />
+          <SearchBar />
+          <PropertiesColumn view={view} />
+        </div>
+        <AdditionalInfo />
       </div>
-        <FilterBar />
-        <SearchBar />
-        <PropertiesColumn />
-        {/* <AdditionalInfo /> */}
-        <PerfectHouse /> 
-        <ContactUs />
+      {/* <Pagination /> */}
+      <PerfectHouse /> 
+      <ContactUs />
     </div>
   )
 }

@@ -22,7 +22,7 @@ const Breadcrumbs = () => {
   })
 
   return (
-    <nav>
+    <nav className='h-[160px] bg-[#71ae4c1a] w-full pt-7'>
       <h1 className='max-w-7xl mx-auto px-8 text-2xl font-semibold p-4'>
         {pathSegments[pathSegments.length - 1]?.replace(/-/g, ' ').replace(/\b\w/g, char => char.toUpperCase()) || 'Home'}
       </h1>

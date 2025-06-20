@@ -97,6 +97,10 @@ const RealEstateInquiryForm: React.FC = () => {
               onChange={handleChange}
             >
               <option value="">Nothing selected</option>
+              {/* <option value="buyer" label='Buyer'>Buyer</option> */}
+              <option value="agent" label='Agent'>Agent</option>
+              <option value="investor" label='Investor'>Investor</option>
+              <option value="other" label='Other'>Other</option>
               {personnelRoles.map((role) => (
                 <option key={role} value={role}>
                   {role.charAt(0).toUpperCase() + role.slice(1)}
@@ -132,6 +136,12 @@ const RealEstateInquiryForm: React.FC = () => {
                 onChange={handleChange}
               >
                 <option value="">Nothing selected</option>
+                {/* <option value="Mr">Mr</option> */}
+                <option value="Ms">Ms</option>
+                <option value="Mrs">Mrs</option>
+                <option value="Dr">Dr</option>
+                <option value="Mx">Mx</option>
+                <option value="Other">Other</option>
                 {addressTitles.map((title) => (
                   <option key={title} value={title}>
                     {title.charAt(0).toUpperCase() + title.slice(1)}

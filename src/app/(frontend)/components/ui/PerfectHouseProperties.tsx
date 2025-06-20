@@ -49,8 +49,8 @@ const properties = [
 
 const FeaturedProperties: React.FC = () => {
   return (
-    <section className="max-w-7xl h-3xl md:ml-30 px-8 py-16">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    <section className="max-w-7xl px-8 py-16">
+      <div className="w-l md:w-6xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {properties.map((property) => {
           const containerRef = useRef<HTMLDivElement | null>(null)
           const mouseX = useMotionValue(0)
