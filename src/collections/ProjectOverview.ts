@@ -186,8 +186,16 @@ export const ProjectOverview: CollectionConfig = {
         {
           label: 'Price Range',
           name: 'price_range',
-          type: 'text',
+          type: 'array',
           required: false,
+          fields: [
+            {
+              name: 'point',
+              label: 'Point',
+              type: 'text',
+              required: true,
+            },
+          ],
         },
         {
           label: 'Flexible Payment Options',
