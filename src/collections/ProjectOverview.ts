@@ -122,29 +122,62 @@ export const ProjectOverview: CollectionConfig = {
         {
           label: 'Nature-Inspired Living',
           name: 'nature_living',
-          type: 'textarea',
+          type: 'array',
           required: false,
+          fields: [
+            {
+              name: 'point',
+              label: 'Point',
+              type: 'text',
+              required: true,
+            },
+          ],
         },
         {
           label: 'Building & Unit Features',
           name: 'building_unit_features',
-          type: 'textarea',
+          type: 'array',
           required: false,
+          fields: [
+            {
+              name: 'point',
+              label: 'Point',
+              type: 'text',
+              required: true,
+            },
+          ],
         },
         {
           label: 'Recreational Facilities',
           name: 'recreational_facilities',
-          type: 'textarea',
+          type: 'array',
           required: false,
+          fields: [
+            {
+              name: 'point',
+              label: 'Point',
+              type: 'text',
+              required: true,
+            },
+          ],
         },
         {
           label: 'Convenience & Accessibility',
           name: 'convenience_accessibility',
-          type: 'textarea',
+          type: 'array',
           required: false,
+          fields: [
+            {
+              name: 'point',
+              label: 'Point',
+              type: 'text',
+              required: true,
+            },
+          ],
         },
       ],
     },
+
     {
       label: 'Pricing & Payment Plans',
       name: 'pricing_payment_plans',
@@ -159,8 +192,16 @@ export const ProjectOverview: CollectionConfig = {
         {
           label: 'Flexible Payment Options',
           name: 'flexible_payment_options',
-          type: 'textarea',
+          type: 'array',
           required: false,
+          fields: [
+            {
+              name: 'point',
+              label: 'Point',
+              type: 'text',
+              required: true,
+            },
+          ],
         },
       ],
     },
