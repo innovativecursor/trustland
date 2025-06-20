@@ -44,8 +44,10 @@ export const ProjectOverview: CollectionConfig = {
       type: 'upload',
       relationTo: 'media', // this should match your media collection slug
       required: false,
+      minRows: 5,
+      maxRows: 5,
       admin: {
-        description: 'Upload property images (multiple allowed)',
+        description: 'Upload property images (required 5 images)',
       },
       hasMany: true,
     },
