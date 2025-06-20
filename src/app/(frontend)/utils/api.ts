@@ -17,6 +17,33 @@ export interface PropertyType {
   property_type: string
 }
 
+export interface ProjectOverview {
+  title: string
+  slug: string
+  overview: string
+  gallery_images?: any[]
+  promo_video?: any
+  property_details?: {
+    property_type: string
+    floor_area?: string
+    unit_types?: string
+    price: string
+    property_status?: string
+    location: string
+  }
+  features_amenities?: {
+    nature_living?: { point: string }[]
+    building_unit_features?: { point: string }[]
+    recreational_facilities?: { point: string }[]
+    convenience_accessibility?: { point: string }[]
+  }
+  pricing_payment_plans?: {
+    price_range?: { point: string }[]
+    flexible_payment_options?: { point: string }[]
+  }
+  location_highlights?: { point: string }[]
+}
+
 // API Utility Function
 const fetchFromAPI = async (endpoint: string) => {
   try {
@@ -68,4 +95,8 @@ export const fetchBuyerInquiries = async (): Promise<BuyerInquiry[]> => {
 export const fetchBuyerNames = async (): Promise<string[]> => {
   const buyers: BuyerInquiry[] = await fetchFromAPI('buyer-inquiry')
   return buyers.map((b) => b.name)
+}
+
+export const fetchAllProjectOverviews = async (): Promise<ProjectOverview[]> => {
+  return await fetchFromAPI('project-overview')
 }
