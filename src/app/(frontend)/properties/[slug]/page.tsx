@@ -41,18 +41,32 @@ export default async function PropertyPage(props: Props) {
         location: '',
       }
 
-  const pricing = property.pricing_payment_plans ?? {
-    price_range: [],
-    flexible_payment_options: [],
-  }
+  // const pricing = property.pricing_payment_plans ?? {
+  //   price_range: [],
+  //   flexible_payment_options: [],
+  // }
 
-  const locationPoints = property.location_highlights ?? []
+  // const locationPoints = property.location_highlights ?? []
 
-  const mapFeatureArray = (arr?: { point: string }[]) =>
-    (arr ?? []).map((item, index) => ({
-      id: index.toString(),
-      point: item.point,
-    }))
+  // const mapFeatureArray = (arr?: { point: string }[]) =>
+  //   (arr ?? []).map((item, index) => ({
+  //     id: index.toString(),
+  //     point: item.point,
+  //   }))
+
+      const mapFeatureArray = (arr?: { point: string }[]) =>
+      (arr ?? []).map((item, index) => ({
+        id: index.toString(),
+        point: item.point,
+      }))
+      
+    const locationPoints = mapFeatureArray(property.location_highlights)
+
+    const pricing = {
+      price_range: mapFeatureArray(property.pricing_payment_plans?.price_range),
+      flexible_payment_options: mapFeatureArray(property.pricing_payment_plans?.flexible_payment_options),
+    }
+
 
   const features = {
     nature_living: mapFeatureArray(property.features_amenities?.nature_living),

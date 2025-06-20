@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import path from 'path'
 
 export const Media: CollectionConfig = {
   slug: 'media',
@@ -10,6 +11,7 @@ export const Media: CollectionConfig = {
   },
   upload: {
     staticDir: 'media', // Folder where files will be stored
+    //staticDir: path.resolve('/Users/datatype/Downloads/'), // For MacOS
     mimeTypes: ['image/*', 'video/*'], // Allow images & videos
   },
   fields: [],

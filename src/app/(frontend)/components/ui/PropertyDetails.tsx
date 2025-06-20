@@ -48,7 +48,7 @@ export default function PropertyDetails({
             </div>
             <div>
               <p className="text-gray-500">Floor Area</p>
-              <p className="font-semibold">{details.floorArea}</p>
+              <p className="font-semibold">{details.floorArea} sq.m.</p>
               <hr className="text-gray-300 mt-8 w-60" />
             </div>
             <div>
@@ -58,7 +58,7 @@ export default function PropertyDetails({
             </div>
             <div>
               <p className="text-gray-500">Price</p>
-              <p className="font-semibold">{details.price}</p>
+              <p className="font-semibold">{details.price} M</p>
               <hr className="text-gray-300 mt-8 w-60" />
             </div>
             <div>
