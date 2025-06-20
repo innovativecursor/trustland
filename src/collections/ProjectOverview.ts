@@ -208,8 +208,16 @@ export const ProjectOverview: CollectionConfig = {
     {
       label: 'Location Highlights',
       name: 'location_highlights',
-      type: 'textarea',
+      type: 'array',
       required: false,
+      fields: [
+        {
+          name: 'point',
+          label: 'Point',
+          type: 'text',
+          required: true,
+        },
+      ],
     },
   ],
 }
