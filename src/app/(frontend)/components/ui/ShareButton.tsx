@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { FaWhatsapp, FaFacebook, FaLink } from 'react-icons/fa'
 import { motion, AnimatePresence } from 'framer-motion'
-
+import toast from 'react-hot-toast'
 import Image from 'next/image'
 import Share from '../../public/assets/InternalPropertyAssets/Share.png'
 
@@ -15,7 +15,7 @@ const ShareButton: React.FC = () => {
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(currentUrl)
-    alert('Link copied to clipboard!')
+    toast.success('Link copied to clipboard!')
     setIsOpen(false)
   }
 

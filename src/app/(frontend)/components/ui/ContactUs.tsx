@@ -1,8 +1,64 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
+import FloatingLabelInput from './FloatingLabelInput'
+import FloatingLabelSelect from './FloatingLabelSelect'
+import toast from 'react-hot-toast'
 
 export default function ContactForm() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    serviceType: '',
+    message: '',
+  })
+
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    try {
+      const response = await fetch('/api/buyer-inquiry', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          source: 'contact-form',
+        }),
+      })
+
+      if (!response.ok) throw new Error('Submission failed')
+
+      toast.success('Message sent successfully!')
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        serviceType: '',
+        message: '',
+      })
+    } catch (error) {
+      console.error(error)
+      toast.error('Something went wrong. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <section className="bg-gray-100 py-16 px-4">
       <div className="max-w-5xl mx-auto">
@@ -10,43 +66,68 @@ export default function ContactForm() {
           Get in Touch with Us!
         </h2>
 
-        <form className="text-sm grid grid-cols-1 md:grid-cols-2 gap-6">
-          <input
+        <form
+          className="text-sm grid grid-cols-1 md:grid-cols-2 gap-6"
+          onSubmit={handleSubmit}
+        >
+          <FloatingLabelInput
+            name="name"
             type="text"
+            label="Name"
             placeholder="Enter Your Name"
-            className="w-full border border-gray-200 rounded-lg px-5 py-4 focus:outline-none focus:ring-2 focus:ring-[#339438]"
+            value={formData.name}
+            onChange={handleChange}
           />
-          <input
+
+          <FloatingLabelInput
+            name="email"
             type="email"
-            placeholder="Enter Your Mail"
-            className="w-full border border-gray-200 rounded-lg px-5 py-4 focus:outline-none focus:ring-2 focus:ring-[#339438]"
+            label="Email"
+            placeholder="Enter Your Email"
+            value={formData.email}
+            onChange={handleChange}
           />
-          <input
+
+          <FloatingLabelInput
+            name="phone"
             type="tel"
+            label="Phone"
             placeholder="Enter Your Phone Number"
-            className="w-full border border-gray-200 rounded-lg px-5 py-4 focus:outline-none focus:ring-2 focus:ring-green-600"
+            value={formData.phone}
+            onChange={handleChange}
           />
-          <select
-            className="w-full border border-gray-200 rounded-lg px-5 py-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#339438]"
-            defaultValue=""
+
+          <FloatingLabelSelect
+            name="serviceType"
+            value={formData.serviceType}
+            label="Select Service Type"
+            onChange={handleChange}
           >
-            <option>Select Service Type</option>
+            <option value="">Select Service Type</option>
             <option value="ResidentialConstruction">Residential Construction</option>
             <option value="RoadConstruction">Road Construction</option>
             <option value="LegalPaperWorkProcessing">Legal & Paper Work Processing</option>
             <option value="ArchitecturalDesign">Architectural Design</option>
-          </select>
-          <textarea
-            placeholder="Enter Message"
-            className="md:col-span-2 w-full border border-gray-200 rounded-lg px-5 py-4 h-48 resize-none focus:outline-none focus:ring-2 focus:ring-[#339438]"
-          />
-          <div className='md:ml-100'>
-          <button
-            type="submit"
-            className="md:col-span-2 w-70 bg-[#339438] hover:bg-black text-white font-medium py-4 rounded-lg"
-          >
-            Send Message
-          </button>
+          </FloatingLabelSelect>
+
+          <div className="md:col-span-2">
+            <textarea
+              name="message"
+              placeholder="Enter Message"
+              value={formData.message}
+              onChange={handleChange}
+              className="w-full border border-gray-200 rounded-lg px-5 py-4 h-48 resize-none focus:outline-none focus:ring-2 focus:ring-[#339438]"
+            />
+          </div>
+
+          <div className="md:ml-100">
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="md:col-span-2 w-70 bg-[#339438] hover:bg-black text-white font-medium py-4 rounded-lg"
+            >
+              {isSubmitting ? 'Sending...' : 'Send Message'}
+            </button>
           </div>
         </form>
       </div>

@@ -30,6 +30,7 @@ export interface ProjectOverview {
     price: string
     property_status?: string
     location: string
+    bedroom?: string
   }
   features_amenities?: {
     nature_living?: { point: string }[]

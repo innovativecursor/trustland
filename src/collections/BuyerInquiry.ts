@@ -31,19 +31,19 @@ export const BuyerInquiry: CollectionConfig = {
       name: 'budget',
       type: 'number',
       label: 'Budget (PHP)',
-      required: true,
+      required: false, // changed from true
     },
     {
       name: 'minSize',
       type: 'number',
       label: 'Minimum Size (Sq ft)',
-      required: true,
+      required: false, // changed from true
     },
     {
       name: 'howToAddress',
       type: 'select',
       label: 'How should we address you?',
-      required: true,
+      required: false, // changed from true
       options: [
         { label: 'Mr.', value: 'mr' },
         { label: 'Ms.', value: 'ms' },
@@ -57,13 +57,37 @@ export const BuyerInquiry: CollectionConfig = {
       name: 'personnelRole',
       type: 'select',
       label: 'Personnel Role',
-      required: true,
+      required: false, // changed from true
       options: [
         { label: 'Buyer', value: 'buyer' },
         { label: 'Agent', value: 'agent' },
         { label: 'Investor', value: 'investor' },
         { label: 'Other', value: 'other' },
       ],
+    },
+    {
+      name: 'phone',
+      type: 'text',
+      label: 'Phone Number',
+      required: false,
+    },
+    {
+      name: 'serviceType',
+      type: 'text',
+      label: 'Service Type',
+      required: false,
+    },
+    {
+      name: 'message',
+      type: 'textarea',
+      label: 'Message',
+      required: false,
+    },
+    {
+      name: 'source',
+      type: 'text',
+      label: 'Form Source',
+      required: false,
     },
     {
       name: 'createdAt',

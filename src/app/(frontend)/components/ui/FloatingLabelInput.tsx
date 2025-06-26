@@ -37,7 +37,7 @@ const FloatingLabelInput = ({
         {...props}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        className="border border-gray-300 rounded-lg px-4 py-3 text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500"
+        className="border border-gray-300 rounded-lg px-4 py-3 text-sm w-full focus:outline-none focus:ring-2 focus:ring-[#339438]"
       />
     </div>
   )

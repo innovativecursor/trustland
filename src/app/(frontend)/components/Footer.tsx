@@ -9,6 +9,7 @@ import {
 import logo from '../public/assets/logo_trustland.png'
 import innocursor from '../public/assets/FooterAssets/innocursor.svg'
 import Image from 'next/image'
+import Link from 'next/link'
 export default function Footer() {
   return (
     <footer className="bg-[#f7fbf5] text-gray-700 text-sm">
@@ -66,10 +67,10 @@ export default function Footer() {
               <div className="flex flex-1 flex-col md:flex-row gap-4">
                 <div className="flex flex-col gap-6 min-w-[300px]">
                   <h4 className="font-semibold text-gray-800">QUICK LINKS</h4>
-                  <span>Home</span>
-                  <span>Services</span>
-                  <span>Projects</span>
-                  <span>Contact</span>
+                  <Link href="/" className="text-gray-600 hover:text-black transition">Home</Link>
+                  <Link href="/properties" className="text-gray-600 hover:text-black transition">Feature Properties</Link>
+                  <Link href="/services" className="text-gray-600 hover:text-black transition">Services</Link>
+                  <Link href="/contact" className="text-gray-600 hover:text-black transition">Contact</Link>
                 </div>
 
                 <div className="flex flex-col gap-6 min-w-[200px]">

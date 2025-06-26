@@ -7,6 +7,7 @@ import Navbar from './components/NavBar'
 import Footer from './components/Footer'
 import './styles.css'
 import Loader from './components/ui/Loader'
+import { Toaster } from 'react-hot-toast' // ✅ Import toaster
 
 const poppins = Poppins({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -21,7 +22,6 @@ export default function RootLayoutClient({ children }: { children: React.ReactNo
   useEffect(() => {
     setLoading(true) // Show loader on route change
     const timer = setTimeout(() => setLoading(false), 600) // Fake delay for UX
-
     return () => clearTimeout(timer)
   }, [pathname])
 
@@ -29,6 +29,9 @@ export default function RootLayoutClient({ children }: { children: React.ReactNo
     <html lang="en">
       <body className={poppins.className}>
         <Navbar />
+
+        {/* ✅ React Hot Toast Toaster */}
+        <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
 
         {/* Show loader while loading */}
         {loading ? (

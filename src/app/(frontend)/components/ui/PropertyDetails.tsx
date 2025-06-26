@@ -6,8 +6,10 @@ import AgentImage from '../../public/assets/InternalPropertyAssets/agent-image.p
 import Star1 from '../../public/assets/InternalPropertyAssets/Star 1.png'
 import Phone from '../../public/assets/InternalPropertyAssets/Phone.png'
 import Mail from '../../public/assets/InternalPropertyAssets/Mail.png'
-import Schedule from '../../public/assets/InternalPropertyAssets/Schedule.png'
-import ContactAgent from '../../public/assets/InternalPropertyAssets/Administrator Male.png'
+// import Schedule from '../../public/assets/InternalPropertyAssets/Schedule.png'
+// import ContactAgent from '../../public/assets/InternalPropertyAssets/Administrator Male.png'
+import ContactButton from '../ui/ContactButton'
+import Schedule from '../ui/ScheduleVisitButton'
 
 interface PropertyDetailsProps {
   overview: string
@@ -103,14 +105,8 @@ export default function PropertyDetails({
         </div>
 
         <div className="flex gap-2">
-          <button className="bg-green-600 hover:bg-black text-white px-4 py-2 rounded-md flex items-center gap-2 text-sm">
-            <Image src={ContactAgent} alt="Emo" className="w-6.5 h-7" />
-            Contact Agent
-          </button>
-          <button className="border border-gray-400 text-gray-700 px-4 py-2 hover:bg-black hover:text-white rounded-md flex items-center gap-2 text-sm">
-            <Image src={Schedule} alt="Calendar" />
-            Schedule a Visit
-          </button>
+          <ContactButton />
+          <Schedule />
         </div>
       </div>
     </div>

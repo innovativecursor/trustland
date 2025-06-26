@@ -6,7 +6,7 @@ import { PiRuler, PiMapPin } from 'react-icons/pi'
 import Image from 'next/image'
 import { motion, useMotionValue, useTransform } from 'framer-motion'
 import LiquidHoverButton from './ui/SearchButton'
-
+import { useRouter } from 'next/navigation'
 import image1 from '../public/assets/FeaturedPropertiesAssets/trustland_image_1.png'
 import image2 from '../public/assets/FeaturedPropertiesAssets/trustland_image_2.png'
 import image3 from '../public/assets/FeaturedPropertiesAssets/trustland_image_3.jpg'
@@ -84,6 +84,8 @@ const properties = [
 ]
 
 const FeaturedProperties: React.FC = () => {
+  const router = useRouter()
+    
   return (
     <section className="w-full max-w-7xl mx-auto flex flex-col items-center justify-between px-6 md:px-8 py-16 my-12 relative">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 w-full">
@@ -94,7 +96,7 @@ const FeaturedProperties: React.FC = () => {
             everything from legal paperwork to construction and design.
           </p>
         </div>
-        <LiquidHoverButton>View All</LiquidHoverButton>
+        <LiquidHoverButton onClick={() => router.push('/properties')}>View All</LiquidHoverButton>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 w-full">

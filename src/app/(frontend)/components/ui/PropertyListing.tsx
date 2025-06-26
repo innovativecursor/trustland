@@ -31,10 +31,10 @@ export default function PropertyListing({ images, video, title, location, price 
           <div className="">
             <ShareButton />
           </div>
-          <button className="border px-3 py-1.5 rounded hover:bg-black hover:text-white flex">
+          {/* <button className="border px-3 py-1.5 rounded hover:bg-black hover:text-white flex">
             <Image src={Save} alt="Save" className="mr-4 hover:text-white" />
             Save
-          </button>
+          </button> */}
         </div>
       </div>
 
@@ -49,14 +49,14 @@ export default function PropertyListing({ images, video, title, location, price 
       )}
 
       {/* Gallery Images */}
-      <div className="grid grid-cols-1 md:grid-cols-4 md:gap-2">
-        <div className="md:col-span-2 row-span-2">
+      <div className=" grid grid-cols-1 md:grid-cols-4 md:gap-2">
+        <div className=" md:col-span-2 row-span-2">
           <Image
             src={images?.[0]?.url || '/placeholder.jpg'}
             alt={images?.[0]?.filename || 'Main image'}
             width={800}
             height={600}
-            className="w-full h-full object-cover"
+            className="w-full h-115 object-cover"
           />
         </div>
 
@@ -66,10 +66,10 @@ export default function PropertyListing({ images, video, title, location, price 
             <Image
               key={img.id}
               src={img.url}
-              alt={img.filename}
+              alt='grid images'
               width={400}
-              height={300}
-              className="w-full h-full object-cover"
+              height={30}
+              className="w-full h-56 object-cover"
             />
           ))}
       </div>

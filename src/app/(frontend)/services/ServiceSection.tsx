@@ -2,7 +2,7 @@ import React from 'react'
 import Breadcrumbs from '../components/ui/BreadCrumbs'
 import ImgGridService from '../components/ui/ImgGridService'
 import ServicesHeading from '../components/ui/ServicesHeading'
-import ServicesProvidedCalled from '../components/ServicesProvidedCalled'
+// import ServicesProvidedCalled from '../components/ServicesProvidedCalled'
 import ContactForm from '../components/ui/ContactUs'
 
 const ServiceSection = () => {
@@ -10,8 +10,10 @@ const ServiceSection = () => {
     <div className='pt-5'>
       <Breadcrumbs />
       <ImgGridService />
-      <ServicesHeading />
-      <ServicesProvidedCalled />
+      <div className=''>
+        <ServicesHeading />
+        {/* <ServicesProvidedCalled /> */}
+      </div>
       <ContactForm />
     </div>
   )

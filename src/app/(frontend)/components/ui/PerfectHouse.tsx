@@ -1,17 +1,22 @@
 import React from 'react'
-// import PropertiesColumn from './PropertiesColumn'
 import PerfectHouseProperties from './PerfectHouseProperties'
 
 const PerfectHouse = () => {
   return (
-  <div className='bg-gray-100 flex justify-start'>
-    <div className='max-w-7xl mx-auto mt-15'>  
-      <h1 className='font-semibold text-[40px] p-4 md:p-0 md:pt-28 md:text-5xl'>Find Your Perfect House And Lot at the <br className='hidden md:block md:mt-4'/> Best Price!</h1>
-      <p className='p-4 mt-2 md:p-0 md:mt-10'>Pre Selling Discount! - Upto 15% off on selected properties</p>
-      {/* <PropertiesColumn /> */}
-      <PerfectHouseProperties/>
+    <div className="bg-gray-100 flex justify-center px-4 md:px-8 lg:px-16">
+      <div className="w-full max-w-7xl py-16 mt-20">
+        <h1 className="font-semibold text-3xl sm:text-4xl md:text-5xl ">
+          Find Your Perfect House And Lot at the <br className="hidden md:inline py-16" />
+          Best Price!
+        </h1>
+        <p className="mt-4 text-base sm:text-lg text-gray-700">
+          Pre Selling Discount! – Up to 15% off on selected properties
+        </p>
+        <div className="mt-10">
+          <PerfectHouseProperties />
+        </div>
+      </div>
     </div>
-  </div>
   )
 }
 

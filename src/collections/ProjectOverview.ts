@@ -292,5 +292,19 @@ export const ProjectOverview: CollectionConfig = {
         },
       ],
     },
+    {
+      label: 'Feature on Landing Page?',
+      name: 'prop_featured',
+      type: 'checkbox',
+      defaultValue: false,
+      required: false,
+    },
+    {
+      label: 'feature on Offers Section',
+      name: 'prop_offer',
+      type: 'checkbox',
+      defaultValue: false,
+      required: false,
+    },
   ],
 }

@@ -6,6 +6,7 @@ import { MdEmail, MdLocationOn } from 'react-icons/md'
 import FloatingLabelSelect from './ui/FloatingLabelSelect'
 import FloatingLabelInput from './ui/FloatingLabelInput'
 import { BuyerInquiry, fetchBuyerInquiries } from '../utils/api'
+import toast from 'react-hot-toast'
 
 const RealEstateInquiryForm: React.FC = () => {
   const [personnelRoles, setPersonnelRoles] = useState<string[]>([])
@@ -61,7 +62,7 @@ const RealEstateInquiryForm: React.FC = () => {
 
       if (!response.ok) throw new Error('Submission failed')
 
-      alert('Form submitted successfully!')
+      toast.success('Form submitted successfully!')
       setFormData({
         personnelRole: '',
         name: '',
@@ -72,7 +73,7 @@ const RealEstateInquiryForm: React.FC = () => {
       })
     } catch (error) {
       console.error(error)
-      alert('Something went wrong.')
+      toast.error('Something went wrong. Please try again.')
     } finally {
       setIsSubmitting(false)
     }
@@ -97,15 +98,16 @@ const RealEstateInquiryForm: React.FC = () => {
               onChange={handleChange}
             >
               <option value="">Nothing selected</option>
-              {/* <option value="buyer" label='Buyer'>Buyer</option> */}
-              <option value="agent" label='Agent'>Agent</option>
-              <option value="investor" label='Investor'>Investor</option>
-              <option value="other" label='Other'>Other</option>
-              {personnelRoles.map((role) => (
-                <option key={role} value={role}>
-                  {role.charAt(0).toUpperCase() + role.slice(1)}
-                </option>
-              ))}
+              <option value="agent">Agent</option>
+              <option value="investor">Investor</option>
+              <option value="other">Other</option>
+              {personnelRoles
+                .filter((role): role is string => typeof role === 'string' && role.trim() !== '')
+                .map((role) => (
+                  <option key={role} value={role}>
+                    {role.charAt(0).toUpperCase() + role.slice(1)}
+                  </option>
+                ))}
             </FloatingLabelSelect>
 
             <FloatingLabelInput
@@ -136,17 +138,18 @@ const RealEstateInquiryForm: React.FC = () => {
                 onChange={handleChange}
               >
                 <option value="">Nothing selected</option>
-                {/* <option value="Mr">Mr</option> */}
                 <option value="Ms">Ms</option>
                 <option value="Mrs">Mrs</option>
                 <option value="Dr">Dr</option>
                 <option value="Mx">Mx</option>
                 <option value="Other">Other</option>
-                {addressTitles.map((title) => (
-                  <option key={title} value={title}>
-                    {title.charAt(0).toUpperCase() + title.slice(1)}
-                  </option>
-                ))}
+                {addressTitles
+                  .filter((title): title is string => typeof title === 'string' && title.trim() !== '')
+                  .map((title) => (
+                    <option key={title} value={title}>
+                      {title.charAt(0).toUpperCase() + title.slice(1)}
+                    </option>
+                  ))}
               </FloatingLabelSelect>
             </div>
 
@@ -180,7 +183,7 @@ const RealEstateInquiryForm: React.FC = () => {
           </form>
         </div>
 
-        {/* Contact Sidebar (Unchanged) */}
+        {/* Contact Sidebar */}
         <div className="flex-1 bg-[#F5FFF6] rounded-2xl p-10 flex flex-col">
           <div>
             <h3 className="text-2xl font-semibold text-[#1A1A1A] mb-1">Contact Us</h3>
