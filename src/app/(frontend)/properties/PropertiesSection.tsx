@@ -175,7 +175,7 @@ const PropertiesSection = () => {
     <div className="pt-5">
       <Breadcrumbs />
       <div className="flex justify-center">
-        <div className="pr-10 flex-col justify-center">
+        <div className="md:pr-10">
           <FilterBar
             view={view}
             setView={setView}
