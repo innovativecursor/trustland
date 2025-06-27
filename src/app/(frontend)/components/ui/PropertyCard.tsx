@@ -36,14 +36,14 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, view }) => {
       <div
         ref={containerRef}
         onMouseMove={handleMouseMove}
-        className={`relative rounded-xl overflow-hidden shadow-md group transition-all bg-white ${
-          view === 'list' ? 'flex flex-row w-full h-[170px] sm:h-[200px]' : ''
+        className={`mx-auto md:mx-0 relative rounded-xl overflow-hidden shadow-md group transition-all bg-white ${
+          view === 'list' ? 'flex flex-row w-full h-[170px] sm:h-[200px]' : 'h-70 w-90 md:w-full md:h-auto'
         }`}
       >
         {/* Image */}
         <motion.div
           className={`relative ${
-            view === 'list' ? 'w-40 h-auto sm:w-1/3 sm:h-full' : 'h-56 sm:h-64 md:h-80'
+            view === 'list' ? 'w-40 h-auto sm:w-1/3 sm:h-full' : 'h-70 sm:h-64 md:h-80'
           }`}
           initial={{ scale: 1 }}
           whileHover={{ scale: 1.05 }}

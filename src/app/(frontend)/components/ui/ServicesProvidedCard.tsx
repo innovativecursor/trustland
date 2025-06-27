@@ -43,7 +43,7 @@ export default function ServicesProvidedCard({
       </div>
 
       {/* Text Content */}
-      <div className="mt-12">
+      <div className="mt-12 text-sm md:text-base">
         <h2 className="text-xl font-bold mb-2">{heading}</h2>
         <p className="text-gray-600 text-[14px] mb-6">{subheading}</p>
 

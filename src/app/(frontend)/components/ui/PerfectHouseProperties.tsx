@@ -74,11 +74,11 @@ const FeaturedProperties: React.FC = () => {
                 key={property.id}
                 ref={containerRef}
                 onMouseMove={handleMouseMove}
-                className="relative rounded-xl overflow-hidden shadow-md group transition-all bg-white"
+                className="relative w-90 rounded-xl overflow-hidden shadow-md group transition-all bg-white"
               >
                 {/* Image Section */}
                 <motion.div
-                  className="relative w-full h-64 sm:h-72 md:h-80"
+                  className="relative w-full h-70 sm:h-72 md:h-80"
                   initial={{ scale: 1 }}
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.4 }}

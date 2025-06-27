@@ -84,7 +84,7 @@ const Navbar = () => {
 
         {/* Hamburger Menu - Mobile */}
         <div className="lg:hidden">
-          <button onClick={() => setIsOpen(true)} className="text-white">
+          <button onClick={() => setIsOpen(true)} >
             <RxHamburgerMenu size={32} />
           </button>
         </div>

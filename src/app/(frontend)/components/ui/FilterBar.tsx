@@ -37,7 +37,7 @@ export default function FilterBar({
   }
 
   return (
-    <div className="mt-5 md:mt-20">
+    <div className="px-4 md:px-0 mt-5 md:mt-20">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-5">
         {/* Left: View toggle + Sort */}
         <div className="flex flex-col md:flex-row md:items-center gap-4 flex-wrap">
@@ -72,7 +72,7 @@ export default function FilterBar({
             <select
               value={sortOption}
               onChange={(e) => setSortOption(e.target.value)}
-              className="h-10 min-w-[180px] border border-gray-300 rounded-md px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#339438]"
+              className="h-10 w-60 md:min-w-[180px] border border-gray-300 rounded-md px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#339438]"
             >
               <option value="Popularity">Sort By Popularity</option>
               <option value="LowToHigh">Price: Low to High</option>
@@ -86,7 +86,7 @@ export default function FilterBar({
               <select
                 value={currentPage}
                 onChange={(e) => setCurrentPage(Number(e.target.value))}
-                className="h-10 min-w-[150px] border border-gray-300 rounded-md px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#339438]"
+                className="h-10 w-60 md:min-w-[180px] border border-gray-300 rounded-md px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#339438]"
               >
                 {Array.from({ length: totalPages }, (_, i) => (
                   <option key={i} value={i + 1}>

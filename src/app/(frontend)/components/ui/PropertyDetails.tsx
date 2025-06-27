@@ -76,11 +76,11 @@ export default function PropertyDetails({
       </div>
 
       {/* Right Section */}
-      <div className="space-y-4">
+      <div className="space-y-4 mt-20 sm:mt-0">
         <h2 className="text-xl font-semibold">Contact Us for a Site Visit & Reservation</h2>
         <div className="grid grid-cols-2 gap-0">
-          <div className="w-32 h-32">
-            <Image src={AgentImage} alt="Agent" className="w-32 h-32 rounded-lg object-cover" />
+          <div className="w-25 lg:w-32 h-25 lg:h-32">
+            <Image src={AgentImage} alt="Agent" className="w-25 lg:w-32 h-25 lg:h-32 rounded-lg object-cover" />
           </div>
           <div>
             <p className="font-semibold">Jetha Lal</p>
