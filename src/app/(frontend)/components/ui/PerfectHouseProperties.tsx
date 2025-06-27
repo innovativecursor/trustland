@@ -49,7 +49,7 @@ const properties = [
 const FeaturedProperties: React.FC = () => {
   return (
     <section className="max-w-7xl flex justify-start">
-      <div className="w-full md:w-7xl py-12">
+      <div className="w-full lg:w-7xl py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {properties.map((property) => {
             const containerRef = useRef<HTMLDivElement | null>(null)
@@ -74,7 +74,7 @@ const FeaturedProperties: React.FC = () => {
                 key={property.id}
                 ref={containerRef}
                 onMouseMove={handleMouseMove}
-                className="relative w-90 rounded-xl overflow-hidden shadow-md group transition-all bg-white"
+                className="mx-auto lg:mx-0 relative w-90 rounded-xl overflow-hidden shadow-md group transition-all bg-white"
               >
                 {/* Image Section */}
                 <motion.div
