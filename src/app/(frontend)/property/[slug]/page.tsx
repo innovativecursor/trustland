@@ -5,16 +5,12 @@ import PropertyDetails from '../../components/ui/PropertyDetails'
 import FeatureSection from '../../components/ui/FeatureSection'
 import { fetchProjectOverviewBySlug } from '../../utils/api'
 
-interface Props {
-  params: {
-    slug: string
-  }
-}
+export default async function PropertyPage(props: { params: Promise<{ slug: string }> }) {
+  const { slug } = await props.params
 
-export default async function PropertyPage({ params }: Props) {
-  if (!params?.slug) return notFound()
+  if (!slug) return notFound()
 
-  const decodedSlug = decodeURIComponent(params.slug)
+  const decodedSlug = decodeURIComponent(slug)
 
   try {
     const property = await fetchProjectOverviewBySlug(decodedSlug)
