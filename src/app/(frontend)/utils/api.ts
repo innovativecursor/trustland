@@ -167,6 +167,7 @@ export const fetchAllProjects = async (): Promise<ProjectOverview[]> => {
   }
 }
 
+//Fetch Service Cards
 export const fetchServiceCards = async (): Promise<ServiceCard[]> => {
-  return await fetchFromAPI('services', { depth: '1' })
+  return await fetchFromAPI('services', { depth: '2' })
 }
