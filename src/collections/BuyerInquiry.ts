@@ -49,7 +49,6 @@ export const BuyerInquiry: CollectionConfig = {
         { label: 'Ms.', value: 'ms' },
         { label: 'Mrs.', value: 'mrs' },
         { label: 'Dr.', value: 'dr' },
-        { label: 'Mx.', value: 'mx' },
         { label: 'Other', value: 'other' },
       ],
     },
