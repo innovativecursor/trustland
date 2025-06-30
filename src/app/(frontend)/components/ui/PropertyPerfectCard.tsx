@@ -6,6 +6,7 @@ import { FaBath, FaBed } from 'react-icons/fa'
 import { PiMapPin, PiRuler } from 'react-icons/pi'
 import Image from 'next/image'
 import { ProjectOverview } from '../../utils/api'
+import Link from 'next/link'
 
 interface Props {
   project: ProjectOverview
@@ -36,6 +37,7 @@ const PropertyPerfectCard: React.FC<Props> = ({ project }) => {
       : null
 
   return (
+   <Link href={`/property/${project.slug}`} className="block">  
     <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
@@ -84,7 +86,7 @@ const PropertyPerfectCard: React.FC<Props> = ({ project }) => {
 
         <div className="flex items-center justify-between flex-wrap">
           <div className="text-green-600 text-[15px] font-semibold">
-            {project.property_details?.price || '—'}
+            PHP {project.property_details?.price || '—'}M
           </div>
           <div className="flex items-center gap-3 text-xs text-gray-600 mt-2 sm:mt-0">
             {card?.beds !== undefined && card.beds !== 0 && (
@@ -112,6 +114,7 @@ const PropertyPerfectCard: React.FC<Props> = ({ project }) => {
         </div>
       </div>
     </div>
+  </Link>
   )
 }
 
