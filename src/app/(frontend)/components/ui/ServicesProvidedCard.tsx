@@ -1,3 +1,5 @@
+'use client'
+
 import Image, { StaticImageData } from 'next/image'
 import tick from '../../public/assets/ServicesAssets/Group 1000005079.png'
 
@@ -7,12 +9,15 @@ type ServicePoint = {
 }
 
 interface ServicesProvidedCardProps {
-  bgImage: StaticImageData | string
-  numberImage: StaticImageData | string
+  bgImage: string | StaticImageData
+  numberImage: string | StaticImageData
   heading: string
   subheading: string
   points: ServicePoint[]
 }
+
+const prependCMSUrl = (src: string): string =>
+  src.startsWith('/') ? `${process.env.NEXT_PUBLIC_PAYLOAD_URL}${src}` : src
 
 export default function ServicesProvidedCard({
   bgImage,
@@ -21,42 +26,40 @@ export default function ServicesProvidedCard({
   subheading,
   points,
 }: ServicesProvidedCardProps) {
+  const isValidString = (val: unknown): val is string =>
+    typeof val === 'string' && val.trim() !== ''
+
+  const bgImageUrl =
+    isValidString(bgImage) ? prependCMSUrl(bgImage) : bgImage || null
+
+  const numberImageUrl =
+    isValidString(numberImage) ? prependCMSUrl(numberImage) : numberImage || null
+
   return (
     <div className="w-full flex flex-col items-center mt-15">
       {/* Background Image */}
       <div className="relative w-full max-w-6xl rounded-xl">
-        {bgImage && typeof bgImage === 'string' ? (
+        {bgImageUrl && (
           <Image
-            src={bgImage}
+            src={bgImageUrl}
             alt="Service Background"
             className="w-full h-60 sm:h-auto object-cover"
             width={1200}
             height={400}
           />
-        ) : typeof bgImage !== 'string' ? (
-          <Image
-            src={bgImage}
-            alt="Service Background"
-            className="w-full h-60 sm:h-auto object-cover"
-          />
-        ) : null}
+        )}
 
-        <div className="absolute h-20 w-20 bottom-[-40px] left-1/2 transform -translate-x-1/2 bg-white rounded-full md:w-40 md:h-40 md:bottom-[-80px]  flex items-center justify-center">
-          {numberImage && typeof numberImage === 'string' ? (
+        {/* Number Image */}
+        <div className="absolute h-20 w-20 bottom-[-40px] left-1/2 transform -translate-x-1/2 bg-white rounded-full md:w-40 md:h-40 md:bottom-[-80px] flex items-center justify-center">
+          {numberImageUrl && (
             <Image
-              src={numberImage}
+              src={numberImageUrl}
               alt="Service Number"
               className="w-40 h-40 object-contain z-5"
               width={160}
               height={160}
             />
-          ) : typeof numberImage !== 'string' ? (
-            <Image
-              src={numberImage}
-              alt="Service Number"
-              className="w-40 h-40 object-contain z-5"
-            />
-          ) : null}
+          )}
         </div>
       </div>
 
@@ -68,8 +71,14 @@ export default function ServicesProvidedCard({
         {/* Descriptive Points */}
         <ul className="text-left space-y-4">
           {points.map((point, index) => (
-            <li key={index} className="flex ">
-              <Image src={tick} alt="tick" className="mr-2 w-5 h-5"></Image>
+            <li key={index} className="flex">
+              <Image
+                src={tick}
+                alt="tick"
+                className="mr-2 w-5 h-5"
+                width={20}
+                height={20}
+              />
               <div>
                 <span className="font-semibold">{point.title}</span> – {point.description}
               </div>

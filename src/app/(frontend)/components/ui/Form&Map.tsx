@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import FloatingLabelInput from './FloatingLabelInput'
 import FloatingLabelSelect from './FloatingLabelSelect'
 import toast from 'react-hot-toast'
@@ -15,6 +15,13 @@ export default function GetAQuote() {
   })
 
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [formSource, setFormSource] = useState('')
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setFormSource(window.location.href)
+    }
+  }, [])
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -37,7 +44,7 @@ export default function GetAQuote() {
         },
         body: JSON.stringify({
           ...formData,
-          source: 'quote-form',
+          source: formSource,
         }),
       })
 

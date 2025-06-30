@@ -11,6 +11,7 @@ import toast from 'react-hot-toast'
 const RealEstateInquiryForm: React.FC = () => {
   const [personnelRoles, setPersonnelRoles] = useState<string[]>([])
   const [addressTitles, setAddressTitles] = useState<string[]>([])
+  const [formSource, setFormSource] = useState('')
 
   const [formData, setFormData] = useState({
     personnelRole: '',
@@ -24,6 +25,10 @@ const RealEstateInquiryForm: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setFormSource(window.location.href)
+    }
+
     const fetchOptions = async () => {
       const inquiries: BuyerInquiry[] = await fetchBuyerInquiries()
       const roles = Array.from(new Set(inquiries.map((b) => b.personnelRole)))
@@ -57,6 +62,7 @@ const RealEstateInquiryForm: React.FC = () => {
           ...formData,
           budget: parseFloat(formData.budget),
           minSize: parseFloat(formData.minSize),
+          source: formSource,
         }),
       })
 
@@ -182,8 +188,7 @@ const RealEstateInquiryForm: React.FC = () => {
             </div>
           </form>
         </div>
-
-        {/* Contact Sidebar */}
+      {/* Contact Sidebar */}
         <div className="flex-1 bg-[#F5FFF6] rounded-2xl p-10 flex flex-col">
           <div>
             <h3 className="text-2xl font-semibold text-[#1A1A1A] mb-1">Contact Us</h3>

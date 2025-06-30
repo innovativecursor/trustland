@@ -15,7 +15,7 @@ const SuccessAnimation = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev === 0 ? 1 : 0))
-    }, 600) // very fast transition
+    }, 600)
     return () => clearInterval(interval)
   }, [])
 
@@ -50,6 +50,13 @@ const InquiryModal: React.FC = () => {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [formSource, setFormSource] = useState('')
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setFormSource(window.location.href)
+    }
+  }, [])
 
   const openModal = () => {
     setIsSuccess(false)
@@ -80,7 +87,7 @@ const InquiryModal: React.FC = () => {
         body: JSON.stringify({
           ...formData,
           budget: parseFloat(formData.budget),
-          source: 'inquiry-modal',
+          source: formSource,
         }),
       })
 

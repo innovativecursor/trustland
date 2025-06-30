@@ -37,7 +37,7 @@ export default function ContactForm() {
         },
         body: JSON.stringify({
           ...formData,
-          source: 'contact-form',
+          source: window.location.href, // ✅ dynamic form source
         }),
       })
 

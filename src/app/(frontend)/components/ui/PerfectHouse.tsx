@@ -10,7 +10,7 @@ const PerfectHouse = () => {
           Best Price!
         </h1>
         <p className="mt-4 text-base sm:text-lg text-gray-700">
-          Pre Selling Discount! – Up to 15% off on selected properties
+          Pre Selling Discount! – <strong className='text-[#339438]'>Up to 15%</strong> off on selected properties
         </p>
         <div className="mt-10">
           <PerfectHouseProperties />

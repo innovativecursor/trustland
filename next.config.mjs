@@ -5,7 +5,12 @@ const nextConfig = {
   reactStrictMode: false,
   // Your Next.js config here
   images: {
-    domains: ['localhost', 'www.youtube.com', 'img.youtube.com'],
+    domains: [
+      'localhost',
+      'cms.example.com', // ✅ Add your actual domain here
+      'www.youtube.com',
+      'img.youtube.com',
+    ],
     remotePatterns: [
       {
         protocol: 'http',

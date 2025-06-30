@@ -1,11 +1,16 @@
 'use client'
 
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import backgroundHero from '../../public/assets/ParallaxAssets/background_image_parallax.png'
-import LiquidHoverButton from './SearchButton'
 import ContactUsButton from './ContactUsButton'
 
 const ParallaxSection = () => {
+  const router = useRouter()
+
+  const handleClick = () => {
+    router.push('/contact')
+  }
+
   return (
     <section id="contact" className="relative h-[50vh] w-full pt-16 md:pt-24 lg:pt-32">
       {/* Background Image */}
@@ -16,7 +21,7 @@ const ParallaxSection = () => {
         }}
       ></div>
 
-      {/* Gradient Overlay (your updated gradient) */}
+      {/* Gradient Overlay */}
       <div
         className="absolute inset-0"
         style={{
@@ -35,7 +40,9 @@ const ParallaxSection = () => {
           Offering personalized real estate services to help you buy your dream property.
         </h2>
 
-        <ContactUsButton>Schedule a Consultation</ContactUsButton>
+        <div onClick={handleClick}>
+          <ContactUsButton>Schedule a Consultation</ContactUsButton>
+        </div>
       </div>
     </section>
   )

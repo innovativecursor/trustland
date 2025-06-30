@@ -43,6 +43,7 @@ const InquiryModal: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [formSource, setFormSource] = useState('')
 
   const [formData, setFormData] = useState({
     name: '',
@@ -52,6 +53,12 @@ const InquiryModal: React.FC = () => {
     message: '',
   })
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setFormSource(window.location.href)
+    }
+  }, [])
+
   const openModal = () => {
     setIsSuccess(false)
     setIsOpen(true)
@@ -60,7 +67,7 @@ const InquiryModal: React.FC = () => {
   const closeModal = () => setIsOpen(false)
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     setFormData((prev) => ({
       ...prev,
@@ -81,7 +88,7 @@ const InquiryModal: React.FC = () => {
         body: JSON.stringify({
           ...formData,
           budget: parseFloat(formData.budget),
-          source: 'inquiry-modal',
+          source: formSource,
         }),
       })
 

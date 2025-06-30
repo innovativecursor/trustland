@@ -15,9 +15,9 @@ type Props = {
 }
 
 const PRICE_RANGES = [
-  { label: 'Low Budget', min: 3, max: 17 },
-  { label: 'Medium Budget', min: 18, max: 24 },
-  { label: 'High Budget', min: 25, max: 40 },
+  { label: 'Low Budget', min: 0, max: 3 },
+  { label: 'Medium Budget', min: 3.01, max: 5 },
+  { label: 'High Budget', min: 5.01, max: 10 },
 ]
 
 export default function AdditionalInfo({ properties, onFilter }: Props) {
