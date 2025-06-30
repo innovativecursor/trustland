@@ -5,10 +5,8 @@ import PropertyDetails from '../../components/ui/PropertyDetails'
 import FeatureSection from '../../components/ui/FeatureSection'
 import { fetchProjectOverviewBySlug } from '../../utils/api'
 
-export default async function PropertyPage({ params }: { params: { slug: string } }) {
+export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params
-
-  console.log('Received slug param:', slug)
 
   const property = await fetchProjectOverviewBySlug(slug)
 
@@ -16,15 +14,14 @@ export default async function PropertyPage({ params }: { params: { slug: string 
 
   const galleryImages = property.gallery_images ?? []
 
-  const propertyDetailsRaw = property.property_details
-  const details = propertyDetailsRaw
+  const details = property.property_details
     ? {
-        propertyType: propertyDetailsRaw.property_type,
-        floorArea: propertyDetailsRaw.floor_area ?? '',
-        unitTypes: propertyDetailsRaw.unit_types ?? '',
-        price: propertyDetailsRaw.price,
-        status: propertyDetailsRaw.property_status ?? '',
-        location: propertyDetailsRaw.location,
+        propertyType: property.property_details.property_type,
+        floorArea: property.property_details.floor_area ?? '',
+        unitTypes: property.property_details.unit_types ?? '',
+        price: property.property_details.price,
+        status: property.property_details.property_status ?? '',
+        location: property.property_details.location,
       }
     : {
         propertyType: '',
@@ -67,8 +64,8 @@ export default async function PropertyPage({ params }: { params: { slug: string 
           images={galleryImages}
           video={property.promo_video}
           title={property.title}
-          location={property.property_details?.location || ''}
-          price={property.property_details?.price || ''}
+          location={details.location}
+          price={details.price}
         />
         <PropertyDetails
           overview={property.overview}
