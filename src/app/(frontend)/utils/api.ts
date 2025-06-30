@@ -1,4 +1,6 @@
 // types.ts (you can separate this if needed)
+
+import { StaticImageData } from 'next/image'
 export interface BuyerInquiry {
   name: string
   email: string
@@ -58,8 +60,8 @@ export interface ProjectOverview {
 export interface ServiceCard {
   heading: string
   subheading: string
-  bgImage: string
-  numberImage: string
+  bgImage: string | StaticImageData
+  numberImage: string | StaticImageData
   points: {
     title: string
     description: string
