@@ -46,7 +46,7 @@ const properties = [
   },
 ]
 
-const FeaturedProperties: React.FC = () => {
+const PerfectHouseProperties: React.FC = () => {
   return (
     <section className="max-w-7xl flex justify-start">
       <div className="w-full lg:w-7xl py-12">
@@ -66,7 +66,7 @@ const FeaturedProperties: React.FC = () => {
             const gradientOverlay = useTransform(
               [mouseX, mouseY],
               ([x, y]) =>
-                `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.2) 0%, transparent 60%)`
+                `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.2) 0%, transparent 60%)`,
             )
 
             return (
@@ -118,9 +118,7 @@ const FeaturedProperties: React.FC = () => {
                   </p>
 
                   <div className="flex items-center justify-between flex-wrap">
-                    <div className="text-green-600 text-[15px] font-semibold">
-                      {property.price}
-                    </div>
+                    <div className="text-green-600 text-[15px] font-semibold">{property.price}</div>
                     <div className="flex items-center gap-3 text-xs text-gray-600 mt-2 sm:mt-0">
                       {property.beds !== 0 && (
                         <div className="flex items-center gap-1">
@@ -153,4 +151,4 @@ const FeaturedProperties: React.FC = () => {
   )
 }
 
-export default FeaturedProperties
+export default PerfectHouseProperties
