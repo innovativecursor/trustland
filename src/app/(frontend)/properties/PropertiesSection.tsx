@@ -141,7 +141,6 @@ const PropertiesSection = () => {
   filterWithSession()
 }, [projects])
 
-
   
   // Sort logic
   const sortedProjects = useMemo(() => {
