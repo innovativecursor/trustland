@@ -1,5 +1,3 @@
-// components/ServiceSection.tsx
-
 import Image, { StaticImageData } from 'next/image'
 import tick from '../../public/assets/ServicesAssets/Group 1000005079.png'
 
@@ -27,14 +25,38 @@ export default function ServicesProvidedCard({
     <div className="w-full flex flex-col items-center mt-15">
       {/* Background Image */}
       <div className="relative w-full max-w-6xl rounded-xl">
-        <Image
-          src={bgImage}
-          alt="Service Background"
-          className="w-full h-60 sm:h-auto object-cover"
-        />
-        {/* Number Image */}
+        {bgImage && typeof bgImage === 'string' ? (
+          <Image
+            src={bgImage}
+            alt="Service Background"
+            className="w-full h-60 sm:h-auto object-cover"
+            width={1200}
+            height={400}
+          />
+        ) : typeof bgImage !== 'string' ? (
+          <Image
+            src={bgImage}
+            alt="Service Background"
+            className="w-full h-60 sm:h-auto object-cover"
+          />
+        ) : null}
+
         <div className="absolute h-20 w-20 bottom-[-40px] left-1/2 transform -translate-x-1/2 bg-white rounded-full md:w-40 md:h-40 md:bottom-[-80px]  flex items-center justify-center">
-          <Image src={numberImage} alt="Service Number" className="w-40 h-40 object-contain z-5" />
+          {numberImage && typeof numberImage === 'string' ? (
+            <Image
+              src={numberImage}
+              alt="Service Number"
+              className="w-40 h-40 object-contain z-5"
+              width={160}
+              height={160}
+            />
+          ) : typeof numberImage !== 'string' ? (
+            <Image
+              src={numberImage}
+              alt="Service Number"
+              className="w-40 h-40 object-contain z-5"
+            />
+          ) : null}
         </div>
       </div>
 
