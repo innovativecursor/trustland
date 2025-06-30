@@ -26,7 +26,7 @@ const SearchBar = ({
   }
 
   return (
-    <div className="w-full flex flex-col items-center">
+    <div className="w-full flex flex-col items-center text-sm">
       {/* Search Input + Button */}
       <div className="flex z-10">
         <input
@@ -39,20 +39,21 @@ const SearchBar = ({
           }}
           onFocus={() => setShowSuggestions(true)}
           onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-          className="w-75 h-8 md:w-170 md:h-10 border-2 border-gray-400 rounded-l-xl px-4 py-2 hover:border-[#339438]"
+          className="w-75 h-8 md:w-170 md:h-10 border border-gray-300 rounded-l-lg px-4 py-2 focus:border-[#339438] focus:outline-none transition-colors"
         />
         <button
           onClick={onSearch}
-          className="px-2 md:px-6 bg-[#339438] text-white rounded-r-xl flex items-center cursor-pointer"
+          className="px-3 md:px-5 bg-[#339438] text-white rounded-r-lg flex items-center gap-2 hover:bg-[#2b7c2f] transition-colors"
         >
-          <FaSearch /> Search
+          <FaSearch className="text-xs" />
+          <span className="text-sm">Search</span>
         </button>
       </div>
 
       {/* Recommendation Dropdown */}
       {showSuggestions && filteredHistory.length > 0 && (
-        <div className="w-full mt-2 bg-white border border-gray-300 rounded-md shadow-md z-0">
-          <ul className="max-h-48 overflow-y-auto divide-y">
+        <div className="w-full mt-2 bg-white border border-gray-200 rounded-md shadow-sm z-0 max-w-md">
+          <ul className="max-h-48 overflow-y-auto divide-y divide-gray-100 text-sm">
             {filteredHistory.map((item, i) => (
               <li
                 key={i}
@@ -61,17 +62,14 @@ const SearchBar = ({
                   onSearch()
                   setShowSuggestions(false)
                 }}
-                className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                className="px-4 py-2 hover:bg-gray-50 cursor-pointer"
               >
                 {item}
               </li>
             ))}
           </ul>
-          <div className="text-right pr-2 py-1">
-            <button
-              onClick={clearHistory}
-              className="text-xs text-red-500 hover:underline"
-            >
+          <div className="text-right pr-3 py-1.5">
+            <button onClick={clearHistory} className="text-xs text-red-500 hover:underline">
               Clear history
             </button>
           </div>

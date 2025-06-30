@@ -14,7 +14,7 @@ type Props = {
 export default function AdditionalInfoWrapper({ properties, onFilter }: Props) {
   const [showDrawer, setShowDrawer] = useState(false)
   const [tempFilteredProjects, setTempFilteredProjects] = useState<ProjectOverview[]>([])
-  const [resetTrigger, setResetTrigger] = useState(0) // 👈 used to reset AdditionalInfo
+  const [resetTrigger, setResetTrigger] = useState(0)
 
   useEffect(() => {
     document.body.style.overflow = showDrawer ? 'hidden' : 'auto'
@@ -30,7 +30,7 @@ export default function AdditionalInfoWrapper({ properties, onFilter }: Props) {
 
   const handleReset = () => {
     setResetTrigger((prev) => prev + 1)
-    onFilter(properties) // send unfiltered list
+    onFilter(properties)
     setTempFilteredProjects(properties)
     setShowDrawer(false)
   }
@@ -41,9 +41,9 @@ export default function AdditionalInfoWrapper({ properties, onFilter }: Props) {
       <div className="lg:hidden fixed bottom-5 right-5 z-50">
         <button
           onClick={() => setShowDrawer(true)}
-          className="lg:hidden bg-[#339438] text-white px-5 py-3 rounded-full shadow-xl flex items-center gap-2"
+          className="lg:hidden bg-[#339438] text-white px-5 py-2.5 rounded-full shadow-xl flex items-center gap-2 text-sm"
         >
-          <Filter size={18} className='lg:hidden'/>
+          <Filter size={16} className="lg:hidden" />
           Filters
         </button>
       </div>
@@ -63,32 +63,32 @@ export default function AdditionalInfoWrapper({ properties, onFilter }: Props) {
               {/* Close */}
               <button
                 onClick={() => setShowDrawer(false)}
-                className="absolute top-3 right-4 text-gray-500 hover:text-black text-2xl font-bold"
+                className="absolute top-3 right-4 text-gray-400 hover:text-gray-600 text-xl font-medium"
               >
                 &times;
               </button>
 
-              <h2 className="lg:hidden text-xl font-semibold mb-4 mt-2">Filters</h2>
+              <h2 className="lg:hidden text-lg font-medium text-gray-700 mb-4 mt-2">Filters</h2>
 
               <div className="flex-1 overflow-y-auto pb-4">
                 <AdditionalInfo
                   properties={properties}
                   onFilter={setTempFilteredProjects}
-                  key={resetTrigger} // reset on trigger
+                  key={resetTrigger}
                 />
               </div>
 
               {/* Buttons */}
-              <div className="pt-4 border-t border-gray-200 space-y-3">
+              <div className="pt-4 border-t border-gray-200 space-y-2.5">
                 <button
                   onClick={handleApply}
-                  className="w-full bg-[#339438] text-white py-3 rounded-md text-center"
+                  className="w-full bg-[#339438] text-white py-2.5 rounded-md text-sm"
                 >
                   Apply Filters
                 </button>
                 <button
                   onClick={handleReset}
-                  className="lg:hidden w-full border border-gray-300 text-gray-700 py-2 rounded-md text-center"
+                  className="lg:hidden w-full border border-gray-300 text-gray-500 py-2 rounded-md text-sm"
                 >
                   Reset Filters
                 </button>
@@ -101,19 +101,12 @@ export default function AdditionalInfoWrapper({ properties, onFilter }: Props) {
       {/* Desktop Sidebar */}
       <div className="hidden lg:block">
         <div className="flex justify-between items-center pr-4 mb-2">
-          <h2 className="lg:hidden text-xl font-semibold">Filters</h2>
-          <button
-            onClick={handleReset}
-            className="lg:hidden text-sm"
-          >
+          <h2 className="lg:hidden text-lg font-medium text-gray-700">Filters</h2>
+          <button onClick={handleReset} className="lg:hidden text-sm text-gray-500">
             Reset Filters
           </button>
         </div>
-        <AdditionalInfo
-          properties={properties}
-          onFilter={onFilter}
-          key={resetTrigger}
-        />
+        <AdditionalInfo properties={properties} onFilter={onFilter} key={resetTrigger} />
       </div>
     </div>
   )

@@ -37,7 +37,7 @@ export default function FilterBar({
   }
 
   return (
-    <div className="px-4 md:px-0 mt-5 md:mt-20">
+    <div className="px-4 md:px-0 mt-5 md:mt-20 text-sm">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-5">
         {/* Left: View toggle + Sort */}
         <div className="flex flex-col md:flex-row md:items-center gap-4 flex-wrap">
@@ -45,25 +45,25 @@ export default function FilterBar({
           <div className="flex items-center space-x-2">
             <button
               onClick={() => setView('grid')}
-              className={`p-2 rounded-md border ${
+              className={`p-2 rounded-md border transition-colors ${
                 view === 'grid'
                   ? 'text-[#339438] border-[#339438]'
-                  : 'text-gray-400 border-gray-300'
+                  : 'text-gray-400 border-gray-300 hover:border-gray-400'
               }`}
               title="Grid View"
             >
-              <FaThLarge size={20} />
+              <FaThLarge size={16} />
             </button>
             <button
               onClick={() => setView('list')}
-              className={`p-2 rounded-md border ${
+              className={`p-2 rounded-md border transition-colors ${
                 view === 'list'
                   ? 'text-[#339438] border-[#339438]'
-                  : 'text-gray-400 border-gray-300'
+                  : 'text-gray-400 border-gray-300 hover:border-gray-400'
               }`}
               title="List View"
             >
-              <FaBars size={20} />
+              <FaBars size={16} />
             </button>
           </div>
 
@@ -72,7 +72,7 @@ export default function FilterBar({
             <select
               value={sortOption}
               onChange={(e) => setSortOption(e.target.value)}
-              className="h-10 w-60 md:min-w-[180px] border border-gray-300 rounded-md px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#339438]"
+              className="h-10 w-60 md:min-w-[180px] border border-gray-300 rounded-md px-3 text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#339438] transition"
             >
               <option value="Popularity">Sort By Popularity</option>
               <option value="LowToHigh">Price: Low to High</option>
@@ -86,7 +86,7 @@ export default function FilterBar({
               <select
                 value={currentPage}
                 onChange={(e) => setCurrentPage(Number(e.target.value))}
-                className="h-10 w-60 md:min-w-[180px] border border-gray-300 rounded-md px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#339438]"
+                className="h-10 w-60 md:min-w-[180px] border border-gray-300 rounded-md px-3 text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#339438] transition"
               >
                 {Array.from({ length: totalPages }, (_, i) => (
                   <option key={i} value={i + 1}>
@@ -104,10 +104,10 @@ export default function FilterBar({
             <button
               onClick={goToPreviousPage}
               disabled={currentPage === 1}
-              className={`px-4 py-2 rounded-md border ${
+              className={`px-4 py-2 rounded-md border text-sm transition ${
                 currentPage === 1
                   ? 'text-gray-300 border-gray-200 bg-gray-100 cursor-not-allowed'
-                  : 'text-black border-gray-400 hover:bg-gray-100'
+                  : 'text-gray-700 border-gray-300 hover:bg-gray-50'
               }`}
             >
               Previous
@@ -115,10 +115,10 @@ export default function FilterBar({
             <button
               onClick={goToNextPage}
               disabled={currentPage === totalPages}
-              className={`px-4 py-2 rounded-md border ${
+              className={`px-4 py-2 rounded-md border text-sm transition ${
                 currentPage === totalPages
                   ? 'text-gray-300 border-gray-200 bg-gray-100 cursor-not-allowed'
-                  : 'text-black border-gray-400 hover:bg-gray-100'
+                  : 'text-gray-700 border-gray-300 hover:bg-gray-50'
               }`}
             >
               Next
