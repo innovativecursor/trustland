@@ -3,9 +3,10 @@
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import Dropdown from './Dropdown'
-import LiquidHoverButton from './SearchButton'
+import SearchButton from './SearchButton'
 
 import { fetchLocationCities, fetchPropertyTypeNames } from '../../utils/api'
+import LiquidHoverButton from './SearchButton'
 
 const Search = () => {
   const router = useRouter()
@@ -14,7 +15,6 @@ const Search = () => {
   const [budgets, setBudgets] = useState(['Budget'])
   const [propertyTypes, setPropertyTypes] = useState(['Property Type'])
   const [loading, setLoading] = useState(true)
-
   const [selectedPropertyType, setSelectedPropertyType] = useState('')
   const [selectedLocation, setSelectedLocation] = useState('')
   const [selectedBudget, setSelectedBudget] = useState('')
@@ -24,6 +24,8 @@ const Search = () => {
       try {
         const fetchedLocations = await fetchLocationCities()
         const fetchedPropertyTypes = await fetchPropertyTypeNames()
+
+        console.log('Fetched Property Types:', fetchedPropertyTypes) // Add this
 
         const getBudgetRangeLabel = ['Under 3M', 'Under 5M', 'Under 10M']
 
@@ -67,15 +69,12 @@ const Search = () => {
       queryParams.append('budget', budgetValue)
     }
 
-    if (queryParams.toString()) {
-      sessionStorage.setItem('searchFilters', queryParams.toString())
-    }
-
+    sessionStorage.setItem('searchFilters', queryParams.toString())
     router.push('/properties')
   }
 
   return (
-    <div className="relative z-10 mt-8 bg-white border border-black rounded-lg p-4 flex flex-col md:flex-row items-center gap-4 shadow-lg w-full max-w-5xl px-4 md:px-0">
+    <div className="relative z-10 mt-8 bg-white  border-[1px] border-[#000000] rounded-lg p-4 flex flex-col md:flex-row items-center gap-4 shadow-lg w-full max-w-5xl px-4 md:px-0">
       <div className="flex-1 min-w-[160px] w-full">
         <Dropdown loading={loading} options={propertyTypes} onSelect={setSelectedPropertyType} />
       </div>

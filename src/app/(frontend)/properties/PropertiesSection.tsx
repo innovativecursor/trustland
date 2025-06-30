@@ -106,34 +106,40 @@ const PropertiesSection = () => {
   }
 
   useEffect(() => {
-    const filters = sessionStorage.getItem('searchFilters')
-    if (!filters || projects.length === 0) return
+  const filterWithSession = async () => {
+    const filterQuery = sessionStorage.getItem('searchFilters')
+    if (!filterQuery) return
 
-    const params = new URLSearchParams(filters)
-    const selectedType = params.get('propertyType')
-    const selectedLocation = params.get('location')
-    const maxBudget = params.get('budget') ? parseInt(params.get('budget') || '0') : undefined
+    const params = new URLSearchParams(filterQuery)
+    const propertyType = params.get('propertyType')
+    const location = params.get('location')
+    const budgetStr = params.get('budget')
+    const maxBudget = budgetStr ? Number(budgetStr) : null
 
-    const filtered = projects.filter((property) => {
-      const { property_details } = property
+    const parsePrice = (priceStr: string) => {
+      if (!priceStr) return 0
+      const cleaned = priceStr.replace(/[^\d.]/g, '') // Allow decimals too
+      const numeric = parseFloat(cleaned)
+      return numeric < 1000 ? numeric * 1_000_000 : numeric // Assume millions if small
+    }
 
-      const matchesType =
-        !selectedType || property_details?.property_type === selectedType
+    const filtered = projects.filter((project) => {
+      const details = project.property_details
+      if (!details) return false
 
-      const matchesLocation =
-        !selectedLocation || property_details?.location === selectedLocation
-
+      const matchesType = !propertyType || details.property_type === propertyType
+      const matchesLocation = !location || details.location === location
       const matchesBudget =
-        !maxBudget ||
-        (property_details?.price &&
-          Number(property_details.price) <= maxBudget)
+        !maxBudget || parsePrice(details.price) <= maxBudget
 
       return matchesType && matchesLocation && matchesBudget
     })
 
     setFilteredProjects(filtered)
-    sessionStorage.removeItem('searchFilters')
-  }, [projects])
+  }
+
+  filterWithSession()
+}, [projects])
 
   
   // Sort logic
