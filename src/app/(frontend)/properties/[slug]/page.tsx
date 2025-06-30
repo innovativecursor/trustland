@@ -5,16 +5,10 @@ import PropertyDetails from '../../components/ui/PropertyDetails'
 import FeatureSection from '../../components/ui/FeatureSection'
 import { fetchProjectOverviewBySlug } from '../../utils/api'
 
-interface Props {
-  params: {
-    slug: string
-  }
-}
+export default async function PropertyPage({ params }: { params: { slug: string } }) {
+  const { slug } = params
 
-export default async function PropertyPage(props: Props) {
-  const { slug } = props.params
-
-  console.log("Received slug param:", slug)
+  console.log('Received slug param:', slug)
 
   const property = await fetchProjectOverviewBySlug(slug)
 
@@ -41,32 +35,20 @@ export default async function PropertyPage(props: Props) {
         location: '',
       }
 
-  // const pricing = property.pricing_payment_plans ?? {
-  //   price_range: [],
-  //   flexible_payment_options: [],
-  // }
+  const mapFeatureArray = (arr?: { point: string }[]) =>
+    (arr ?? []).map((item, index) => ({
+      id: index.toString(),
+      point: item.point,
+    }))
 
-  // const locationPoints = property.location_highlights ?? []
+  const locationPoints = mapFeatureArray(property.location_highlights)
 
-  // const mapFeatureArray = (arr?: { point: string }[]) =>
-  //   (arr ?? []).map((item, index) => ({
-  //     id: index.toString(),
-  //     point: item.point,
-  //   }))
-
-      const mapFeatureArray = (arr?: { point: string }[]) =>
-      (arr ?? []).map((item, index) => ({
-        id: index.toString(),
-        point: item.point,
-      }))
-      
-    const locationPoints = mapFeatureArray(property.location_highlights)
-
-    const pricing = {
-      price_range: mapFeatureArray(property.pricing_payment_plans?.price_range),
-      flexible_payment_options: mapFeatureArray(property.pricing_payment_plans?.flexible_payment_options),
-    }
-
+  const pricing = {
+    price_range: mapFeatureArray(property.pricing_payment_plans?.price_range),
+    flexible_payment_options: mapFeatureArray(
+      property.pricing_payment_plans?.flexible_payment_options,
+    ),
+  }
 
   const features = {
     nature_living: mapFeatureArray(property.features_amenities?.nature_living),
@@ -94,11 +76,7 @@ export default async function PropertyPage(props: Props) {
           pricing={pricing}
           locationPoints={locationPoints}
         />
-        <FeatureSection
-          features={features}
-          locationPoints={locationPoints}
-          pricing={pricing}
-        />
+        <FeatureSection features={features} locationPoints={locationPoints} pricing={pricing} />
       </div>
     </div>
   )
