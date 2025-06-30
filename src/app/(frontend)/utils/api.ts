@@ -119,6 +119,7 @@ export const fetchBuyerNames = async (): Promise<string[]> => {
 export const fetchProjectOverviewBySlug = async (slug: string): Promise<ProjectOverview | null> => {
   const results: ProjectOverview[] = await fetchFromAPI('project-overview', {
     'where[slug][equals]': slug,
+    depth: '2', 
   })
 
   return results.length ? results[0] : null

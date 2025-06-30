@@ -45,7 +45,18 @@ const FeatureHomeCard: React.FC<Props> = ({ project }) => {
         whileHover={{ scale: 1.1 }}
         transition={{ duration: 0.4 }}
       >
-        <Image src={card?.image} alt={project.title} fill className="object-cover" />
+        {card?.image && typeof card.image === 'object' && card.image.url?.trim() ? (
+          <Image
+            src={card.image.url}
+            alt={project.title}
+            fill
+            className="object-cover"
+          />
+        ) : null}
+
+        {/* Optional fallback: */}
+        {/* <Image src={card?.image?.url?.trim() || '/placeholder.jpg'} alt={project.title} fill className="object-cover" /> */}
+
         <motion.div className="absolute inset-0" style={{ background: gradientOverlay }} />
       </motion.div>
 

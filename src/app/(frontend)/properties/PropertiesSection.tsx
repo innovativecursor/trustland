@@ -105,6 +105,37 @@ const PropertiesSection = () => {
     setFilteredProjects(projects)
   }
 
+  useEffect(() => {
+    const filters = sessionStorage.getItem('searchFilters')
+    if (!filters || projects.length === 0) return
+
+    const params = new URLSearchParams(filters)
+    const selectedType = params.get('propertyType')
+    const selectedLocation = params.get('location')
+    const maxBudget = params.get('budget') ? parseInt(params.get('budget') || '0') : undefined
+
+    const filtered = projects.filter((property) => {
+      const { property_details } = property
+
+      const matchesType =
+        !selectedType || property_details?.property_type === selectedType
+
+      const matchesLocation =
+        !selectedLocation || property_details?.location === selectedLocation
+
+      const matchesBudget =
+        !maxBudget ||
+        (property_details?.price &&
+          Number(property_details.price) <= maxBudget)
+
+      return matchesType && matchesLocation && matchesBudget
+    })
+
+    setFilteredProjects(filtered)
+    sessionStorage.removeItem('searchFilters')
+  }, [projects])
+
+  
   // Sort logic
   const sortedProjects = useMemo(() => {
   const sorted = [...filteredProjects]
@@ -196,7 +227,7 @@ const PropertiesSection = () => {
             <div className="mt-2 flex justify-end">
               <button
                 onClick={handleClearSearch}
-                className="text-sm text-red-600 underline hover:text-red-800"
+                className="text-sm text-[#339438] underline hover:text-black"
               >
                 Clear search
               </button>
