@@ -32,12 +32,14 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, view }) => {
   )
 
   return (
-    <Link href={`/properties/${property.slug}`}>
+    <Link href={`/property/${property.slug}`}>
       <div
         ref={containerRef}
         onMouseMove={handleMouseMove}
         className={`mx-auto md:mx-0 relative rounded-xl overflow-hidden shadow-md group transition-all bg-white ${
-          view === 'list' ? 'flex flex-row w-full h-[170px] sm:h-[200px]' : 'h-70 w-90 md:w-full md:h-auto'
+          view === 'list'
+            ? 'flex flex-row w-full h-[170px] sm:h-[200px]'
+            : 'h-70 w-90 md:w-full md:h-auto'
         }`}
       >
         {/* Image */}

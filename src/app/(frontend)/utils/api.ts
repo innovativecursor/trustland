@@ -53,13 +53,20 @@ export interface ProjectOverview {
 }
 
 // API Utility Function
-const fetchFromAPI = async (endpoint: string) => {
+const API_BASE_URL =
+  typeof window === 'undefined' ? process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000' : ''
+
+const fetchFromAPI = async (endpoint: string, params?: Record<string, string>): Promise<any[]> => {
   try {
-    const res = await fetch(`/api/${endpoint}`, {
+    const query = params ? `?${new URLSearchParams(params).toString()}` : ''
+    const fullUrl = `${API_BASE_URL}/api/${endpoint}${query}`
+
+    const res = await fetch(fullUrl, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
+      cache: 'no-store',
     })
 
     if (!res.ok) throw new Error(`Failed to fetch ${endpoint}`)
@@ -106,23 +113,12 @@ export const fetchBuyerNames = async (): Promise<string[]> => {
 }
 
 //Fetch all Project Overview slugs
-// const API_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
-
 export const fetchProjectOverviewBySlug = async (slug: string): Promise<ProjectOverview | null> => {
-  try {
-    const res = await fetch(`/api/project-overview?where[slug][equals]=${slug}`, {
-      cache: 'no-store',
-    })
+  const results: ProjectOverview[] = await fetchFromAPI('project-overview', {
+    'where[slug][equals]': slug,
+  })
 
-    if (!res.ok) throw new Error('Failed to fetch property overview')
-    const data = await res.json()
-    if (!data?.docs?.length) return null
-
-    return data.docs[0]
-  } catch (error) {
-    console.error('Error fetching project overview by slug:', error)
-    return null
-  }
+  return results.length ? results[0] : null
 }
 
 // Fetch all project slugs
