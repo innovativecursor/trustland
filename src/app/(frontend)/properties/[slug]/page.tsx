@@ -5,14 +5,8 @@ import PropertyDetails from '../../components/ui/PropertyDetails'
 import FeatureSection from '../../components/ui/FeatureSection'
 import { fetchProjectOverviewBySlug } from '../../utils/api'
 
-type PageProps = {
-  params: {
-    slug: string
-  }
-}
-
-export default async function PropertyPage(props: PageProps) {
-  const { slug } = props.params
+export default async function PropertyPage({ params }: { params: { slug: string } }) {
+  const { slug } = params
 
   console.log('Received slug param:', slug)
 
