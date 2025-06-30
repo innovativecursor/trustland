@@ -42,7 +42,7 @@ export const ProjectOverview: CollectionConfig = {
       label: 'Gallery Images',
       name: 'gallery_images',
       type: 'upload',
-      relationTo: 'media', // this should match your media collection slug
+      relationTo: 'media',
       required: false,
       minRows: 5,
       maxRows: 5,
@@ -305,6 +305,17 @@ export const ProjectOverview: CollectionConfig = {
       type: 'checkbox',
       defaultValue: false,
       required: false,
+    },
+    {
+      label: 'Offer Discount Text',
+      name: 'offer_discount_text',
+      type: 'text',
+      required: false,
+      admin: {
+        position: 'sidebar',
+        description: 'Enter the discount offer text (e.g., "10% OFF for early buyers"). Optional.',
+        condition: (data) => data?.prop_offer === true,
+      },
     },
   ],
 }
