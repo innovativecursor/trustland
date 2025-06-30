@@ -55,6 +55,17 @@ export interface ProjectOverview {
   prop_offer?: boolean
 }
 
+export interface ServiceCard {
+  heading: string
+  subheading: string
+  bgImage: string
+  numberImage: string
+  points: {
+    title: string
+    description: string
+  }[]
+}
+
 // API Utility Function
 const API_BASE_URL =
   typeof window === 'undefined' ? process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000' : ''
@@ -119,7 +130,7 @@ export const fetchBuyerNames = async (): Promise<string[]> => {
 export const fetchProjectOverviewBySlug = async (slug: string): Promise<ProjectOverview | null> => {
   const results: ProjectOverview[] = await fetchFromAPI('project-overview', {
     'where[slug][equals]': slug,
-    depth: '2', 
+    depth: '2',
   })
 
   return results.length ? results[0] : null
@@ -150,4 +161,8 @@ export const fetchAllProjects = async (): Promise<ProjectOverview[]> => {
     console.error('Error fetching all projects:', error)
     return []
   }
+}
+
+export const fetchServiceCards = async (): Promise<ServiceCard[]> => {
+  return await fetchFromAPI('services', { depth: '1' })
 }

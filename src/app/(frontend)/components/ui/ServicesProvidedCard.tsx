@@ -1,19 +1,19 @@
 // components/ServiceSection.tsx
 
-import Image, { StaticImageData } from "next/image";
-import tick from "../../public/assets/ServicesAssets/Group 1000005079.png"
+import Image, { StaticImageData } from 'next/image'
+import tick from '../../public/assets/ServicesAssets/Group 1000005079.png'
 
 type ServicePoint = {
-  title: string;
-  description: string;
-};
+  title: string
+  description: string
+}
 
 interface ServicesProvidedCardProps {
-  bgImage: StaticImageData;
-  numberImage: StaticImageData;
-  heading: string;
-  subheading: string;
-  points: ServicePoint[];
+  bgImage: StaticImageData | string
+  numberImage: StaticImageData | string
+  heading: string
+  subheading: string
+  points: ServicePoint[]
 }
 
 export default function ServicesProvidedCard({
@@ -34,11 +34,7 @@ export default function ServicesProvidedCard({
         />
         {/* Number Image */}
         <div className="absolute h-20 w-20 bottom-[-40px] left-1/2 transform -translate-x-1/2 bg-white rounded-full md:w-40 md:h-40 md:bottom-[-80px]  flex items-center justify-center">
-          <Image
-            src={numberImage}
-            alt="Service Number"
-            className="w-40 h-40 object-contain z-5"
-          />
+          <Image src={numberImage} alt="Service Number" className="w-40 h-40 object-contain z-5" />
         </div>
       </div>
 
@@ -53,13 +49,12 @@ export default function ServicesProvidedCard({
             <li key={index} className="flex ">
               <Image src={tick} alt="tick" className="mr-2 w-5 h-5"></Image>
               <div>
-                <span className="font-semibold">{point.title}</span>{" "}
-                – {point.description}
+                <span className="font-semibold">{point.title}</span> – {point.description}
               </div>
             </li>
           ))}
         </ul>
       </div>
     </div>
-  );
+  )
 }

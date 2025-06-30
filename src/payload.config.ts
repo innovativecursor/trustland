@@ -10,12 +10,12 @@ import sharp from 'sharp'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { ProjectOverview } from './collections/ProjectOverview'
-// import FeaturedProperties from './collections/FeaturedProperties'
 import icon from '../public/favicon.ico'
 import { PropertyType } from './collections/PropertyType'
 import { Location } from './collections/Location'
 import BuyerInquiry from './collections/BuyerInquiry'
 import { Property } from './collections/Property'
+import Services from './collections/Service'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -41,11 +41,11 @@ export default buildConfig({
     Users,
     Media,
     ProjectOverview,
-    // FeaturedProperties,
     PropertyType,
     Location,
     BuyerInquiry,
     Property,
+    Services,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
