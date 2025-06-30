@@ -150,9 +150,13 @@ export const fetchAllProjectSlugs = async (): Promise<string[]> => {
   }
 }
 
+//Fetch All Projects
 export const fetchAllProjects = async (): Promise<ProjectOverview[]> => {
   try {
-    const res = await fetch('/api/project-overview', { cache: 'no-store' })
+    const res = await fetch('/api/project-overview?depth=2', {
+      cache: 'no-store',
+    })
+
     if (!res.ok) throw new Error('Failed to fetch project data')
 
     const data = await res.json()

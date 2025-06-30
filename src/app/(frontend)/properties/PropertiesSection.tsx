@@ -42,7 +42,7 @@ const PropertiesSection = () => {
       setLoading(true)
       const slugs = await fetchAllProjectSlugs()
       const allProjects = await Promise.all(
-        slugs.map((slug) => fetchProjectOverviewBySlug(slug))
+        slugs.map((slug: string) => fetchProjectOverviewBySlug(slug))
       )
       const validProjects = allProjects.filter(Boolean) as ProjectOverview[]
       setProjects(validProjects)
