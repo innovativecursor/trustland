@@ -32,7 +32,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, view }) => {
   )
 
   return (
-    <Link href={`/property/${property.slug}`}>
+    <Link href={`/property/${encodeURIComponent(property.slug)}`}>
       <div
         ref={containerRef}
         onMouseMove={handleMouseMove}
