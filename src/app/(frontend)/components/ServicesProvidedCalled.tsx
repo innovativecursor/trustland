@@ -20,8 +20,8 @@ export default function HomePage() {
       {services.map((service, index) => (
         <ServiceProvidedCard
           key={index}
-          bgImage={service.bgImage}
-          numberImage={service.numberImage}
+          bgImage={service.bgImage?.url || ''}
+          numberImage={service.numberImage?.url || ''}
           heading={service.heading}
           subheading={service.subheading}
           points={service.points}

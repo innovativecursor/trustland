@@ -62,8 +62,8 @@ export interface ProjectOverview {
 export interface ServiceCard {
   heading: string
   subheading: string
-  bgImage: string | StaticImageData
-  numberImage: string | StaticImageData
+  bgImage: { url: string } | null
+  numberImage: { url: string } | null
   points: {
     title: string
     description: string
