@@ -10,9 +10,9 @@ export const Media: CollectionConfig = {
     hidden: true,
   },
   upload: {
-    // staticDir: path.resolve('/var/www/trustland-media'), // For linux
+    staticDir: path.resolve('/var/www/trustland-media'), // For linux
     // staticDir: 'media', // Folder where files will be stored
-    staticDir: path.resolve('/Users/datatype/Downloads/'), // For MacOS
+    // staticDir: path.resolve('/Users/datatype/Downloads/'), // For MacOS
     mimeTypes: ['image/*', 'video/*'], // Allow images & videos
   },
   fields: [],
