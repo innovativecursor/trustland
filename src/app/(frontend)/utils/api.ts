@@ -17,6 +17,7 @@ export interface Location {
 }
 
 export interface PropertyType {
+  name: any
   property_type: string
 }
 

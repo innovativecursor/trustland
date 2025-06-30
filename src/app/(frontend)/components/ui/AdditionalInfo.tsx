@@ -1,12 +1,12 @@
 'use client'
 
 import React, { useEffect, useMemo, useState } from 'react'
-import { ProjectOverview } from '../../utils/api'
+import { ProjectOverview, fetchAllPropertyTypes, fetchLocationCities } from '../../utils/api'
 
 type Filters = {
   propertyType: string[]
   priceRange: string[]
-  bedroom: string[]
+  location: string[]
 }
 
 type Props = {
@@ -20,20 +20,31 @@ const PRICE_RANGES = [
   { label: 'High Budget', min: 25, max: 40 },
 ]
 
-const BEDROOMS = [
-  { label: 'Single', match: (beds: number) => beds === 1 },
-  { label: 'Double', match: (beds: number) => beds === 2 },
-  { label: 'Up to 3', match: (beds: number) => beds <= 3 },
-  { label: 'Up to 4', match: (beds: number) => beds <= 4 },
-]
-
 export default function AdditionalInfo({ properties, onFilter }: Props) {
   const [filters, setFilters] = useState<Filters>({
     propertyType: [],
     priceRange: [],
-    bedroom: [],
+    location: [],
   })
 
+  const [propertyTypes, setPropertyTypes] = useState<string[]>([])
+  const [locations, setLocations] = useState<string[]>([])
+
+  //  Fetch dynamic filter options
+  useEffect(() => {
+    const loadFilters = async () => {
+      const types = await fetchAllPropertyTypes()
+      const locs = await fetchLocationCities()
+      console.log('Fetched Property Types:', types)
+      console.log('Fetched Locations:', locs)
+      setPropertyTypes(types.map((t) => t.name)) 
+      setLocations(locs)
+    }
+
+    loadFilters()
+  }, [])
+
+  // Count property types
   const typeCounts = useMemo(() => {
     const counts: Record<string, number> = {}
     properties.forEach((p) => {
@@ -43,23 +54,22 @@ export default function AdditionalInfo({ properties, onFilter }: Props) {
     return counts
   }, [properties])
 
-  const bedroomCounts = useMemo(() => {
+  const locationCounts = useMemo(() => {
     const counts: Record<string, number> = {}
     properties.forEach((p) => {
-      const beds = p.card_data?.beds ?? 0
-      BEDROOMS.forEach(({ label, match }) => {
-        if (match(beds)) counts[label] = (counts[label] || 0) + 1
-      })
+      const loc = p.property_details?.location
+      if (loc) counts[loc] = (counts[loc] || 0) + 1
     })
     return counts
   }, [properties])
 
+  // Apply filters
   useEffect(() => {
     const filtered = properties.filter((property) => {
       const details = property.property_details
       const type = details?.property_type || ''
       const price = parseFloat(details?.price || '0')
-      const beds = property.card_data?.beds ?? 0
+      const location = details?.location || ''
 
       const matchesType =
         filters.propertyType.length === 0 || filters.propertyType.includes(type)
@@ -71,14 +81,10 @@ export default function AdditionalInfo({ properties, onFilter }: Props) {
           return range && price >= range.min && price <= range.max
         })
 
-      const matchesBedroom =
-        filters.bedroom.length === 0 ||
-        filters.bedroom.some((label) => {
-          const matchFn = BEDROOMS.find((b) => b.label === label)?.match
-          return matchFn ? matchFn(beds) : false
-        })
+      const matchesLocation =
+        filters.location.length === 0 || filters.location.includes(location)
 
-      return matchesType && matchesPrice && matchesBedroom
+      return matchesType && matchesPrice && matchesLocation
     })
 
     onFilter(filtered)
@@ -90,10 +96,11 @@ export default function AdditionalInfo({ properties, onFilter }: Props) {
   ) => {
     setFilters((prev) => {
       const current = prev[filterKey]
-      const updated = current.includes(label)
-        ? current.filter((item) => item !== label)
-        : [...current, label]
-      return { ...prev, [filterKey]: updated }
+      const isAlreadySelected = current.includes(label)
+      return {
+        ...prev,
+        [filterKey]: isAlreadySelected ? [] : [label], // Only one value or none
+      }
     })
   }
 
@@ -143,7 +150,7 @@ export default function AdditionalInfo({ properties, onFilter }: Props) {
       <div className="border rounded-xl w-full p-5 md:mr-20">
         {renderCheckboxGroup(
           'Property Type',
-          ['House', 'Family Apartment', 'Lot', 'Villa'].map((label) => ({
+          propertyTypes.map((label) => ({
             label,
             count: typeCounts[label] || 0,
           })),
@@ -160,12 +167,12 @@ export default function AdditionalInfo({ properties, onFilter }: Props) {
         )}
 
         {renderCheckboxGroup(
-          'Bedroom',
-          BEDROOMS.map((b) => ({
-            label: b.label,
-            count: bedroomCounts[b.label] || 0,
+          'Location',
+          locations.map((label) => ({
+            label,
+            count: locationCounts[label] || 0,
           })),
-          'bedroom',
+          'location',
           false
         )}
       </div>
