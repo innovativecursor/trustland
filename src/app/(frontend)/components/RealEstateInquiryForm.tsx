@@ -144,13 +144,15 @@ const RealEstateInquiryForm: React.FC = () => {
                 onChange={handleChange}
               >
                 <option value="">Nothing selected</option>
-                <option value="Ms">Ms</option>
-                <option value="Mrs">Mrs</option>
-                <option value="Dr">Dr</option>
-                <option value="Mx">Mx</option>
-                <option value="Other">Other</option>
+                <option value="ms">Ms</option>
+                <option value="mrs">Mrs</option>
+                <option value="dr">Dr</option>
+                <option value="mr">Mr</option>
+                <option value="other">Other</option>
                 {addressTitles
-                  .filter((title): title is string => typeof title === 'string' && title.trim() !== '')
+                  .filter(
+                    (title): title is string => typeof title === 'string' && title.trim() !== '',
+                  )
                   .map((title) => (
                     <option key={title} value={title}>
                       {title.charAt(0).toUpperCase() + title.slice(1)}
@@ -188,7 +190,7 @@ const RealEstateInquiryForm: React.FC = () => {
             </div>
           </form>
         </div>
-      {/* Contact Sidebar */}
+        {/* Contact Sidebar */}
         <div className="flex-1 bg-[#F5FFF6] rounded-2xl p-10 flex flex-col">
           <div>
             <h3 className="text-2xl font-semibold text-[#1A1A1A] mb-1">Contact Us</h3>
