@@ -30,122 +30,145 @@ type Props = {
 }
 
 const FeaturesAndPricing: React.FC<Props> = ({ features, locationPoints, pricing }) => {
+  const hasFeatures =
+    features.nature_living.length > 0 ||
+    features.building_unit_features.length > 0 ||
+    features.recreational_facilities.length > 0 ||
+    features.convenience_accessibility.length > 0
+
+  const hasLocation = locationPoints.length > 0
+  const hasPricing = pricing.price_range.length > 0 || pricing.flexible_payment_options.length > 0
+
+  if (!hasFeatures && !hasLocation && !hasPricing) return null // hide whole component if empty
+
   return (
     <div className="max-w-7xl mx-auto bg-[#71ae4c1a] p-8 rounded-2xl grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-800 my-25">
       {/* Left Column */}
       <div className="space-y-6">
-        <h2 className="text-xl font-semibold">Features & Amenities</h2>
+        {hasFeatures && <h2 className="text-xl font-semibold">Features & Amenities</h2>}
 
-        {/* Nature-Inspired Living */}
-        <div>
-          <div className="flex items-center gap-2 font-semibold text-sm">
-            <Image src={Bullet} alt="Nature Icon" width={20} height={20} />
-            Nature-Inspired Living
+        {features.nature_living.length > 0 && (
+          <div>
+            <div className="flex items-center gap-2 font-semibold text-sm">
+              <Image src={Bullet} alt="Nature Icon" width={20} height={20} />
+              Nature-Inspired Living
+            </div>
+            <ul className="ml-6 space-y-1 mt-2 text-sm">
+              {features.nature_living.map((item) => (
+                <li key={item.id} className="flex items-start gap-2">
+                  <Image src={Tick} alt="Check" width={16} height={16} />
+                  {item.point}
+                </li>
+              ))}
+            </ul>
           </div>
-          <ul className="ml-6 space-y-1 mt-2 text-sm">
-            {features.nature_living.map((item) => (
-              <li key={item.id} className="flex items-start gap-2">
-                <Image src={Tick} alt="Check" width={16} height={16} />
-                {item.point}
-              </li>
-            ))}
-          </ul>
-        </div>
+        )}
 
-        {/* Building & Unit Features */}
-        <div>
-          <div className="flex items-center gap-2 font-semibold text-sm">
-            <Image src={Bullet} alt="Building Icon" width={20} height={20} />
-            Building & Unit Features
+        {features.building_unit_features.length > 0 && (
+          <div>
+            <div className="flex items-center gap-2 font-semibold text-sm">
+              <Image src={Bullet} alt="Building Icon" width={20} height={20} />
+              Building & Unit Features
+            </div>
+            <ul className="ml-6 space-y-1 mt-2 text-sm">
+              {features.building_unit_features.map((item) => (
+                <li key={item.id} className="flex items-start gap-2">
+                  <Image src={Tick} alt="Check" width={16} height={16} />
+                  {item.point}
+                </li>
+              ))}
+            </ul>
           </div>
-          <ul className="ml-6 space-y-1 mt-2 text-sm">
-            {features.building_unit_features.map((item) => (
-              <li key={item.id} className="flex items-start gap-2">
-                <Image src={Tick} alt="Check" width={16} height={16} />
-                {item.point}
-              </li>
-            ))}
-          </ul>
-        </div>
+        )}
 
-        {/* Recreational Facilities */}
-        <div>
-          <div className="flex items-center gap-2 font-semibold text-sm">
-            <Image src={Bullet} alt="Recreation Icon" width={20} height={20} />
-            Recreational Facilities
+        {features.recreational_facilities.length > 0 && (
+          <div>
+            <div className="flex items-center gap-2 font-semibold text-sm">
+              <Image src={Bullet} alt="Recreation Icon" width={20} height={20} />
+              Recreational Facilities
+            </div>
+            <ul className="ml-6 space-y-1 mt-2 text-sm">
+              {features.recreational_facilities.map((item) => (
+                <li key={item.id} className="flex items-start gap-2">
+                  <Image src={Tick} alt="Check" width={16} height={16} />
+                  {item.point}
+                </li>
+              ))}
+            </ul>
           </div>
-          <ul className="ml-6 space-y-1 mt-2 text-sm">
-            {features.recreational_facilities.map((item) => (
-              <li key={item.id} className="flex items-start gap-2">
-                <Image src={Tick} alt="Check" width={16} height={16} />
-                {item.point}
-              </li>
-            ))}
-          </ul>
-        </div>
+        )}
 
-        {/* Convenience & Accessibility */}
-        <div>
-          <div className="flex items-center gap-2 font-semibold text-sm">
-            <Image src={Bullet} alt="Accessibility Icon" width={20} height={20} />
-            Convenience & Accessibility
+        {features.convenience_accessibility.length > 0 && (
+          <div>
+            <div className="flex items-center gap-2 font-semibold text-sm">
+              <Image src={Bullet} alt="Accessibility Icon" width={20} height={20} />
+              Convenience & Accessibility
+            </div>
+            <ul className="ml-6 space-y-1 mt-2 text-sm">
+              {features.convenience_accessibility.map((item) => (
+                <li key={item.id} className="flex items-start gap-2">
+                  <Image src={Tick} alt="Check" width={16} height={16} />
+                  {item.point}
+                </li>
+              ))}
+            </ul>
           </div>
-          <ul className="ml-6 space-y-1 mt-2 text-sm">
-            {features.convenience_accessibility.map((item) => (
-              <li key={item.id} className="flex items-start gap-2">
-                <Image src={Tick} alt="Check" width={16} height={16} />
-                {item.point}
-              </li>
-            ))}
-          </ul>
-        </div>
+        )}
       </div>
 
-      {/* Right Column - Placeholder (optional static or prop-based content) */}
+      {/* Right Column */}
       <div className="space-y-6">
-        {/* Location Highlights */}
-        <div>
-          <h2 className="text-xl font-semibold flex items-center gap-2 mb-5">
-            Location Highlights
-          </h2>
-          <ul className="ml-6 space-y-1 mt-2 text-sm">
-            {locationPoints.map((item) => (
-              <li key={item.id} className="flex items-start gap-2">
-                <Image src={Tick} alt="Check" width={16} height={16} /> {item.point}
-              </li>
-            ))}
-          </ul>
-        </div>
+        {hasLocation && (
+          <div>
+            <h2 className="text-xl font-semibold flex items-center gap-2 mb-5">
+              Location Highlights
+            </h2>
+            <ul className="ml-6 space-y-1 mt-2 text-sm">
+              {locationPoints.map((item) => (
+                <li key={item.id} className="flex items-start gap-2">
+                  <Image src={Tick} alt="Check" width={16} height={16} />
+                  {item.point}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
-        {/* Pricing Plans */}
-        <div>
-          <h2 className="text-xl font-semibold flex items-center gap-2">Pricing & Payment Plans</h2>
+        {pricing.price_range.length > 0 && (
+          <div>
+            <h2 className="text-xl font-semibold flex items-center gap-2">
+              Pricing & Payment Plans
+            </h2>
 
-          <p className="flex items-center gap-2 font-semibold text-sm mt-5">
-            <Image src={PriceTag} alt="Price Tag" className="w-7" /> Price Range
-          </p>
-          <ul className="ml-6 space-y-1 mt-2 text-sm">
-            {pricing.price_range.map((item) => (
-              <li key={item.id} className="flex items-start gap-2">
-                <Image src={Tick} alt="Check" width={16} height={16} /> {item.point}
-              </li>
-            ))}
-          </ul>
-        </div>
+            <p className="flex items-center gap-2 font-semibold text-sm mt-5">
+              <Image src={PriceTag} alt="Price Tag" className="w-7" /> Price Range
+            </p>
+            <ul className="ml-6 space-y-1 mt-2 text-sm">
+              {pricing.price_range.map((item) => (
+                <li key={item.id} className="flex items-start gap-2">
+                  <Image src={Tick} alt="Check" width={16} height={16} />
+                  {item.point}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
-        {/* Flexible Options */}
-        <div>
-          <h3 className="text-sm font-semibold flex items-center gap-2">
-            <Image src={Card} alt="Card" /> Flexible Payment Options
-          </h3>
-          <ul className="ml-6 space-y-1 mt-2 text-sm">
-            {pricing.flexible_payment_options.map((item) => (
-              <li key={item.id} className="flex items-start gap-2">
-                <Image src={Tick} alt="Check" width={16} height={16} /> {item.point}
-              </li>
-            ))}
-          </ul>
-        </div>
+        {pricing.flexible_payment_options.length > 0 && (
+          <div>
+            <h3 className="text-sm font-semibold flex items-center gap-2">
+              <Image src={Card} alt="Card" /> Flexible Payment Options
+            </h3>
+            <ul className="ml-6 space-y-1 mt-2 text-sm">
+              {pricing.flexible_payment_options.map((item) => (
+                <li key={item.id} className="flex items-start gap-2">
+                  <Image src={Tick} alt="Check" width={16} height={16} />
+                  {item.point}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   )
