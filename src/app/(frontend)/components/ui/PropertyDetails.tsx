@@ -23,13 +23,11 @@ interface PropertyDetailsProps {
   }
   pricing: any
   locationPoints: any
-  sourcePage: string
 }
 
 export default function PropertyDetails({
   overview,
   details,
-  sourcePage,
   pricing,
   locationPoints,
 }: PropertyDetailsProps) {
@@ -111,8 +109,8 @@ export default function PropertyDetails({
         </div>
 
         <div className="flex gap-2">
-          <ContactButton sourcePage={sourcePage} />
-          <Schedule sourcePage={sourcePage} />
+          <ContactButton />
+          <Schedule />
         </div>
       </div>
     </div>

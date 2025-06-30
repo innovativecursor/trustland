@@ -8,9 +8,7 @@ import Schedule from '../../public/assets/InternalPropertyAssets/Schedule.png'
 import SuccessImage1 from '../../public/assets/InternalPropertyAssets/SuccessImage1.png'
 import SuccessImage2 from '../../public/assets/InternalPropertyAssets/SuccessImage2.png'
 import { motion } from 'framer-motion'
-interface InquiryModalProps {
-  sourcePage: string
-}
+
 const SuccessAnimation = () => {
   const [current, setCurrent] = useState(0)
 
@@ -41,7 +39,7 @@ const SuccessAnimation = () => {
   )
 }
 
-const InquiryModal: React.FC<InquiryModalProps> = ({ sourcePage }) => {
+const InquiryModal: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)

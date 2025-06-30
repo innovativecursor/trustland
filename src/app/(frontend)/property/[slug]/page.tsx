@@ -80,7 +80,6 @@ export default async function PropertyPage(props: { params: Promise<{ slug: stri
             details={details}
             pricing={pricing}
             locationPoints={locationPoints}
-            sourcePage={`/property/${decodedSlug}`}
           />
           <FeatureSection features={features} locationPoints={locationPoints} pricing={pricing} />
         </div>
