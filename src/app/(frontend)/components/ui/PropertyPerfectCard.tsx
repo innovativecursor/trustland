@@ -14,7 +14,7 @@ interface Property {
   beds: number
   baths: number
   area: number
-  image: StaticImageData
+  image: string | StaticImageData
   badges: string[]
 }
 
@@ -49,7 +49,14 @@ const PropertyPerfectCard: React.FC<{ property: Property }> = ({ property }) => 
         whileHover={{ scale: 1.05 }}
         transition={{ duration: 0.4 }}
       >
-        <Image src={property.image} alt={property.title} fill className="object-cover" priority />
+        <Image
+          src={property.image}
+          alt={property.title}
+          fill
+          className="object-cover"
+          priority
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
         <motion.div className="absolute inset-0" style={{ background: gradientOverlay }} />
       </motion.div>
 

@@ -52,6 +52,7 @@ export interface ProjectOverview {
     badges?: { badge: string }[]
   }
   prop_featured?: boolean
+  prop_offer?: boolean
 }
 
 // API Utility Function
