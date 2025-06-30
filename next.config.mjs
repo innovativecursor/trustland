@@ -7,9 +7,7 @@ const nextConfig = {
   images: {
     domains: [
       'localhost',
-      'cms.example.com', // ✅ Add your actual domain here
-      'www.youtube.com',
-      'img.youtube.com',
+      'www.trustlandbuilders.com',
     ],
     remotePatterns: [
       {
