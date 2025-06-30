@@ -106,11 +106,11 @@ export const fetchBuyerNames = async (): Promise<string[]> => {
 }
 
 //Fetch all Project Overview slugs
-const API_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+// const API_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
 export const fetchProjectOverviewBySlug = async (slug: string): Promise<ProjectOverview | null> => {
   try {
-    const res = await fetch(`${API_URL}/api/project-overview?where[slug][equals]=${slug}`, {
+    const res = await fetch(`/api/project-overview?where[slug][equals]=${slug}`, {
       cache: 'no-store',
     })
 
