@@ -23,11 +23,13 @@ interface PropertyDetailsProps {
   }
   pricing: any
   locationPoints: any
+  sourcePage: string
 }
 
 export default function PropertyDetails({
   overview,
   details,
+  sourcePage,
   pricing,
   locationPoints,
 }: PropertyDetailsProps) {
@@ -80,7 +82,11 @@ export default function PropertyDetails({
         <h2 className="text-xl font-semibold">Contact Us for a Site Visit & Reservation</h2>
         <div className="grid grid-cols-2 gap-0">
           <div className="w-25 lg:w-32 h-25 lg:h-32">
-            <Image src={AgentImage} alt="Agent" className="w-25 lg:w-32 h-25 lg:h-32 rounded-lg object-cover" />
+            <Image
+              src={AgentImage}
+              alt="Agent"
+              className="w-25 lg:w-32 h-25 lg:h-32 rounded-lg object-cover"
+            />
           </div>
           <div>
             <p className="font-semibold">Jetha Lal</p>
@@ -105,8 +111,8 @@ export default function PropertyDetails({
         </div>
 
         <div className="flex gap-2">
-          <ContactButton />
-          <Schedule />
+          <ContactButton sourcePage={sourcePage} />
+          <Schedule sourcePage={sourcePage} />
         </div>
       </div>
     </div>

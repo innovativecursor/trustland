@@ -9,6 +9,7 @@ export interface BuyerInquiry {
   howToAddress: 'mr' | 'ms' | 'mrs' | 'dr' | 'mx' | 'other'
   personnelRole: 'buyer' | 'agent' | 'investor' | 'other'
   createdAt: string
+  sourcePage?: string
 }
 
 export interface Location {

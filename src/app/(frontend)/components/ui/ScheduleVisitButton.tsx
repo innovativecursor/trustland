@@ -8,7 +8,9 @@ import Schedule from '../../public/assets/InternalPropertyAssets/Schedule.png'
 import SuccessImage1 from '../../public/assets/InternalPropertyAssets/SuccessImage1.png'
 import SuccessImage2 from '../../public/assets/InternalPropertyAssets/SuccessImage2.png'
 import { motion } from 'framer-motion'
-
+interface InquiryModalProps {
+  sourcePage: string
+}
 const SuccessAnimation = () => {
   const [current, setCurrent] = useState(0)
 
@@ -39,7 +41,7 @@ const SuccessAnimation = () => {
   )
 }
 
-const InquiryModal: React.FC = () => {
+const InquiryModal: React.FC<InquiryModalProps> = ({ sourcePage }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
@@ -60,7 +62,7 @@ const InquiryModal: React.FC = () => {
   const closeModal = () => setIsOpen(false)
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
     setFormData((prev) => ({
       ...prev,
@@ -129,23 +131,19 @@ const InquiryModal: React.FC = () => {
               <div className="flex flex-col items-center justify-center text-center">
                 <SuccessAnimation />
                 <p className="mt-6 text-lg font-semibold text-gray-800">
-                  Thank you for scheduling!<br />
+                  Thank you for scheduling!
+                  <br />
                   Our agent will reach out to you shortly.
                 </p>
               </div>
             ) : (
               <>
-                <h2 className="text-2xl font-bold text-center mb-1 text-gray-800">
-                  Inquiry Form
-                </h2>
+                <h2 className="text-2xl font-bold text-center mb-1 text-gray-800">Inquiry Form</h2>
                 <p className="text-center mb-6 text-sm text-gray-600">
                   Interested in this property? Fill out the form below:
                 </p>
 
-                <form
-                  onSubmit={handleSubmit}
-                  className="grid grid-cols-1 md:grid-cols-2 gap-4"
-                >
+                <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FloatingLabelInput
                     label="Name"
                     name="name"
@@ -187,9 +185,7 @@ const InquiryModal: React.FC = () => {
                   />
 
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium mb-1 text-gray-700">
-                      Message
-                    </label>
+                    <label className="block text-sm font-medium mb-1 text-gray-700">Message</label>
                     <textarea
                       name="message"
                       rows={4}
