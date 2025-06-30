@@ -14,8 +14,8 @@ const FeaturedProperties: React.FC = () => {
   useEffect(() => {
     const getProjects = async () => {
       const data = await fetchAllProjects()
-      const filtered = data.filter((proj) => proj.card_data && proj.card_data.image)
-      setProjects(filtered)
+      const featured = data.filter((proj) => proj.prop_featured === true && proj.card_data?.image)
+      setProjects(featured)
     }
 
     getProjects()

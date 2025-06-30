@@ -23,6 +23,7 @@ export interface ProjectOverview {
   overview: string
   gallery_images?: any[]
   promo_video?: any
+
   property_details?: {
     property_type: string
     floor_area?: string
@@ -50,6 +51,7 @@ export interface ProjectOverview {
     image: any
     badges?: { badge: string }[]
   }
+  prop_featured?: boolean
 }
 
 // API Utility Function
