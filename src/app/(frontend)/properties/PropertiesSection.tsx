@@ -42,7 +42,7 @@ const PropertiesSection = () => {
       setLoading(true)
       const slugs = await fetchAllProjectSlugs()
       const allProjects = await Promise.all(
-        slugs.map((slug: string) => fetchProjectOverviewBySlug(slug))
+        slugs.map((slug: string) => fetchProjectOverviewBySlug(slug)),
       )
       const validProjects = allProjects.filter(Boolean) as ProjectOverview[]
       setProjects(validProjects)
@@ -59,7 +59,10 @@ const PropertiesSection = () => {
     setSearchActive(true)
     setLoading(true)
 
-    const updatedHistory = [searchQuery, ...searchHistory.filter(q => q !== searchQuery)].slice(0, 5)
+    const updatedHistory = [searchQuery, ...searchHistory.filter((q) => q !== searchQuery)].slice(
+      0,
+      5,
+    )
     setSearchHistory(updatedHistory)
     localStorage.setItem('searchHistory', JSON.stringify(updatedHistory))
 
@@ -90,7 +93,7 @@ const PropertiesSection = () => {
     }
 
     const matchedProjects = await Promise.all(
-      matchedSlugs.map((slug) => fetchProjectOverviewBySlug(slug))
+      matchedSlugs.map((slug) => fetchProjectOverviewBySlug(slug)),
     )
 
     setTimeout(() => {
@@ -106,58 +109,105 @@ const PropertiesSection = () => {
   }
 
   useEffect(() => {
-  const filterWithSession = async () => {
-    const filterQuery = sessionStorage.getItem('searchFilters')
-    if (!filterQuery) return
+    const filterWithSession = async () => {
+      const filterQuery = sessionStorage.getItem('searchFilters')
+      if (!filterQuery) return
 
-    const params = new URLSearchParams(filterQuery)
-    const propertyType = params.get('propertyType')
-    const location = params.get('location')
-    const budgetStr = params.get('budget')
-    const maxBudget = budgetStr ? Number(budgetStr) : null
+      const params = new URLSearchParams(filterQuery)
+      const propertyType = params.get('propertyType')
+      const location = params.get('location')
+      const budgetStr = params.get('budget')
+      const maxBudget = budgetStr ? Number(budgetStr) : null
 
-    const parsePrice = (priceStr: string) => {
-      if (!priceStr) return 0
-      const cleaned = priceStr.replace(/[^\d.]/g, '') // Allow decimals too
-      const numeric = parseFloat(cleaned)
-      return numeric < 1000 ? numeric * 1_000_000 : numeric // Assume millions if small
+      const parsePrice = (priceStr: string) => {
+        if (!priceStr) return 0
+        const cleaned = priceStr.replace(/[^\d.]/g, '') // Allow decimals too
+        const numeric = parseFloat(cleaned)
+        return numeric < 1000 ? numeric * 1_000_000 : numeric // Assume millions if small
+      }
+
+      const filtered = projects.filter((project) => {
+        const details = project.property_details
+        if (!details) return false
+
+        const matchesType = !propertyType || details.property_type === propertyType
+        const matchesLocation = !location || details.location === location
+        const matchesBudget = !maxBudget || parsePrice(details.price) <= maxBudget
+
+        return matchesType && matchesLocation && matchesBudget
+      })
+
+      setFilteredProjects(filtered)
     }
 
-    const filtered = projects.filter((project) => {
-      const details = project.property_details
-      if (!details) return false
+    filterWithSession()
+  }, [projects])
 
-      const matchesType = !propertyType || details.property_type === propertyType
-      const matchesLocation = !location || details.location === location
-      const matchesBudget =
-        !maxBudget || parsePrice(details.price) <= maxBudget
+  useEffect(() => {
+    setSearchQuery('')
+    setSearchActive(false)
+  }, [])
 
-      return matchesType && matchesLocation && matchesBudget
-    })
+  // ✅ 2. Force filter from sessionStorage after projects load
+  useEffect(() => {
+    const filterWithSession = async () => {
+      const filterQuery = sessionStorage.getItem('searchFilters')
+      if (!filterQuery) return
 
-    setFilteredProjects(filtered)
-  }
+      const params = new URLSearchParams(filterQuery)
+      const propertyType = params.get('propertyType')
+      const location = params.get('location')
+      const budgetStr = params.get('budget')
+      const maxBudget = budgetStr ? Number(budgetStr) : null
 
-  filterWithSession()
-}, [projects])
+      const parsePrice = (priceStr: string) => {
+        if (!priceStr) return 0
+        const cleaned = priceStr.replace(/[^\d.]/g, '')
+        const numeric = parseFloat(cleaned)
+        return numeric < 1000 ? numeric * 1_000_000 : numeric
+      }
 
-  
+      const filtered = projects.filter((project) => {
+        const details = project.property_details
+        if (!details) return false
+
+        const matchesType = !propertyType || details.property_type === propertyType
+        const matchesLocation = !location || details.location === location
+        const matchesBudget = !maxBudget || parsePrice(details.price) <= maxBudget
+
+        return matchesType && matchesLocation && matchesBudget
+      })
+
+      setFilteredProjects(filtered)
+    }
+
+    // ✅ Delay to ensure projects state is fully set before filtering
+    const delay = setTimeout(() => {
+      filterWithSession()
+    }, 100)
+
+    return () => clearTimeout(delay)
+  }, [projects])
+
+  // ✅ 3. Always go to first page when filters change
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [filteredProjects])
+
   // Sort logic
   const sortedProjects = useMemo(() => {
-  const sorted = [...filteredProjects]
-  if (sortOption === 'LowToHigh') {
-    sorted.sort(
-      (a, b) =>
-        Number(a.property_details?.price || 0) - Number(b.property_details?.price || 0)
-    )
-  } else if (sortOption === 'HighToLow') {
-    sorted.sort(
-      (a, b) =>
-        Number(b.property_details?.price || 0) - Number(a.property_details?.price || 0)
-    )
-  }
-  return sorted
-}, [filteredProjects, sortOption])
+    const sorted = [...filteredProjects]
+    if (sortOption === 'LowToHigh') {
+      sorted.sort(
+        (a, b) => Number(a.property_details?.price || 0) - Number(b.property_details?.price || 0),
+      )
+    } else if (sortOption === 'HighToLow') {
+      sorted.sort(
+        (a, b) => Number(b.property_details?.price || 0) - Number(a.property_details?.price || 0),
+      )
+    }
+    return sorted
+  }, [filteredProjects, sortOption])
 
   // Pagination logic
   const totalPages = Math.ceil(sortedProjects.length / 6)
@@ -239,11 +289,7 @@ const PropertiesSection = () => {
               </button>
             </div>
           )}
-          <PropertyCardsWrapper
-            view={view}
-            loading={loading}
-            projects={paginatedProjects}
-          />
+          <PropertyCardsWrapper view={view} loading={loading} projects={paginatedProjects} />
         </div>
         <AdditionalInfo properties={projects} onFilter={setFilteredProjects} />
       </div>
