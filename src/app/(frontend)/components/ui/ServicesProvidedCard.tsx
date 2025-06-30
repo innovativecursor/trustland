@@ -29,17 +29,17 @@ export default function ServicesProvidedCard({
   const isValidString = (val: unknown): val is string =>
     typeof val === 'string' && val.trim() !== ''
 
-  const bgImageUrl =
-    isValidString(bgImage) ? prependCMSUrl(bgImage) : bgImage || null
+  const bgImageUrl = isValidString(bgImage) ? prependCMSUrl(bgImage) : bgImage || null
 
-  const numberImageUrl =
-    isValidString(numberImage) ? prependCMSUrl(numberImage) : numberImage || null
+  const numberImageUrl = isValidString(numberImage)
+    ? prependCMSUrl(numberImage)
+    : numberImage || null
 
   return (
     <div className="w-full flex flex-col items-center mt-15">
       {/* Background Image */}
       <div className="relative w-full max-w-6xl rounded-xl">
-        {bgImageUrl && (
+        {typeof bgImageUrl === 'string' && bgImageUrl.trim() !== '' && (
           <Image
             src={bgImageUrl}
             alt="Service Background"
@@ -51,7 +51,7 @@ export default function ServicesProvidedCard({
 
         {/* Number Image */}
         <div className="absolute h-20 w-20 bottom-[-40px] left-1/2 transform -translate-x-1/2 bg-white rounded-full md:w-40 md:h-40 md:bottom-[-80px] flex items-center justify-center">
-          {numberImageUrl && (
+          {typeof numberImageUrl === 'string' && numberImageUrl.trim() !== '' && (
             <Image
               src={numberImageUrl}
               alt="Service Number"
@@ -72,13 +72,7 @@ export default function ServicesProvidedCard({
         <ul className="text-left space-y-4">
           {points.map((point, index) => (
             <li key={index} className="flex">
-              <Image
-                src={tick}
-                alt="tick"
-                className="mr-2 w-5 h-5"
-                width={20}
-                height={20}
-              />
+              <Image src={tick} alt="tick" className="mr-2 w-5 h-5" width={20} height={20} />
               <div>
                 <span className="font-semibold">{point.title}</span> – {point.description}
               </div>
