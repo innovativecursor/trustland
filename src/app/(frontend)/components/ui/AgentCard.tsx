@@ -23,7 +23,7 @@ export default function AgentCard({ name, email, phone, rating, image }: AgentPr
   const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0)
 
   return (
-    <div className="grid grid-cols-2 gap-0">
+    <div className="grid grid-cols-[auto_1fr] items-center gap-x-2">
       <div className="w-24 lg:w-32 h-24 lg:h-32 relative">
         {image?.url ? (
           <Image src={image.url} alt={name} fill className="rounded-lg object-cover" />
@@ -33,7 +33,7 @@ export default function AgentCard({ name, email, phone, rating, image }: AgentPr
           </div>
         )}
       </div>
-      <div className="pl-4">
+      <div>
         <p className="font-semibold">{name}</p>
 
         <div className="flex items-center space-x-1 my-3 text-[#329633] text-xs">
