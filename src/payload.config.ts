@@ -16,7 +16,7 @@ import { Location } from './collections/Location'
 import BuyerInquiry from './collections/BuyerInquiry'
 // import { Property } from './collections/Property'
 import Services from './collections/Service'
-import Agents from './collections/Agent'
+// import Agents from './collections/Agent'
 import Discount from './collections/Discount'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -48,7 +48,7 @@ export default buildConfig({
     BuyerInquiry,
     // Property,
     Services,
-    Agents,
+    // Agents,
     Discount,
   ],
   editor: lexicalEditor(),

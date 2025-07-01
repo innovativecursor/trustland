@@ -12,6 +12,10 @@ export const slugify = (text: string): string => {
 
 export const ProjectOverview: CollectionConfig = {
   slug: 'project-overview',
+  labels: {
+    singular: 'Property Listing',
+    plural: 'Property Listing',
+  },
   access: {
     read: () => true,
   },
@@ -37,7 +41,6 @@ export const ProjectOverview: CollectionConfig = {
         ],
       },
     },
-
     {
       label: 'Gallery Images',
       name: 'gallery_images',
@@ -81,7 +84,8 @@ export const ProjectOverview: CollectionConfig = {
         {
           label: 'Property Type',
           name: 'property_type',
-          type: 'text',
+          type: 'relationship',
+          relationTo: 'propertyType',
           required: true,
         },
         {
@@ -111,7 +115,8 @@ export const ProjectOverview: CollectionConfig = {
         {
           label: 'Location',
           name: 'location',
-          type: 'text',
+          type: 'relationship',
+          relationTo: 'location',
           required: true,
         },
       ],
@@ -179,7 +184,6 @@ export const ProjectOverview: CollectionConfig = {
         },
       ],
     },
-
     {
       label: 'Pricing & Payment Plans',
       name: 'pricing_payment_plans',
@@ -300,11 +304,54 @@ export const ProjectOverview: CollectionConfig = {
       required: false,
     },
     {
-      label: 'feature on Offers Section',
+      label: 'Feature on Offers Section',
       name: 'prop_offer',
       type: 'checkbox',
       defaultValue: false,
       required: false,
+    },
+    {
+      label: 'Agent Details',
+      name: 'agent',
+      type: 'group',
+      admin: {
+        description: 'Details of the agent for this property',
+      },
+      fields: [
+        {
+          label: 'Name',
+          name: 'name',
+          type: 'text',
+          required: true,
+        },
+        {
+          label: 'Email',
+          name: 'email',
+          type: 'email',
+          required: true,
+        },
+        {
+          label: 'Phone',
+          name: 'phone',
+          type: 'text',
+          required: true,
+        },
+        {
+          label: 'Rating',
+          name: 'rating',
+          type: 'number',
+          required: true,
+          min: 0,
+          max: 5,
+        },
+        {
+          label: 'Agent Image',
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+        },
+      ],
     },
   ],
 }

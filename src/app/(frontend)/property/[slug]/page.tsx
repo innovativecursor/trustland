@@ -5,8 +5,8 @@ import PropertyDetails from '../../components/ui/PropertyDetails'
 import FeatureSection from '../../components/ui/FeatureSection'
 import { fetchProjectOverviewBySlug } from '../../utils/api'
 
-export default async function PropertyPage(props: { params: Promise<{ slug: string }> }) {
-  const { slug } = await props.params
+export default async function PropertyPage(props: { params: { slug: string } }) {
+  const { slug } = props.params
 
   if (!slug) return notFound()
 
@@ -80,6 +80,7 @@ export default async function PropertyPage(props: { params: Promise<{ slug: stri
             details={details}
             pricing={pricing}
             locationPoints={locationPoints}
+            agent={property.agent || null}
           />
           <FeatureSection features={features} locationPoints={locationPoints} pricing={pricing} />
         </div>

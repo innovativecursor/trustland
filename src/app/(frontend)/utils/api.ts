@@ -22,6 +22,7 @@ export interface PropertyType {
 }
 
 export interface ProjectOverview {
+  agent: null
   title: string
   slug: string
   overview: string
@@ -193,11 +194,6 @@ export const fetchServiceCards = async (): Promise<ServiceCard[]> => {
   return await fetchFromAPI('services')
 }
 
-// Fetch Agents 
-export const fetchAgent = async (): Promise<Agent | null> => {
-  const agents: Agent[] = await fetchFromAPI('agent')
-  return agents.length ? agents[0] : null 
-}
 
 //Fetch Offers Section Discount Discounts
 export const fetchPerfectHouseDiscount = async (): Promise<string> => {

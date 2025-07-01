@@ -7,7 +7,7 @@ const Agents: CollectionConfig = {
     defaultColumns: ['name', 'email', 'phone'],
   },
   access: {
-    create: ({ req }) => (req.user ? false : true),
+    create: () => true,
     read: () => true,
     update: () => true,
     delete: () => true,
