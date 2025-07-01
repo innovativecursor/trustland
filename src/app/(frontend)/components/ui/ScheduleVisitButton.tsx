@@ -67,7 +67,7 @@ const InquiryModal: React.FC = () => {
   const closeModal = () => setIsOpen(false)
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
     setFormData((prev) => ({
       ...prev,
@@ -123,8 +123,21 @@ const InquiryModal: React.FC = () => {
 
       {/* Modal */}
       {isOpen && (
-        <div className="text-sm fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-10 px-4">
-          <div className="bg-gray-200 p-8 rounded-2xl w-full max-w-3xl shadow-lg relative overflow-visible">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={closeModal}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-sm px-4"
+        >
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={(e) => e.stopPropagation()}
+            className="bg-gray-200 p-8 rounded-2xl w-full max-w-3xl shadow-lg relative overflow-visible text-sm"
+          >
             <button
               onClick={closeModal}
               className="absolute top-4 right-4 text-xl font-bold text-gray-400 hover:text-red-600"
@@ -213,8 +226,8 @@ const InquiryModal: React.FC = () => {
                 </form>
               </>
             )}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
     </>
   )
