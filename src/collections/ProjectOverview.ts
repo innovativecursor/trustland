@@ -81,7 +81,8 @@ export const ProjectOverview: CollectionConfig = {
         {
           label: 'Property Type',
           name: 'property_type',
-          type: 'text',
+          type: 'relationship',
+          relationTo: 'propertyType',
           required: true,
         },
         {
@@ -111,7 +112,8 @@ export const ProjectOverview: CollectionConfig = {
         {
           label: 'Location',
           name: 'location',
-          type: 'text',
+          type: 'relationship',
+          relationTo: 'location',
           required: true,
         },
       ],
@@ -317,6 +319,5 @@ export const ProjectOverview: CollectionConfig = {
         condition: (data) => data?.prop_offer === true,
       },
     },
-    
   ],
 }

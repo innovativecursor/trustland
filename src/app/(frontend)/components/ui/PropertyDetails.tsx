@@ -6,8 +6,6 @@ import AgentImage from '../../public/assets/InternalPropertyAssets/agent-image.p
 import Star1 from '../../public/assets/InternalPropertyAssets/Star 1.png'
 import Phone from '../../public/assets/InternalPropertyAssets/Phone.png'
 import Mail from '../../public/assets/InternalPropertyAssets/Mail.png'
-// import Schedule from '../../public/assets/InternalPropertyAssets/Schedule.png'
-// import ContactAgent from '../../public/assets/InternalPropertyAssets/Administrator Male.png'
 import ContactButton from '../ui/ContactButton'
 import Schedule from '../ui/ScheduleVisitButton'
 import AgentCard from './AgentCard'
@@ -16,7 +14,7 @@ import { Agent, fetchAgent } from '../../utils/api'
 interface PropertyDetailsProps {
   overview: string
   details: {
-    propertyType: string
+    propertyType: string | { name: string }
     floorArea: string
     unitTypes: string
     price: string
@@ -42,6 +40,14 @@ export default function PropertyDetails({
     }
     getAgent()
   }, [])
+
+  const getPropertyTypeLabel = () => {
+    if (typeof details.propertyType === 'object' && details.propertyType !== null) {
+      return details.propertyType.name
+    }
+    return details.propertyType
+  }
+
   return (
     <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 p-6 mt-15">
       {/* Left Section */}
@@ -56,7 +62,7 @@ export default function PropertyDetails({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-8 gap-x-22 text-[13px]">
             <div>
               <p className="text-gray-500">Property Type</p>
-              <p className="font-semibold">{details.propertyType}</p>
+              <p className="font-semibold">{getPropertyTypeLabel()}</p>
               <hr className="text-gray-300 mt-8" />
             </div>
             <div>
@@ -89,35 +95,6 @@ export default function PropertyDetails({
       {/* Right Section */}
       <div className="space-y-4 mt-20 sm:mt-0">
         <h2 className="text-xl font-semibold">Contact Us for a Site Visit & Reservation</h2>
-        {/* <div className="grid grid-cols-2 gap-0">
-          <div className="w-25 lg:w-32 h-25 lg:h-32">
-            <Image
-              src={AgentImage}
-              alt="Agent"
-              className="w-25 lg:w-32 h-25 lg:h-32 rounded-lg object-cover"
-            />
-          </div>
-          <div>
-            <p className="font-semibold">Jetha Lal</p>
-            <div className="flex items-center space-x-1 my-3">
-              {Array(5)
-                .fill(0)
-                .map((_, i) => (
-                  <span key={i}>
-                    <Image src={Star1} alt="stars" />
-                  </span>
-                ))}
-            </div>
-            <p className="text-gray-600 text-[12px] mt-4 flex">
-              <Image src={Mail} alt="Mail" className="h-2 w-3 mt-1 mr-3" />
-              info@trustlandsolution.com
-            </p>
-            <p className="text-gray-600 text-[12px] mt-2 flex">
-              <Image src={Phone} alt="Phone" className="w-2.5 h-3 mr-3" />
-              +63 964 993 5618
-            </p>
-          </div>
-        </div> */}
 
         {agent && (
           <AgentCard

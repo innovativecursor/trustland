@@ -80,8 +80,12 @@ const FeatureHomeCard: React.FC<Props> = ({ project }) => {
       <div className="absolute bottom-4 left-4 right-4 bg-white p-4 rounded-lg shadow-md z-20">
         <h3 className="text-xl font-semibold mb-1">{project.title}</h3>
         <p className="text-sm text-gray-500 flex items-center gap-1 mb-3">
-          <PiMapPin className="text-base" /> {project.property_details?.location || '—'}
+          <PiMapPin className="text-base" />
+          {typeof project.property_details?.location === 'object'
+            ? `${project.property_details.location.location_city}, ${project.property_details.location.location_province}`
+            : project.property_details?.location ?? '—'}
         </p>
+
 
         <div className="flex items-center justify-between">
           <div className="text-[#339438] text-lg font-medium">

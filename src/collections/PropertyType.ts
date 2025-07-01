@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
 export const PropertyType: CollectionConfig = {
-  slug: 'property-type',
+  slug: 'propertyType',
   access: {
     read: () => true,
   },

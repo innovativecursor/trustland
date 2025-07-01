@@ -37,7 +37,19 @@ export default function AdditionalInfo({ properties, onFilter }: Props) {
       setIsLoading(true)
       const types = await fetchAllPropertyTypes()
       const locs = await fetchLocationCities()
-      setPropertyTypes(types.map((t) => t.name))
+      setPropertyTypes(
+        types
+          .map((t) =>
+            typeof t === 'string'
+              ? t
+              : typeof t.name === 'string'
+              ? t.name
+              : typeof t.property_type === 'string'
+              ? t.property_type
+              : ''
+          )
+          .filter(Boolean)
+      )
       setLocations(locs)
       setIsLoading(false)
     }
@@ -48,7 +60,8 @@ export default function AdditionalInfo({ properties, onFilter }: Props) {
   const typeCounts = useMemo(() => {
     const counts: Record<string, number> = {}
     properties.forEach((p) => {
-      const type = p.property_details?.property_type
+      const typeRaw = p.property_details?.property_type
+      const type = typeof typeRaw === 'object' ? (typeRaw as any).name : typeRaw
       if (type) counts[type] = (counts[type] || 0) + 1
     })
     return counts
@@ -57,7 +70,8 @@ export default function AdditionalInfo({ properties, onFilter }: Props) {
   const locationCounts = useMemo(() => {
     const counts: Record<string, number> = {}
     properties.forEach((p) => {
-      const loc = p.property_details?.location
+      const locRaw = p.property_details?.location
+      const loc = typeof locRaw === 'object' ? (locRaw as any).location_city : locRaw
       if (loc) counts[loc] = (counts[loc] || 0) + 1
     })
     return counts
@@ -66,9 +80,15 @@ export default function AdditionalInfo({ properties, onFilter }: Props) {
   useEffect(() => {
     const filtered = properties.filter((property) => {
       const details = property.property_details
-      const type = details?.property_type || ''
+      const typeRaw = details?.property_type
+      const type = typeof typeRaw === 'object' ? (typeRaw as any).name : typeRaw
+
       const price = parseFloat(details?.price || '0')
-      const location = details?.location || ''
+
+      const locationRaw = details?.location
+      const location = typeof locationRaw === 'object'
+        ? (locationRaw as any).location_city
+        : locationRaw
 
       const matchesType = filters.propertyType.length === 0 || filters.propertyType.includes(type)
       const matchesPrice =
@@ -96,26 +116,24 @@ export default function AdditionalInfo({ properties, onFilter }: Props) {
     })
   }
 
-  const renderLoadingSkeleton = (count: number = 3) => {
-    return (
-      <div className="space-y-2 px-4 py-2">
-        {[...Array(count)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="h-4 w-3/4 bg-gray-200 rounded"
-            animate={{ opacity: [0.3, 0.8, 0.3] }}
-            transition={{ duration: 1.2, repeat: Infinity }}
-          />
-        ))}
-      </div>
-    )
-  }
+  const renderLoadingSkeleton = (count: number = 3) => (
+    <div className="space-y-2 px-4 py-2">
+      {[...Array(count)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="h-4 w-3/4 bg-gray-200 rounded"
+          animate={{ opacity: [0.3, 0.8, 0.3] }}
+          transition={{ duration: 1.2, repeat: Infinity }}
+        />
+      ))}
+    </div>
+  )
 
   const renderCheckboxGroup = (
     title: string,
     items: { label: string; count?: number; extraText?: string }[],
     filterKey: keyof Filters,
-    showDivider: boolean = true,
+    showDivider: boolean = true
   ) => {
     const visibleItems = items.filter((i) => i.count === undefined || i.count > 0)
 
@@ -165,7 +183,7 @@ export default function AdditionalInfo({ properties, onFilter }: Props) {
             label,
             count: typeCounts[label] || 0,
           })),
-          'propertyType',
+          'propertyType'
         )}
 
         {renderCheckboxGroup(
@@ -174,7 +192,7 @@ export default function AdditionalInfo({ properties, onFilter }: Props) {
             label: r.label,
             extraText: `PHP ${r.min}M – ${r.max}M`,
           })),
-          'priceRange',
+          'priceRange'
         )}
 
         {renderCheckboxGroup(
@@ -184,7 +202,7 @@ export default function AdditionalInfo({ properties, onFilter }: Props) {
             count: locationCounts[label] || 0,
           })),
           'location',
-          false,
+          false
         )}
       </div>
     </aside>

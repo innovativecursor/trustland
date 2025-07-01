@@ -31,6 +31,18 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, view }) => {
       `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.2) 0%, transparent 60%)`,
   )
 
+  // 🔍 Safely extract location values
+  const locationRaw = property.property_details?.location
+  let locationCity = ''
+  let locationProvince = ''
+
+  if (typeof locationRaw === 'object' && locationRaw !== null) {
+    locationCity = (locationRaw as any).location_city || ''
+    locationProvince = (locationRaw as any).location_province || ''
+  } else if (typeof locationRaw === 'string') {
+    locationCity = locationRaw
+  }
+
   return (
     <Link href={`/property/${encodeURIComponent(property.slug)}`}>
       <div
@@ -87,7 +99,10 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, view }) => {
         >
           <h3 className="text-lg font-semibold mb-1">{property.title}</h3>
           <p className="text-sm text-gray-500 flex items-center gap-1 mb-3">
-            <PiMapPin className="text-base" /> {property.property_details?.location}
+            <PiMapPin className="text-base" />
+            {locationCity && locationProvince
+              ? `${locationCity}, ${locationProvince}`
+              : locationCity || locationProvince || '—'}
           </p>
 
           <div className="flex items-center justify-between flex-wrap gap-2">

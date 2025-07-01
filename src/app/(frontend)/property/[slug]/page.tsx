@@ -5,21 +5,28 @@ import PropertyDetails from '../../components/ui/PropertyDetails'
 import FeatureSection from '../../components/ui/FeatureSection'
 import { fetchProjectOverviewBySlug } from '../../utils/api'
 
-export default async function PropertyPage(props: { params: Promise<{ slug: string }> }) {
+// eslint-disable-next-line @next/next/no-async-client-component
+export default async function PropertyPage(props: { params: Promise<{ slug: string }> }) { 
   const { slug } = await props.params
-
   if (!slug) return notFound()
 
   const decodedSlug = decodeURIComponent(slug)
 
   try {
     const property = await fetchProjectOverviewBySlug(decodedSlug)
-
     if (!property) return notFound()
 
     const galleryImages = property.gallery_images ?? []
 
     const propertyDetailsRaw = property.property_details
+    const location = propertyDetailsRaw?.location
+    const locationText =
+      typeof location === 'object' && location !== null
+        ? `${location.location_city}, ${location.location_province}`
+        : typeof location === 'string'
+        ? location
+        : '—'
+
     const details = propertyDetailsRaw
       ? {
           propertyType: propertyDetailsRaw.property_type,
@@ -27,7 +34,7 @@ export default async function PropertyPage(props: { params: Promise<{ slug: stri
           unitTypes: propertyDetailsRaw.unit_types ?? '',
           price: propertyDetailsRaw.price,
           status: propertyDetailsRaw.property_status ?? '',
-          location: propertyDetailsRaw.location,
+          location: locationText,
         }
       : {
           propertyType: '',
@@ -72,7 +79,7 @@ export default async function PropertyPage(props: { params: Promise<{ slug: stri
             images={galleryImages}
             video={property.promo_video}
             title={property.title}
-            location={property.property_details?.location || ''}
+            location={locationText}
             price={property.property_details?.price || ''}
           />
           <PropertyDetails
@@ -81,7 +88,11 @@ export default async function PropertyPage(props: { params: Promise<{ slug: stri
             pricing={pricing}
             locationPoints={locationPoints}
           />
-          <FeatureSection features={features} locationPoints={locationPoints} pricing={pricing} />
+          <FeatureSection
+            features={features}
+            locationPoints={locationPoints}
+            pricing={pricing}
+          />
         </div>
       </div>
     )
