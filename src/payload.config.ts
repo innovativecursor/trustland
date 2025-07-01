@@ -14,8 +14,9 @@ import icon from '../public/favicon.ico'
 import { PropertyType } from './collections/PropertyType'
 import { Location } from './collections/Location'
 import BuyerInquiry from './collections/BuyerInquiry'
-import { Property } from './collections/Property'
+// import { Property } from './collections/Property'
 import Services from './collections/Service'
+import Agents from './collections/Agent'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -44,8 +45,9 @@ export default buildConfig({
     PropertyType,
     Location,
     BuyerInquiry,
-    Property,
+    // Property,
     Services,
+    Agents,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

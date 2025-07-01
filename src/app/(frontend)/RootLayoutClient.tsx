@@ -35,7 +35,7 @@ export default function RootLayoutClient({ children }: { children: React.ReactNo
 
         {/* Show loader while loading */}
         {loading ? (
-          <div className="flex items-center justify-center min-h-screen">
+          <div className="w-full mt-4">
             <Loader />
           </div>
         ) : (

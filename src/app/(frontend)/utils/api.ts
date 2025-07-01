@@ -70,6 +70,14 @@ export interface ServiceCard {
   }[]
 }
 
+export interface Agent {
+  name: string
+  email: string
+  phone: string
+  rating: number // out of 5
+  image: string // URL or image object depending on your CMS
+}
+
 // API Utility Function
 const API_BASE_URL =
   typeof window === 'undefined' ? process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000' : ''
@@ -174,4 +182,9 @@ export const fetchAllProjects = async (): Promise<ProjectOverview[]> => {
 //Fetch Service Cards
 export const fetchServiceCards = async (): Promise<ServiceCard[]> => {
   return await fetchFromAPI('services')
+}
+
+export const fetchAgent = async (): Promise<Agent | null> => {
+  const agents: Agent[] = await fetchFromAPI('agent')
+  return agents.length ? agents[0] : null // return the first one or customize
 }

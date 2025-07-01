@@ -41,7 +41,9 @@ const PropertiesSection = () => {
     const loadInitial = async () => {
       setLoading(true)
       const slugs = await fetchAllProjectSlugs()
-      const allProjects = await Promise.all(slugs.map((slug: string) => fetchProjectOverviewBySlug(slug)))
+      const allProjects = await Promise.all(
+        slugs.map((slug: string) => fetchProjectOverviewBySlug(slug)),
+      )
       const validProjects = allProjects.filter(Boolean) as ProjectOverview[]
       setProjects(validProjects)
       setFilteredProjects(validProjects)
@@ -57,7 +59,10 @@ const PropertiesSection = () => {
     setSearchActive(true)
     setLoading(true)
 
-    const updatedHistory = [searchQuery, ...searchHistory.filter((q) => q !== searchQuery)].slice(0, 5)
+    const updatedHistory = [searchQuery, ...searchHistory.filter((q) => q !== searchQuery)].slice(
+      0,
+      5,
+    )
     setSearchHistory(updatedHistory)
     localStorage.setItem('searchHistory', JSON.stringify(updatedHistory))
 
@@ -83,7 +88,9 @@ const PropertiesSection = () => {
       }
     }
 
-    const matchedProjects = await Promise.all(matchedSlugs.map((slug) => fetchProjectOverviewBySlug(slug)))
+    const matchedProjects = await Promise.all(
+      matchedSlugs.map((slug) => fetchProjectOverviewBySlug(slug)),
+    )
 
     setFilteredProjects(matchedProjects.filter(Boolean) as ProjectOverview[])
     setLoading(false)
@@ -145,11 +152,11 @@ const PropertiesSection = () => {
     const sorted = [...filteredProjects]
     if (sortOption === 'LowToHigh') {
       sorted.sort(
-        (a, b) => Number(a.property_details?.price || 0) - Number(b.property_details?.price || 0)
+        (a, b) => Number(a.property_details?.price || 0) - Number(b.property_details?.price || 0),
       )
     } else if (sortOption === 'HighToLow') {
       sorted.sort(
-        (a, b) => Number(b.property_details?.price || 0) - Number(a.property_details?.price || 0)
+        (a, b) => Number(b.property_details?.price || 0) - Number(a.property_details?.price || 0),
       )
     }
     return sorted
@@ -180,7 +187,7 @@ const PropertiesSection = () => {
               : 'grid-cols-1 gap-6 mb-25'
           }`}
         >
-          {[...Array(4)].map((_, i) => (
+          {projects.map((_, i) => (
             <SkeletonCard key={i} />
           ))}
         </div>

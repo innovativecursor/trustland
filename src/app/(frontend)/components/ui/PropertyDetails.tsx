@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import AgentImage from '../../public/assets/InternalPropertyAssets/agent-image.png'
 import Star1 from '../../public/assets/InternalPropertyAssets/Star 1.png'
@@ -10,6 +10,8 @@ import Mail from '../../public/assets/InternalPropertyAssets/Mail.png'
 // import ContactAgent from '../../public/assets/InternalPropertyAssets/Administrator Male.png'
 import ContactButton from '../ui/ContactButton'
 import Schedule from '../ui/ScheduleVisitButton'
+import AgentCard from './AgentCard'
+import { Agent, fetchAgent } from '../../utils/api'
 
 interface PropertyDetailsProps {
   overview: string
@@ -31,6 +33,15 @@ export default function PropertyDetails({
   pricing,
   locationPoints,
 }: PropertyDetailsProps) {
+  const [agent, setAgent] = useState<Agent | null>(null)
+
+  useEffect(() => {
+    const getAgent = async () => {
+      const result = await fetchAgent()
+      setAgent(result)
+    }
+    getAgent()
+  }, [])
   return (
     <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 p-6 mt-15">
       {/* Left Section */}
@@ -78,7 +89,7 @@ export default function PropertyDetails({
       {/* Right Section */}
       <div className="space-y-4 mt-20 sm:mt-0">
         <h2 className="text-xl font-semibold">Contact Us for a Site Visit & Reservation</h2>
-        <div className="grid grid-cols-2 gap-0">
+        {/* <div className="grid grid-cols-2 gap-0">
           <div className="w-25 lg:w-32 h-25 lg:h-32">
             <Image
               src={AgentImage}
@@ -106,7 +117,17 @@ export default function PropertyDetails({
               +63 964 993 5618
             </p>
           </div>
-        </div>
+        </div> */}
+
+        {agent && (
+          <AgentCard
+            name={agent.name}
+            email={agent.email}
+            phone={agent.phone}
+            rating={agent.rating}
+            image={agent.image}
+          />
+        )}
 
         <div className="flex gap-2">
           <ContactButton />
