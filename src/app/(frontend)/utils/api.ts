@@ -79,6 +79,14 @@ export interface Agent {
   } | null
 }
 
+export interface Discount{
+  name: 'perfectHouseDiscount',
+  label: 'Perfect House Discount (%)',
+  type: 'number', 
+  required: true,
+  defaultValue: '15'
+}
+
 // API Utility Function
 const API_BASE_URL =
   typeof window === 'undefined' ? process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000' : ''
@@ -188,5 +196,11 @@ export const fetchServiceCards = async (): Promise<ServiceCard[]> => {
 // Fetch Agents 
 export const fetchAgent = async (): Promise<Agent | null> => {
   const agents: Agent[] = await fetchFromAPI('agent')
-  return agents.length ? agents[0] : null // return the first one or customize
+  return agents.length ? agents[0] : null 
+}
+
+//Fetch Offers Section Discount Discounts
+export const fetchPerfectHouseDiscount = async (): Promise<string> => {
+  const discounts: { percentage: string }[] = await fetchFromAPI('discount')
+  return discounts.length ? discounts[0].percentage : '15'
 }

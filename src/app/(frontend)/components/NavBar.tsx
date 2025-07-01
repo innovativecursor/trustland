@@ -31,15 +31,15 @@ const Navbar = () => {
   const socialLinks = [
     {
       icon: <FaFacebookF size={18} className="text-[#339438]" />,
-      href: 'https://www.facebook.com/paulbalitarealtyservicespbrs',
+      href: 'https://www.facebook.com/people/TrustLand-Solutions/61574562527534/',
     },
     {
       icon: <FaWhatsapp size={18} className="text-[#339438]" />,
-      href: 'https://wa.me/yourNumber', // Replace with actual number
+      href: 'https://wa.link/iwopy0', // Replace with actual number
     },
     {
       icon: <SiViber size={18} className="text-[#339438]" />,
-      href: 'viber://chat?number=yourNumber', // Replace with actual Viber number
+      href: 'viber://chat?number=%2B639659543098', // Replace with actual Viber number
     },
   ]
 

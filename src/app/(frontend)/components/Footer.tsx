@@ -20,15 +20,15 @@ export default function Footer() {
             <Image src={logo.src} width={200} height={200} alt="TrustLand Solutions Logo" />
           </div>
           <div className="flex items-center gap-3">
-            <div className="border border-[#339438] rounded-full p-2 cursor-pointer">
+            <Link href='https://www.facebook.com/people/TrustLand-Solutions/61574562527534/' target='_blank' className="border border-[#339438] rounded-full p-2 cursor-pointer">
               <FaFacebookF size={20} className="text-[#339438]" />
-            </div>
-            <div className="border border-[#339438] rounded-full p-2 cursor-pointer">
+            </Link>
+            <Link href='https://wa.link/iwopy0' target='_blank' className="border border-[#339438] rounded-full p-2 cursor-pointer">
               <FaWhatsapp size={20} className="text-[#339438]" />
-            </div>
-            <div className="border border-[#339438] rounded-full p-2 cursor-pointer">
+            </Link>
+            <Link href='viber://chat?number=%2B639659543098' target='_blank' className="border border-[#339438] rounded-full p-2 cursor-pointer">
               <FaViber size={20} className="text-[#339438]" />
-            </div>
+            </Link>
           </div>
         </div>
 
@@ -50,14 +50,14 @@ export default function Footer() {
                   </div>
                   <div className="flex items-center gap-2">
                     <FaEnvelope className="text-green-700" />
-                    <span className="font-medium">info@trustlandsolution.com</span>
+                    <span className="font-medium">epordido@gmail.com</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <FaMapMarkerAlt className="text-green-700" />
                     <span className="font-medium">
-                      603 National Life Building, Upper
+                      CBLG - Unit 17, Ghoshen Land Towers,  
                       <br />
-                      Session Road, Baguio City, Philippines
+                      Upper General Luna Street, Baguio City
                     </span>
                   </div>
                 </div>

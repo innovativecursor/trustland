@@ -29,7 +29,7 @@ const ImageSection = () => {
                     <div className="flex flex-col">
                         <span className="text-sm">Email</span>
                         <hr className='text-gray-500 mt-3 mb-3 w-12'/>
-                        <span className="text-md">info@trustlandsolution.com</span>
+                        <span className="text-md">epordido@gmail.com</span>
                     </div>
                 </div>
                 {/* Location Column */}
@@ -38,7 +38,7 @@ const ImageSection = () => {
                     <div className="flex flex-col">
                         <span className="text-sm ">Office</span>
                         <hr className='text-gray-500 mt-3 mb-3 w-12'/>
-                        <span className="text-md">603 National Life Building, Upper Session Road, Baguio City</span>
+                        <span className="text-md">CBLG - Unit 17, Ghoshen Land Towers, Upper General Luna Street, Baguio City</span>
                     </div>
                 </div>
             </div>

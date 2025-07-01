@@ -90,7 +90,7 @@ const RealEstateInquiryForm: React.FC = () => {
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between gap-10">
         <div className="flex-1">
           <h2 className="text-3xl sm:text-4xl font-medium tracking-wide text-[#1B201C] mb-2">
-            Real Estate Inquiry Form
+            Inquiry Form
           </h2>
           <p className="text-[#565656] tracking-wide font-light text-[14px] mb-8">
             As the complexity of buildings to increase

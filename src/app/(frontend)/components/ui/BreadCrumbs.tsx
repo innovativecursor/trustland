@@ -7,18 +7,28 @@ interface BreadcrumbsProps {
   title?: string
 }
 
+// Optional: Map of visible breadcrumb labels to actual href paths
+const customRouteMap: Record<string, string> = {
+  property: '/properties',
+}
+
 const Breadcrumbs = ({ title }: BreadcrumbsProps) => {
   const pathname = usePathname()
   const pathSegments = pathname.split('/').filter(Boolean)
 
   const breadcrumbs = pathSegments.map((segment, index) => {
-    const href = '/' + pathSegments.slice(0, index + 1).join('/')
-    const label = segment.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())
+    const hrefSegments = pathSegments.slice(0, index + 1)
+    const rawHref = '/' + hrefSegments.join('/')
+    const mappedHref = customRouteMap[segment] || rawHref
+
+    const label = segment
+      .replace(/-/g, ' ')
+      .replace(/\b\w/g, (char) => char.toUpperCase())
 
     return (
-      <span key={href} className="flex items-center">
+      <span key={mappedHref} className="flex items-center">
         <span className="mx-2 text-gray-400">{'>'}</span>
-        <Link href={href} className="text-black font-medium capitalize">
+        <Link href={mappedHref} className="text-black font-medium capitalize">
           {label}
         </Link>
       </span>
