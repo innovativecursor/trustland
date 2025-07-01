@@ -55,16 +55,6 @@ export const ProjectOverview: CollectionConfig = {
       hasMany: true,
     },
     {
-      label: 'Promo Video',
-      name: 'promo_video',
-      type: 'upload',
-      relationTo: 'media',
-      required: false,
-      admin: {
-        description: 'Upload a promotional video for the project',
-      },
-    },
-    {
       label: 'Title',
       name: 'title',
       type: 'text',
