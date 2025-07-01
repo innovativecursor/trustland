@@ -1,6 +1,6 @@
 import React from 'react'
 import ServicesProvidedCalled from '../ServicesProvidedCalled'
-import { div } from 'framer-motion/client'
+
 
 const ServicesHeading = () => {
   return (

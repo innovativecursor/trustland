@@ -27,18 +27,6 @@ const Services: CollectionConfig = {
       required: true,
     },
     {
-      name: 'bgImage',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-    },
-    {
-      name: 'numberImage',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-    },
-    {
       name: 'points',
       type: 'array',
       required: true,
