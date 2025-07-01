@@ -11,7 +11,7 @@ export const BuyerInquiry: CollectionConfig = {
     defaultColumns: ['name', 'email', 'budget', 'minSize', 'createdAt'],
   },
   access: {
-    create: ({ req }) => (req.user ? false : true),
+    create: () => true,
     read: () => true,
   },
   fields: [

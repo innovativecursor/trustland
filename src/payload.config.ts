@@ -9,7 +9,6 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
-import { ProjectOverview } from './collections/ProjectOverview'
 import icon from '../public/favicon.ico'
 import { PropertyType } from './collections/PropertyType'
 import { Location } from './collections/Location'
@@ -18,6 +17,7 @@ import BuyerInquiry from './collections/BuyerInquiry'
 import Services from './collections/Service'
 import Agents from './collections/Agent'
 import Discount from './collections/Discount'
+import { ProjectOverview } from './collections/ProjectOverview'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -42,7 +42,6 @@ export default buildConfig({
   collections: [
     Users,
     Media,
-    ProjectOverview,
     PropertyType,
     Location,
     BuyerInquiry,
@@ -50,6 +49,7 @@ export default buildConfig({
     Services,
     Agents,
     Discount,
+    ProjectOverview,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

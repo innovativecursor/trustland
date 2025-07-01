@@ -317,5 +317,6 @@ export const ProjectOverview: CollectionConfig = {
         condition: (data) => data?.prop_offer === true,
       },
     },
+    
   ],
 }
