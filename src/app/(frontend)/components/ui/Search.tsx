@@ -78,7 +78,7 @@ const Search = () => {
       <div className="flex-1 min-w-[160px] w-full">
         <Dropdown loading={loading} options={propertyTypes} onSelect={setSelectedPropertyType} />
       </div>
-      <div className="flex-1 min-w-[160px] w-full">
+      <div className="flex-1 min-w-[160px] w-full border-black sm:border-l sm:border-r">
         <Dropdown loading={loading} withBorder options={locations} onSelect={setSelectedLocation} />
       </div>
       <div className="flex-1 min-w-[160px] w-full">

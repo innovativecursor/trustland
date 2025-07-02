@@ -39,7 +39,7 @@ const Dropdown = ({ options, loading = false, withBorder = false, onSelect }: Dr
 
   return (
     <div
-      className={`relative flex-1 ${withBorder ? 'border-l border-r border-black' : ''} w-full md:w-auto`}
+      className={`relative flex-1 ${withBorder ? 'border-black' : ''} w-full md:w-auto`}
       onMouseEnter={() => !isMobile && setIsOpen(true)}
       onMouseLeave={() => !isMobile && setIsOpen(false)}
     >
