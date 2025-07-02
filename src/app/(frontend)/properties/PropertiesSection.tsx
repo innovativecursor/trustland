@@ -108,17 +108,22 @@ const PropertiesSection = () => {
         return num < 1000 ? num * 1_000_000 : num
       }
 
-      const filtered = projects.filter((project) => {
-        const details = project.property_details
-        if (!details) return false
+    const filtered = projects.filter((project) => {
+    const details = project.property_details
+    if (!details) return false
 
-        const matchesType = !propertyType || details.property_type === propertyType
-        const matchesLocation =
-          !location || details.location?.location_city === location
-        const matchesBudget = !maxBudget || parsePrice(details.price) <= maxBudget
+    const matchesType = !propertyType || details.property_type === propertyType ||
+    (typeof details.property_type === 'object' &&
+    (details.property_type as any)?.name === propertyType)
 
-        return matchesType && matchesLocation && matchesBudget
-      })
+
+    const matchesLocation = !location || details.location?.location_city === location
+
+    const matchesBudget = !maxBudget || parsePrice(details.price) <= maxBudget
+
+    return matchesType && matchesLocation && matchesBudget
+  })
+
 
       setFilteredProjects(filtered)
       sessionStorage.removeItem('searchFilters')
