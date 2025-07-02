@@ -12,6 +12,10 @@ export const slugify = (text: string): string => {
 
 export const ProjectOverview: CollectionConfig = {
   slug: 'project-overview',
+  labels: {
+    singular: 'Property Listing',
+    plural: 'Property Listing',
+  },
   access: {
     read: () => true,
   },
