@@ -64,16 +64,16 @@ const FeatureHomeCard: React.FC<Props> = ({ project }) => {
 
       {/* Badges */}
       <div className="absolute top-3 left-3 flex gap-2 z-10">
-        {card?.badges?.map((b, i) => (
-          <span
-            key={i}
-            className={`text-white text-[10px] px-2.5 py-2.5 rounded-2xl font-medium ${
-              b.badge === 'FOR SALE' ? 'bg-[#339438]' : 'bg-gray-800'
-            }`}
-          >
-            {b.badge}
-          </span>
-        ))}
+        {card?.badges
+          ?.filter((b) => b.badge !== 'FOR SALE')
+          .map((b, i) => (
+            <span
+              key={i}
+              className="text-white text-[10px] px-2.5 py-2.5 rounded-2xl font-medium bg-gray-800"
+            >
+              {b.badge}
+            </span>
+          ))}
       </div>
 
       {/* Overlay Content */}
