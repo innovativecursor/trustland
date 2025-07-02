@@ -10,8 +10,10 @@ export default function Home() {
       {/* <Navbar /> */}
       <Hero />
       <FeaturedProperties />
-      <ExploreFeatures />
-      <ParallaxSection />
+      <div className='bg-[#F5FFF6]'>
+        <ExploreFeatures />
+        <ParallaxSection />
+      </div>
       <RealEstateInquiryForm />
       {/* <Footer /> */}
     </>

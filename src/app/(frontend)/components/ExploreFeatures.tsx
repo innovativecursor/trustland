@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useState } from 'react'
-import { motion } from 'framer-motion'
+import React, { useEffect, useRef, useState } from 'react'
+import { motion, useInView } from 'framer-motion'
 // import Image from 'next/image'
 
 import correctImage from '../public/assets/ServicesAssets/correct_image.png'
@@ -49,44 +49,54 @@ const titleVariants = {
 }
 
 const ExploreFeatures: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true })
+
+  useEffect(() => {
+    const checkScreen = () => setIsMobile(window.innerWidth < 768)
+    checkScreen()
+    window.addEventListener('resize', checkScreen)
+    return () => window.removeEventListener('resize', checkScreen)
+  }, [])
+
+  const MotionWrapper = isMobile ? 'div' : motion.div
+  const MotionHeader = isMobile ? 'h2' : motion.h2
+  const MotionSubHeader = isMobile ? 'h3' : motion.h3
+
   return (
-    <div className="bg-[#F5FFF6]">
-      <motion.section
+    <div className="my-5 md:my-0">
+      <MotionWrapper
+        ref={ref}
         className="w-full max-w-7xl mx-auto flex flex-col items-center justify-between px-4 sm:px-6 sm:py-16"
         initial="hidden"
-        animate={isVisible ? 'visible' : 'hidden'}
-        onViewportEnter={() => setIsVisible(true)}
-        onViewportLeave={() => setIsVisible(false)}
-        viewport={{ amount: 0.5 }}
-        variants={sectionVariants}
+        animate={!isMobile && isInView ? 'visible' : 'hidden'}
+        variants={!isMobile ? sectionVariants : undefined}
       >
-        {/* Title */}
-        <motion.h2
+        <MotionHeader
           className="text-black font-semibold tracking-wide text-[58px] flex flex-col justify-center items-center text-center"
-          variants={titleVariants}
+          variants={!isMobile ? titleVariants : undefined}
         >
           Services
-        </motion.h2>
+        </MotionHeader>
 
-        <motion.h3
+        <MotionSubHeader
           className="text-[12px] sm:text-[16px] md:text-[18px] w-full max-w-[47rem] font-light text-center mt-2 mb-[20px]"
-          variants={titleVariants}
+          variants={!isMobile ? titleVariants : undefined}
         >
           At TrustLand Solutions, we make property ownership easy and stress-free by handling
           everything from legal paperwork to construction and design.
-        </motion.h3>
+        </MotionSubHeader>
 
-        {/* Grid */}
-        <motion.div
+        <MotionWrapper
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6 w-full px-2 sm:px-4 md:px-0"
-          variants={sectionVariants}
+          variants={!isMobile ? sectionVariants : undefined}
         >
           {features.map((feature, index) => (
             <FeatureCard key={index} index={index} {...feature} />
           ))}
-        </motion.div>
-      </motion.section>
+        </MotionWrapper>
+      </MotionWrapper>
     </div>
   )
 }
