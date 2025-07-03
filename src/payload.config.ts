@@ -42,10 +42,10 @@ export default buildConfig({
   collections: [
     Users,
     Media,
-    BuyerInquiry,
+    ProjectOverview,
     PropertyType,
     Location,
-    ProjectOverview,
+    BuyerInquiry,
     // Property,
     Services,
     Agents,
